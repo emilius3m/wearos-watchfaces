@@ -211,6 +211,15 @@ def shortcut(parent,x,slotid,provider,label):
         image(c,19,8,28,28,f'[COMPLICATION.{kind}]',**({'tintColor':ACCENT} if kind=='MONOCHROMATIC_IMAGE' else {}))
     el(s,'Complication',type='EMPTY')
 
+def weather_shortcut(parent,x,y,w,h,slotid,label,radius=12):
+    s=el(parent,'ComplicationSlot',x=x,y=y,width=w,height=h,slotId=slotid,displayName=label,isCustomizable='TRUE',supportedTypes='MONOCHROMATIC_IMAGE SMALL_IMAGE SHORT_TEXT RANGED_VALUE EMPTY')
+    mode(s); el(s,'BoundingRoundBox',x=0,y=0,width=w,height=h,cornerRadius=radius)
+    el(s,'DefaultProviderPolicy',defaultSystemProvider='APP_SHORTCUT',defaultSystemProviderType='MONOCHROMATIC_IMAGE')
+    for kind in ('MONOCHROMATIC_IMAGE','SMALL_IMAGE','SHORT_TEXT','RANGED_VALUE'):
+        c=el(s,'Complication',type=kind)
+        rect(draw(c,0,0,w,h),0,0,w,h,'#00000000')
+    el(s,'Complication',type='EMPTY')
+
 def health_column(parent):
     side=group(parent,272,0,108,300)
     text(side,18,88,72,57,60,expr='[SECOND_Z]',family='teko_semibold')
@@ -257,7 +266,6 @@ def build():
     clock(aod,True)
     health_column(active)
     weather=group(scene,60,300,330,84); mode(weather)
-    el(weather,'Launch',target='com.samsung.android.watch.weather/com.samsung.android.watch.weather.ui.WeatherActivity')
     c,available=condition(weather,'[WEATHER.IS_AVAILABLE]')
     weather_data=group(available,0,0,330,84)
     for day,cx in [(1,57),(2,165),(3,273)]: forecast(weather_data,day,cx)
@@ -275,6 +283,7 @@ def build():
     for x in (111,219):line(p,x,35,x,78,'#FF242824',.7)
     shortcut(scene,122,0,'NEXT_EVENT','slot_left_name')
     shortcut(scene,263,1,'UNREAD_NOTIFICATION_COUNT','slot_right_name')
+    weather_shortcut(scene,60,300,330,84,3,'slot_weather_name',12)
     mic=group(active,199,383,52,52)
     el(mic,'Launch',target='com.samsung.android.wear.voicerecorder/com.samsung.android.wear.voicerecorder.view.MainActivity')
     p=draw(mic,0,0,52,52); ellipse(p,26,26,25,fill=ACCENT)

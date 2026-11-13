@@ -10,4 +10,5 @@
     <string name="color_cobalto">Cobalto Ionico</string>
     <string name="color_rubino">Rubino Caldo</string>
     <string name="slot_notif_name">Complicazione Notifiche</string>
+    <string name="slot_weather_name">Scorciatoia Meteo</string>
 </resources>

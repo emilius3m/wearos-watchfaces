@@ -9,4 +9,5 @@
   <string name="color_avorio">Ivory · Mono</string>
   <string name="slot_left_name">Bottom Left Complication</string>
   <string name="slot_shortcut_name">Bottom Right Shortcut</string>
+  <string name="slot_weather_name">Weather Shortcut</string>
 </resources>

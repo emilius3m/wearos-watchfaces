@@ -11,4 +11,5 @@
   <string name="color_rubino">Rubino Caldo</string>
   <string name="slot_notif_name">Complicazione in basso a sinistra</string>
   <string name="slot_shortcut_name">Scorciatoia in basso a destra</string>
+  <string name="slot_weather_name">Scorciatoia Meteo</string>
 </resources>

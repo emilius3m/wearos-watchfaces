@@ -12,4 +12,5 @@
   <string name="slot_left_name">Left Complication</string>
   <string name="slot_right_name">Right Complication</string>
   <string name="slot_shortcut_name">Bottom Shortcut</string>
+  <string name="slot_weather_name">Weather Shortcut</string>
 </resources>

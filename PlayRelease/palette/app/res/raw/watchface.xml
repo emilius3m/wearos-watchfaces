@@ -388,6 +388,46 @@
                 </Line>
             </PartDraw>
         </Group>
+        <ComplicationSlot x="140" y="404" width="200" height="38" slotId="1" displayName="slot_weather_name" isCustomizable="TRUE" supportedTypes="MONOCHROMATIC_IMAGE SMALL_IMAGE SHORT_TEXT RANGED_VALUE EMPTY">
+            <Variant mode="AMBIENT" target="alpha" value="0"/>
+            <BoundingRoundBox x="0" y="0" width="200" height="38" cornerRadius="8"/>
+            <DefaultProviderPolicy defaultSystemProvider="APP_SHORTCUT" defaultSystemProviderType="MONOCHROMATIC_IMAGE"/>
+            <Complication type="MONOCHROMATIC_IMAGE">
+                <PartDraw x="0" y="0" width="200" height="38">
+                    <Rectangle x="0" y="0" width="200" height="38">
+                        <Fill color="#00000000"/>
+                    </Rectangle>
+                </PartDraw>
+            </Complication>
+            <Complication type="SMALL_IMAGE">
+                <PartDraw x="0" y="0" width="200" height="38">
+                    <Rectangle x="0" y="0" width="200" height="38">
+                        <Fill color="#00000000"/>
+                    </Rectangle>
+                </PartDraw>
+            </Complication>
+            <Complication type="SHORT_TEXT">
+                <PartDraw x="0" y="0" width="200" height="38">
+                    <Rectangle x="0" y="0" width="200" height="38">
+                        <Fill color="#00000000"/>
+                    </Rectangle>
+                </PartDraw>
+            </Complication>
+            <Complication type="RANGED_VALUE">
+                <PartDraw x="0" y="0" width="200" height="38">
+                    <Rectangle x="0" y="0" width="200" height="38">
+                        <Fill color="#00000000"/>
+                    </Rectangle>
+                </PartDraw>
+            </Complication>
+            <Complication type="EMPTY">
+                <PartDraw x="0" y="0" width="200" height="38">
+                    <Rectangle x="0" y="0" width="200" height="38">
+                        <Fill color="#00000000"/>
+                    </Rectangle>
+                </PartDraw>
+            </Complication>
+        </ComplicationSlot>
         <ComplicationSlot x="366" y="112" width="68" height="68" slotId="0" displayName="slot_shortcut_name" isCustomizable="TRUE" supportedTypes="MONOCHROMATIC_IMAGE SMALL_IMAGE SHORT_TEXT EMPTY">
             <Variant mode="AMBIENT" target="alpha" value="0"/>
             <BoundingOval x="0" y="0" width="68" height="68"/>

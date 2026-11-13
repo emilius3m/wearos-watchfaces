@@ -4006,6 +4006,40 @@
             </Complication>
             <Complication type="EMPTY"/>
         </ComplicationSlot>
+        <ComplicationSlot x="60" y="300" width="330" height="84" slotId="3" displayName="slot_weather_name" isCustomizable="TRUE" supportedTypes="MONOCHROMATIC_IMAGE SMALL_IMAGE SHORT_TEXT RANGED_VALUE EMPTY">
+            <Variant mode="AMBIENT" target="alpha" value="0"/>
+            <BoundingRoundBox x="0" y="0" width="330" height="84" cornerRadius="12"/>
+            <DefaultProviderPolicy defaultSystemProvider="APP_SHORTCUT" defaultSystemProviderType="MONOCHROMATIC_IMAGE"/>
+            <Complication type="MONOCHROMATIC_IMAGE">
+                <PartDraw x="0" y="0" width="330" height="84">
+                    <Rectangle x="0" y="0" width="330" height="84">
+                        <Fill color="#00000000"/>
+                    </Rectangle>
+                </PartDraw>
+            </Complication>
+            <Complication type="SMALL_IMAGE">
+                <PartDraw x="0" y="0" width="330" height="84">
+                    <Rectangle x="0" y="0" width="330" height="84">
+                        <Fill color="#00000000"/>
+                    </Rectangle>
+                </PartDraw>
+            </Complication>
+            <Complication type="SHORT_TEXT">
+                <PartDraw x="0" y="0" width="330" height="84">
+                    <Rectangle x="0" y="0" width="330" height="84">
+                        <Fill color="#00000000"/>
+                    </Rectangle>
+                </PartDraw>
+            </Complication>
+            <Complication type="RANGED_VALUE">
+                <PartDraw x="0" y="0" width="330" height="84">
+                    <Rectangle x="0" y="0" width="330" height="84">
+                        <Fill color="#00000000"/>
+                    </Rectangle>
+                </PartDraw>
+            </Complication>
+            <Complication type="EMPTY"/>
+        </ComplicationSlot>
         <ComplicationSlot x="199" y="383" width="52" height="52" slotId="2" displayName="slot_shortcut_name" isCustomizable="TRUE" supportedTypes="MONOCHROMATIC_IMAGE SMALL_IMAGE SHORT_TEXT EMPTY">
             <Variant mode="AMBIENT" target="alpha" value="0"/>
             <BoundingOval x="0" y="0" width="52" height="52"/>

@@ -12,4 +12,5 @@
   <string name="slot_left_name">Scorciatoia sinistra</string>
   <string name="slot_right_name">Scorciatoia destra</string>
   <string name="slot_shortcut_name">Scorciatoia centrale</string>
+  <string name="slot_weather_name">Scorciatoia Meteo</string>
 </resources>
