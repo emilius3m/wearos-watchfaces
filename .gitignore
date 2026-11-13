@@ -4,6 +4,8 @@
 *.p12
 *.pem
 *.idsig
+*service-account*.json
+PlayRelease/*.json
 PlayRelease/README-PLAYSTORE.md
 
 # Packaged binaries and archives
