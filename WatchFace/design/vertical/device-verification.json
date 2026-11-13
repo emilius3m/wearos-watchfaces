@@ -1,0 +1,30 @@
+{
+  "package": "com.local.watchface.syshud",
+  "version": "4.0",
+  "model": "SM-L310",
+  "device_time": "2026-11-13_07:21:09",
+  "ambient_state": [
+    "Resource only package name com.local.watchface.syshud",
+    "WatchFaceImpl (ComponentInfo{com.local.watchface.syshud/null}):",
+    "isAmbient=false",
+    "## no_name / com.local.watchface.syshud 4.0 (4)"
+  ],
+  "settings_preserved": {
+    "ambient_enabled": "1",
+    "ambient_force_when_docked": "0"
+  },
+  "tap_checks": {
+    "recorder": "pass",
+    "heart": "pass",
+    "steps": "pass",
+    "battery": "pass",
+    "weather": "pass"
+  },
+  "animation_verified": "07:20 to 07:21; intermediate falling flap frames and correct final digit",
+  "ambient_visual_verified": true,
+  "final_settings": {
+    "ambient_enabled": "1",
+    "ambient_force_when_docked": "0"
+  },
+  "note": "AOD verified in displayed screenshot; service dump isAmbient flag was false, so it is not used as proof of displayed ambient state."
+}

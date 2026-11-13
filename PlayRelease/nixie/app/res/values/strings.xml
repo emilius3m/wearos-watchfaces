@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="watch_face_name">NIXIE</string>
+  <string name="case_finish_name">Case &amp; Bezel</string>
+  <string name="case_titanium">Brushed Titanium &amp; Copper</string>
+  <string name="case_brass">Brass &amp; Gunmetal</string>
+  <string name="tube_color_name">Tube Color</string>
+  <string name="color_ambra">Neon Amber</string>
+  <string name="color_vfd">VFD Phosphor Green</string>
+  <string name="color_cobalto">Ionic Cobalt</string>
+  <string name="color_rubino">Warm Ruby</string>
+  <string name="slot_notif_name">Bottom Left Complication</string>
+  <string name="slot_shortcut_name">Bottom Right Shortcut</string>
+</resources>

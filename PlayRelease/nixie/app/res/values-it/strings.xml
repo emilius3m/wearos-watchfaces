@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="watch_face_name">NIXIE</string>
+  <string name="case_finish_name">Cassa e Lunetta</string>
+  <string name="case_titanium">Titanio e Rame</string>
+  <string name="case_brass">Ottone e Gunmetal</string>
+  <string name="tube_color_name">Colore Valvole</string>
+  <string name="color_ambra">Ambra Neon</string>
+  <string name="color_vfd">VFD Verde Fosforo</string>
+  <string name="color_cobalto">Cobalto Ionico</string>
+  <string name="color_rubino">Rubino Caldo</string>
+  <string name="slot_notif_name">Complicazione in basso a sinistra</string>
+  <string name="slot_shortcut_name">Scorciatoia in basso a destra</string>
+</resources>

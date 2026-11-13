@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="watch_face_name">APEX METEO</string>
+  <string name="a11y_time">%1$s hours %2$s minutes</string>
+  <string name="color_warm">Amber · Classic</string>
+  <string name="theme_color_name">Accent</string>
+  <string name="color_volt">Volt · Lime</string>
+  <string name="color_ice">Ice · Frost</string>
+  <string name="color_ember">Ember · Orange</string>
+  <string name="color_white">Titanium · White</string>
+  <string name="color_red">Pulse · Red</string>
+  <string name="slot_left_name">Left Complication</string>
+  <string name="slot_right_name">Right Complication</string>
+  <string name="slot_shortcut_name">Bottom Shortcut</string>
+</resources>

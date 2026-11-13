@@ -1,0 +1,349 @@
+<?xml version='1.0' encoding='utf-8'?>
+<WatchFace width="480" height="480" clipShape="CIRCLE">
+    <Metadata key="CLOCK_TYPE" value="DIGITAL" />
+    <Metadata key="PREVIEW_TIME" value="09:27:06" />
+    <UserConfigurations>
+        <ColorConfiguration id="corona" displayName="theme_color_name" defaultValue="oro">
+            <ColorOption id="oro" displayName="color_oro" colors="#FFFFC56E #FF8A6630 #FFFFF4DE" />
+            <ColorOption id="plasma" displayName="color_plasma" colors="#FFFF4F9E #FF8A2A55 #FFFFE3EF" />
+            <ColorOption id="aurora" displayName="color_aurora" colors="#FF3DF5B0 #FF1F7A58 #FFE0FFF3" />
+            <ColorOption id="zaffiro" displayName="color_zaffiro" colors="#FF5B9DFF #FF2A4C8A #FFE2EDFF" />
+            <ColorOption id="brace" displayName="color_brace" colors="#FFFF5B38 #FF8A301D #FFFFE7DD" />
+            <ColorOption id="luna" displayName="color_luna" colors="#FFD5E0F2 #FF5D6676 #FFFFFFFF" />
+        </ColorConfiguration>
+    </UserConfigurations>
+    <Scene backgroundColor="#FF000000">
+        <Group name="sky" x="0" y="0" width="480" height="480">
+            <Variant mode="AMBIENT" target="alpha" value="0" />
+            <PartImage x="-20" y="-20" width="520" height="520">
+                <Gyro x="clamp([ACCELEROMETER_ANGLE_X], -40, 40) * 0.14" y="clamp([ACCELEROMETER_ANGLE_Y], -40, 40) * 0.14" />
+                <Image resource="stars_far" />
+            </PartImage>
+            <PartImage x="-20" y="-20" width="520" height="520">
+                <Gyro x="clamp([ACCELEROMETER_ANGLE_X], -40, 40) * 0.34" y="clamp([ACCELEROMETER_ANGLE_Y], -40, 40) * 0.34" />
+                <Image resource="stars_near" />
+            </PartImage>
+        </Group>
+        <Group name="corona" x="0" y="0" width="480" height="480">
+            <Variant mode="AMBIENT" target="alpha" value="0" />
+            <PartImage x="0" y="0" width="480" height="480" tintColor="[CONFIGURATION.corona.0]">
+                <Gyro x="clamp([ACCELEROMETER_ANGLE_X], -40, 40) * -0.09" y="clamp([ACCELEROMETER_ANGLE_Y], -40, 40) * -0.09" />
+                <Image resource="corona" />
+            </PartImage>
+        </Group>
+        <Group name="rays" x="0" y="0" width="480" height="480">
+            <Variant mode="AMBIENT" target="alpha" value="0" />
+            <AnalogClock x="0" y="0" width="480" height="480">
+                <HourHand resource="hand_hour" x="170" y="40" width="140" height="200" pivotX="0.5" pivotY="1" tintColor="[CONFIGURATION.corona.2]" />
+                <MinuteHand resource="hand_minute" x="190" y="0" width="100" height="240" pivotX="0.5" pivotY="1" tintColor="[CONFIGURATION.corona.2]" />
+            </AnalogClock>
+            <PartImage x="0" y="0" width="480" height="480" tintColor="[CONFIGURATION.corona.2]">
+                <Image resource="limb" />
+            </PartImage>
+        </Group>
+        <PartDraw x="0" y="0" width="480" height="480">
+            <Ellipse x="108" y="108" width="264" height="264">
+                <Fill color="#FF000000" />
+            </Ellipse>
+        </PartDraw>
+        <Group name="bead" x="0" y="0" width="480" height="480">
+            <Variant mode="AMBIENT" target="alpha" value="0" />
+            <AnalogClock x="0" y="0" width="480" height="480">
+                <SecondHand resource="hand_second" x="130" y="70" width="220" height="170" pivotX="0.5" pivotY="1" tintColor="[CONFIGURATION.corona.2]">
+                    <Sweep frequency="15" />
+                </SecondHand>
+            </AnalogClock>
+        </Group>
+        <Group name="time" x="0" y="0" width="480" height="480">
+            <PartText x="120" y="151" width="56" height="201">
+                <Text align="CENTER" maxLines="1" ellipsis="TRUE">
+                    <Font family="teko_regular" size="134" weight="NORMAL" color="#FFF6F4EF"><Template>%s<Parameter expression="floor([HOUR_0_23] / 10)" /></Template></Font>
+                </Text>
+            </PartText>
+            <PartText x="174" y="151" width="56" height="201">
+                <Text align="CENTER" maxLines="1" ellipsis="TRUE">
+                    <Font family="teko_regular" size="134" weight="NORMAL" color="#FFF6F4EF"><Template>%s<Parameter expression="[HOUR_0_23] % 10" /></Template></Font>
+                </Text>
+            </PartText>
+            <PartText x="250" y="151" width="56" height="201">
+                <Text align="CENTER" maxLines="1" ellipsis="TRUE">
+                    <Font family="teko_regular" size="134" weight="NORMAL" color="#FFF6F4EF"><Template>%s<Parameter expression="floor([MINUTE] / 10)" /></Template></Font>
+                </Text>
+            </PartText>
+            <PartText x="304" y="151" width="56" height="201">
+                <Text align="CENTER" maxLines="1" ellipsis="TRUE">
+                    <Font family="teko_regular" size="134" weight="NORMAL" color="#FFF6F4EF"><Template>%s<Parameter expression="[MINUTE] % 10" /></Template></Font>
+                </Text>
+            </PartText>
+            <PartDraw x="0" y="0" width="480" height="480">
+                <Ellipse x="234.8" y="219.8" width="10.4" height="10.4">
+                    <Fill color="[CONFIGURATION.corona.0]" />
+                </Ellipse>
+                <Ellipse x="234.8" y="253.8" width="10.4" height="10.4">
+                    <Fill color="[CONFIGURATION.corona.0]" />
+                </Ellipse>
+            </PartDraw>
+            <PartText x="135" y="140" width="210" height="50">
+                <Variant mode="AMBIENT" target="alpha" value="190" />
+                <Text align="CENTER" maxLines="1" ellipsis="TRUE">
+                    <Font family="teko_semibold" size="33" weight="SEMI_BOLD" color="[CONFIGURATION.corona.0]"><Upper><Template>%s<Parameter expression="[DAY_OF_WEEK_F]" /></Template></Upper></Font>
+                </Text>
+            </PartText>
+            <PartText x="140" y="298" width="200" height="50">
+                <Variant mode="AMBIENT" target="alpha" value="190" />
+                <Text align="CENTER" maxLines="1" ellipsis="TRUE">
+                    <Font family="teko_semibold" size="33" weight="SEMI_BOLD" color="#FFD2D5DD"><Upper><Template>%s %s<Parameter expression="[DAY]" /><Parameter expression="[MONTH_S]" /></Template></Upper></Font>
+                </Text>
+            </PartText>
+        </Group>
+        <Group name="moons" x="0" y="0" width="480" height="480">
+            <Variant mode="AMBIENT" target="alpha" value="0" />
+            <Group name="steps" x="56" y="324" width="86" height="86">
+                <Launch target="com.samsung.android.wear.shealth/com.samsung.android.wear.shealth.app.home.HomeActivity" />
+                <PartDraw x="0" y="0" width="86" height="86">
+                    <Ellipse x="0" y="0" width="86" height="86">
+                        <Fill color="#FF000000" />
+                    </Ellipse>
+                    <Ellipse x="3.5" y="3.5" width="79" height="79">
+                        <Stroke color="#FF343A48" thickness="5" />
+                    </Ellipse>
+                    <Arc centerX="43" centerY="43" width="79" height="79" startAngle="0" endAngle="0" direction="CLOCKWISE">
+                        <Transform target="endAngle" value="359.9 * clamp([STEP_COUNT] / clamp([STEP_GOAL], 1, 1000000), 0, 1)" />
+                        <Stroke color="[CONFIGURATION.corona.0]" thickness="5" cap="ROUND" />
+                    </Arc>
+                </PartDraw>
+                <PartImage x="31" y="10" width="24" height="24" tintColor="[CONFIGURATION.corona.0]">
+                    <Image resource="ic_steps" />
+                </PartImage>
+                <Group name="steps_size0" x="0" y="0" width="86" height="86">
+                    <Transform target="alpha" value="[STEP_COUNT] &lt; 10000 ? 255 : 0" />
+                    <PartText x="4" y="31" width="78" height="48">
+                        <Text align="CENTER" maxLines="1" ellipsis="TRUE">
+                            <Font family="teko_semibold" size="32" weight="SEMI_BOLD" color="#FFFFFFFF"><Template>%s<Parameter expression="[STEP_COUNT]" /></Template></Font>
+                        </Text>
+                    </PartText>
+                </Group>
+                <Group name="steps_size1" x="0" y="0" width="86" height="86">
+                    <Transform target="alpha" value="[STEP_COUNT] &lt; 10000 ? 0 : 255" />
+                    <PartText x="4" y="35" width="78" height="39">
+                        <Text align="CENTER" maxLines="1" ellipsis="TRUE">
+                            <Font family="teko_semibold" size="26" weight="SEMI_BOLD" color="#FFFFFFFF"><Template>%s<Parameter expression="[STEP_COUNT]" /></Template></Font>
+                        </Text>
+                    </PartText>
+                </Group>
+            </Group>
+            <Group name="heart" x="197" y="387" width="86" height="86">
+                <Launch target="HEALTH_HEART_RATE" />
+                <PartDraw x="0" y="0" width="86" height="86">
+                    <Ellipse x="0" y="0" width="86" height="86">
+                        <Fill color="#FF000000" />
+                    </Ellipse>
+                    <Ellipse x="2" y="2" width="82" height="82">
+                        <Stroke color="#FF667086" thickness="2" />
+                    </Ellipse>
+                </PartDraw>
+                <PartImage x="31" y="10" width="24" height="24" tintColor="[CONFIGURATION.corona.0]">
+                    <Image resource="ic_heart" />
+                </PartImage>
+                <PartText x="4" y="27" width="78" height="57">
+                    <Text align="CENTER" maxLines="1" ellipsis="TRUE">
+                        <Font family="teko_semibold" size="38" weight="SEMI_BOLD" color="#FFFFFFFF"><Template>%s<Parameter expression="[HEART_RATE] &gt; 0 ? [HEART_RATE] : '--'" /></Template></Font>
+                    </Text>
+                </PartText>
+            </Group>
+            <Group name="battery" x="338" y="324" width="86" height="86">
+                <Launch target="BATTERY_STATUS" />
+                <PartDraw x="0" y="0" width="86" height="86">
+                    <Ellipse x="0" y="0" width="86" height="86">
+                        <Fill color="#FF000000" />
+                    </Ellipse>
+                    <Ellipse x="3.5" y="3.5" width="79" height="79">
+                        <Stroke color="#FF343A48" thickness="5" />
+                    </Ellipse>
+                    <Arc centerX="43" centerY="43" width="79" height="79" startAngle="0" endAngle="0" direction="CLOCKWISE">
+                        <Transform target="endAngle" value="3.599 * clamp([BATTERY_PERCENT], 0, 100)" />
+                        <Stroke color="[CONFIGURATION.corona.0]" thickness="5" cap="ROUND" />
+                    </Arc>
+                </PartDraw>
+                <PartImage x="31" y="10" width="24" height="24" tintColor="[CONFIGURATION.corona.0]">
+                    <Image resource="ic_battery" />
+                </PartImage>
+                <PartText x="4" y="31" width="78" height="48">
+                    <Text align="CENTER" maxLines="1" ellipsis="TRUE">
+                        <Font family="teko_semibold" size="32" weight="SEMI_BOLD" color="#FFFFFFFF"><Template>%s%%<Parameter expression="[BATTERY_PERCENT]" /></Template></Font>
+                    </Text>
+                </PartText>
+            </Group>
+        </Group>
+        <ComplicationSlot x="32" y="102" width="86" height="86" slotId="0" displayName="slot_left_name" isCustomizable="TRUE" supportedTypes="SHORT_TEXT RANGED_VALUE MONOCHROMATIC_IMAGE SMALL_IMAGE EMPTY">
+            <Variant mode="AMBIENT" target="alpha" value="0" />
+            <BoundingOval x="0" y="0" width="86" height="86" />
+            <DefaultProviderPolicy defaultSystemProvider="UNREAD_NOTIFICATION_COUNT" defaultSystemProviderType="SHORT_TEXT" />
+            <Complication type="SHORT_TEXT">
+                <PartDraw x="0" y="0" width="86" height="86">
+                    <Ellipse x="0" y="0" width="86" height="86">
+                        <Fill color="#FF000000" />
+                    </Ellipse>
+                    <Ellipse x="2" y="2" width="82" height="82">
+                        <Stroke color="#FF667086" thickness="2" />
+                    </Ellipse>
+                </PartDraw>
+                <PartImage x="31" y="10" width="24" height="24" tintColor="[CONFIGURATION.corona.0]">
+                    <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                </PartImage>
+                <PartText x="6" y="33" width="74" height="45">
+                    <Text align="CENTER" maxLines="1" ellipsis="TRUE">
+                        <Font family="teko_semibold" size="30" weight="SEMI_BOLD" color="#FFFFFFFF"><Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template></Font>
+                    </Text>
+                </PartText>
+            </Complication>
+            <Complication type="RANGED_VALUE">
+                <PartDraw x="0" y="0" width="86" height="86">
+                    <Ellipse x="0" y="0" width="86" height="86">
+                        <Fill color="#FF000000" />
+                    </Ellipse>
+                    <Ellipse x="3.5" y="3.5" width="79" height="79">
+                        <Stroke color="#FF343A48" thickness="5" />
+                    </Ellipse>
+                    <Arc centerX="43" centerY="43" width="79" height="79" startAngle="0" endAngle="0" direction="CLOCKWISE">
+                        <Transform target="endAngle" value="359.9 * clamp(([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN]) / clamp([COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN], 1, 1000000000), 0, 1)" />
+                        <Stroke color="[CONFIGURATION.corona.0]" thickness="5" cap="ROUND" />
+                    </Arc>
+                </PartDraw>
+                <PartImage x="31" y="10" width="24" height="24" tintColor="[CONFIGURATION.corona.0]">
+                    <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                </PartImage>
+                <PartText x="6" y="33" width="74" height="45">
+                    <Text align="CENTER" maxLines="1" ellipsis="TRUE">
+                        <Font family="teko_semibold" size="30" weight="SEMI_BOLD" color="#FFFFFFFF"><Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template></Font>
+                    </Text>
+                </PartText>
+            </Complication>
+            <Complication type="MONOCHROMATIC_IMAGE">
+                <PartDraw x="0" y="0" width="86" height="86">
+                    <Ellipse x="0" y="0" width="86" height="86">
+                        <Fill color="#FF000000" />
+                    </Ellipse>
+                    <Ellipse x="2" y="2" width="82" height="82">
+                        <Stroke color="#FF667086" thickness="2" />
+                    </Ellipse>
+                </PartDraw>
+                <PartImage x="22" y="22" width="42" height="42" tintColor="[CONFIGURATION.corona.0]">
+                    <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                </PartImage>
+            </Complication>
+            <Complication type="SMALL_IMAGE">
+                <PartDraw x="0" y="0" width="86" height="86">
+                    <Ellipse x="0" y="0" width="86" height="86">
+                        <Fill color="#FF000000" />
+                    </Ellipse>
+                    <Ellipse x="2" y="2" width="82" height="82">
+                        <Stroke color="#FF667086" thickness="2" />
+                    </Ellipse>
+                </PartDraw>
+                <PartImage x="16" y="16" width="54" height="54">
+                    <Image resource="[COMPLICATION.SMALL_IMAGE]" />
+                </PartImage>
+            </Complication>
+            <Complication type="EMPTY">
+                <PartDraw x="0" y="0" width="86" height="86">
+                    <Ellipse x="0" y="0" width="86" height="86">
+                        <Fill color="#FF000000" />
+                    </Ellipse>
+                    <Ellipse x="2" y="2" width="82" height="82">
+                        <Stroke color="#FF667086" thickness="2" />
+                    </Ellipse>
+                </PartDraw>
+            </Complication>
+        </ComplicationSlot>
+        <ComplicationSlot x="362" y="102" width="86" height="86" slotId="1" displayName="slot_right_name" isCustomizable="TRUE" supportedTypes="SHORT_TEXT RANGED_VALUE MONOCHROMATIC_IMAGE SMALL_IMAGE EMPTY">
+            <Variant mode="AMBIENT" target="alpha" value="0" />
+            <BoundingOval x="0" y="0" width="86" height="86" />
+            <DefaultProviderPolicy defaultSystemProvider="SUNRISE_SUNSET" defaultSystemProviderType="SHORT_TEXT" />
+            <Complication type="SHORT_TEXT">
+                <PartDraw x="0" y="0" width="86" height="86">
+                    <Ellipse x="0" y="0" width="86" height="86">
+                        <Fill color="#FF000000" />
+                    </Ellipse>
+                    <Ellipse x="2" y="2" width="82" height="82">
+                        <Stroke color="#FF667086" thickness="2" />
+                    </Ellipse>
+                </PartDraw>
+                <PartImage x="31" y="10" width="24" height="24" tintColor="[CONFIGURATION.corona.0]">
+                    <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                </PartImage>
+                <PartText x="6" y="33" width="74" height="45">
+                    <Text align="CENTER" maxLines="1" ellipsis="TRUE">
+                        <Font family="teko_semibold" size="30" weight="SEMI_BOLD" color="#FFFFFFFF"><Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template></Font>
+                    </Text>
+                </PartText>
+            </Complication>
+            <Complication type="RANGED_VALUE">
+                <PartDraw x="0" y="0" width="86" height="86">
+                    <Ellipse x="0" y="0" width="86" height="86">
+                        <Fill color="#FF000000" />
+                    </Ellipse>
+                    <Ellipse x="3.5" y="3.5" width="79" height="79">
+                        <Stroke color="#FF343A48" thickness="5" />
+                    </Ellipse>
+                    <Arc centerX="43" centerY="43" width="79" height="79" startAngle="0" endAngle="0" direction="CLOCKWISE">
+                        <Transform target="endAngle" value="359.9 * clamp(([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN]) / clamp([COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN], 1, 1000000000), 0, 1)" />
+                        <Stroke color="[CONFIGURATION.corona.0]" thickness="5" cap="ROUND" />
+                    </Arc>
+                </PartDraw>
+                <PartImage x="31" y="10" width="24" height="24" tintColor="[CONFIGURATION.corona.0]">
+                    <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                </PartImage>
+                <PartText x="6" y="33" width="74" height="45">
+                    <Text align="CENTER" maxLines="1" ellipsis="TRUE">
+                        <Font family="teko_semibold" size="30" weight="SEMI_BOLD" color="#FFFFFFFF"><Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template></Font>
+                    </Text>
+                </PartText>
+            </Complication>
+            <Complication type="MONOCHROMATIC_IMAGE">
+                <PartDraw x="0" y="0" width="86" height="86">
+                    <Ellipse x="0" y="0" width="86" height="86">
+                        <Fill color="#FF000000" />
+                    </Ellipse>
+                    <Ellipse x="2" y="2" width="82" height="82">
+                        <Stroke color="#FF667086" thickness="2" />
+                    </Ellipse>
+                </PartDraw>
+                <PartImage x="22" y="22" width="42" height="42" tintColor="[CONFIGURATION.corona.0]">
+                    <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                </PartImage>
+            </Complication>
+            <Complication type="SMALL_IMAGE">
+                <PartDraw x="0" y="0" width="86" height="86">
+                    <Ellipse x="0" y="0" width="86" height="86">
+                        <Fill color="#FF000000" />
+                    </Ellipse>
+                    <Ellipse x="2" y="2" width="82" height="82">
+                        <Stroke color="#FF667086" thickness="2" />
+                    </Ellipse>
+                </PartDraw>
+                <PartImage x="16" y="16" width="54" height="54">
+                    <Image resource="[COMPLICATION.SMALL_IMAGE]" />
+                </PartImage>
+            </Complication>
+            <Complication type="EMPTY">
+                <PartDraw x="0" y="0" width="86" height="86">
+                    <Ellipse x="0" y="0" width="86" height="86">
+                        <Fill color="#FF000000" />
+                    </Ellipse>
+                    <Ellipse x="2" y="2" width="82" height="82">
+                        <Stroke color="#FF667086" thickness="2" />
+                    </Ellipse>
+                </PartDraw>
+            </Complication>
+        </ComplicationSlot>
+        <Group name="annulus" x="0" y="0" width="480" height="480" alpha="0">
+            <Variant mode="AMBIENT" target="alpha" value="255" />
+            <PartDraw x="0" y="0" width="480" height="480">
+                <Ellipse x="108" y="108" width="264" height="264">
+                    <Stroke color="[CONFIGURATION.corona.1]" thickness="1.5" />
+                </Ellipse>
+            </PartDraw>
+        </Group>
+    </Scene>
+</WatchFace>

@@ -1,0 +1,409 @@
+<?xml version='1.0' encoding='utf-8'?>
+<WatchFace width="480" height="480" clipShape="CIRCLE">
+    <Metadata key="CLOCK_TYPE" value="DIGITAL" />
+    <Metadata key="PREVIEW_TIME" value="09:27:36" />
+    <UserConfigurations>
+        <ListConfiguration id="case_finish" displayName="case_finish_name" defaultValue="titanium">
+            <ListOption id="titanium" displayName="case_titanium" />
+            <ListOption id="brass" displayName="case_brass" />
+        </ListConfiguration>
+        <ColorConfiguration id="theme" displayName="tube_color_name" defaultValue="ambra">
+            <ColorOption id="ambra" displayName="color_ambra" colors="#FFFF6A14 #FFFFECBA #FFFF942C" />
+            <ColorOption id="vfd" displayName="color_vfd" colors="#FF1CE6B0 #FFD6FFF2 #FF3EE8BA" />
+            <ColorOption id="cobalto" displayName="color_cobalto" colors="#FF3A9BFF #FFE0F2FF #FF68B6FF" />
+            <ColorOption id="rubino" displayName="color_rubino" colors="#FFFF3646 #FFFFD8DC #FFFF6470" />
+        </ColorConfiguration>
+    </UserConfigurations>
+    <BitmapFonts>
+        <BitmapFont name="nixie_glow"><Character name="0" resource="nixie_glow_0" width="71" height="108" /><Character name="1" resource="nixie_glow_1" width="71" height="108" /><Character name="2" resource="nixie_glow_2" width="71" height="108" /><Character name="3" resource="nixie_glow_3" width="71" height="108" /><Character name="4" resource="nixie_glow_4" width="71" height="108" /><Character name="5" resource="nixie_glow_5" width="71" height="108" /><Character name="6" resource="nixie_glow_6" width="71" height="108" /><Character name="7" resource="nixie_glow_7" width="71" height="108" /><Character name="8" resource="nixie_glow_8" width="71" height="108" /><Character name="9" resource="nixie_glow_9" width="71" height="108" /></BitmapFont>
+        <BitmapFont name="nixie_core"><Character name="0" resource="nixie_core_0" width="71" height="108" /><Character name="1" resource="nixie_core_1" width="71" height="108" /><Character name="2" resource="nixie_core_2" width="71" height="108" /><Character name="3" resource="nixie_core_3" width="71" height="108" /><Character name="4" resource="nixie_core_4" width="71" height="108" /><Character name="5" resource="nixie_core_5" width="71" height="108" /><Character name="6" resource="nixie_core_6" width="71" height="108" /><Character name="7" resource="nixie_core_7" width="71" height="108" /><Character name="8" resource="nixie_core_8" width="71" height="108" /><Character name="9" resource="nixie_core_9" width="71" height="108" /></BitmapFont>
+    </BitmapFonts>
+    <Scene backgroundColor="#FF000000">
+        <Group name="dial_hardware" x="0" y="0" width="480" height="480">
+            <Variant mode="AMBIENT" target="alpha" value="0" />
+            <ListConfiguration id="case_finish">
+                <ListOption id="titanium">
+                    <PartImage x="0" y="0" width="480" height="480">
+                        <Image resource="dial_titanium" />
+                    </PartImage>
+                </ListOption>
+                <ListOption id="brass">
+                    <PartImage x="0" y="0" width="480" height="480">
+                        <Image resource="dial_brass" />
+                    </PartImage>
+                </ListOption>
+            </ListConfiguration>
+        </Group>
+        <Group name="sec_crown" x="0" y="0" width="480" height="480">
+            <Variant mode="AMBIENT" target="alpha" value="0" />
+            <AnalogClock x="0" y="0" width="480" height="480">
+                <SecondHand resource="sec_bead" x="232" y="24" width="16" height="16" pivotX="0.5" pivotY="13.5" tintColor="[CONFIGURATION.theme.2]" />
+            </AnalogClock>
+        </Group>
+        <PartText x="130" y="52" width="220" height="38">
+            <Variant mode="AMBIENT" target="alpha" value="155" />
+            <Text align="CENTER" maxLines="1" ellipsis="TRUE">
+                <Font family="teko_semibold" size="25" weight="SEMI_BOLD" color="#FFD6B48A"><Upper><Template>%s · %s %s<Parameter expression="[DAY_OF_WEEK_F]" /><Parameter expression="[DAY]" /><Parameter expression="[MONTH_S]" /></Template></Upper></Font>
+            </Text>
+        </PartText>
+        <Group name="nixie_glow_layer" x="0" y="0" width="480" height="480">
+            <Variant mode="AMBIENT" target="alpha" value="0" />
+            <Group name="tube_glow_0" x="74" y="112" width="71" height="108">
+                <Transform target="alpha" value="208 + 47 * sin(0.037699 * [MILLISECOND])" />
+                <PartText x="0" y="0" width="71" height="108">
+                    <Text align="CENTER" maxLines="1" ellipsis="FALSE">
+                        <BitmapFont family="nixie_glow" size="108" color="[CONFIGURATION.theme.0]"><Template>%s<Parameter expression="floor([HOUR_0_23] / 10)" /></Template></BitmapFont>
+                    </Text>
+                </PartText>
+            </Group>
+            <Group name="tube_glow_1" x="149" y="112" width="71" height="108">
+                <Transform target="alpha" value="208 + 47 * sin(0.037699 * [MILLISECOND] + 1.57)" />
+                <PartText x="0" y="0" width="71" height="108">
+                    <Text align="CENTER" maxLines="1" ellipsis="FALSE">
+                        <BitmapFont family="nixie_glow" size="108" color="[CONFIGURATION.theme.0]"><Template>%s<Parameter expression="[HOUR_0_23] % 10" /></Template></BitmapFont>
+                    </Text>
+                </PartText>
+            </Group>
+            <Group name="tube_glow_2" x="260" y="112" width="71" height="108">
+                <Transform target="alpha" value="206 + 49 * cos(0.031416 * [MILLISECOND])" />
+                <PartText x="0" y="0" width="71" height="108">
+                    <Text align="CENTER" maxLines="1" ellipsis="FALSE">
+                        <BitmapFont family="nixie_glow" size="108" color="[CONFIGURATION.theme.0]"><Template>%s<Parameter expression="floor([MINUTE] / 10)" /></Template></BitmapFont>
+                    </Text>
+                </PartText>
+            </Group>
+            <Group name="tube_glow_3" x="335" y="112" width="71" height="108">
+                <Transform target="alpha" value="206 + 49 * sin(0.043982 * [MILLISECOND] + 2.4)" />
+                <PartText x="0" y="0" width="71" height="108">
+                    <Text align="CENTER" maxLines="1" ellipsis="FALSE">
+                        <BitmapFont family="nixie_glow" size="108" color="[CONFIGURATION.theme.0]"><Template>%s<Parameter expression="[MINUTE] % 10" /></Template></BitmapFont>
+                    </Text>
+                </PartText>
+            </Group>
+            <Group name="colon_glow_grp" x="228" y="145" width="24" height="52">
+                <Transform target="alpha" value="110 + 145 * (0.5 + 0.5 * cos(0.006283 * [MILLISECOND]))" />
+                <PartImage x="0" y="0" width="24" height="52" tintColor="[CONFIGURATION.theme.0]">
+                    <Image resource="colon_glow" />
+                </PartImage>
+            </Group>
+        </Group>
+        <Group name="nixie_core_layer" x="0" y="0" width="480" height="480">
+            <Variant mode="AMBIENT" target="alpha" value="165" />
+            <PartText x="74" y="112" width="71" height="108">
+                <Text align="CENTER" maxLines="1" ellipsis="FALSE">
+                    <BitmapFont family="nixie_core" size="108" color="[CONFIGURATION.theme.1]"><Template>%s<Parameter expression="floor([HOUR_0_23] / 10)" /></Template></BitmapFont>
+                </Text>
+            </PartText>
+            <PartText x="149" y="112" width="71" height="108">
+                <Text align="CENTER" maxLines="1" ellipsis="FALSE">
+                    <BitmapFont family="nixie_core" size="108" color="[CONFIGURATION.theme.1]"><Template>%s<Parameter expression="[HOUR_0_23] % 10" /></Template></BitmapFont>
+                </Text>
+            </PartText>
+            <PartText x="260" y="112" width="71" height="108">
+                <Text align="CENTER" maxLines="1" ellipsis="FALSE">
+                    <BitmapFont family="nixie_core" size="108" color="[CONFIGURATION.theme.1]"><Template>%s<Parameter expression="floor([MINUTE] / 10)" /></Template></BitmapFont>
+                </Text>
+            </PartText>
+            <PartText x="335" y="112" width="71" height="108">
+                <Text align="CENTER" maxLines="1" ellipsis="FALSE">
+                    <BitmapFont family="nixie_core" size="108" color="[CONFIGURATION.theme.1]"><Template>%s<Parameter expression="[MINUTE] % 10" /></Template></BitmapFont>
+                </Text>
+            </PartText>
+            <Group name="colon_core_grp" x="228" y="145" width="24" height="52">
+                <Transform target="alpha" value="155 + 100 * (0.5 + 0.5 * cos(0.006283 * [MILLISECOND]))" />
+                <PartImage x="0" y="0" width="24" height="52" tintColor="[CONFIGURATION.theme.1]">
+                    <Image resource="colon_core" />
+                </PartImage>
+            </Group>
+        </Group>
+        <Group name="nixie_ignition" x="0" y="0" width="480" height="480">
+            <Variant mode="AMBIENT" target="alpha" value="0" />
+            <PartAnimatedImage x="74" y="108" width="71" height="128" tintColor="[CONFIGURATION.theme.1]">
+                <AnimationController play="ON_VISIBLE ON_NEXT_HOUR" beforePlaying="HIDE" afterPlaying="HIDE" />
+                <SequenceImages loopCount="1" frameRate="24">
+                    <Image resource="nixie_flash_1" />
+                    <Image resource="nixie_flash_2" />
+                    <Image resource="nixie_flash_3" />
+                    <Image resource="nixie_flash_4" />
+                    <Image resource="nixie_flash_5" />
+                    <Image resource="nixie_flash_6" />
+                </SequenceImages>
+            </PartAnimatedImage>
+            <PartAnimatedImage x="149" y="108" width="71" height="128" tintColor="[CONFIGURATION.theme.1]">
+                <AnimationController play="ON_VISIBLE ON_NEXT_HOUR" beforePlaying="HIDE" afterPlaying="HIDE" />
+                <SequenceImages loopCount="1" frameRate="24">
+                    <Image resource="nixie_flash_1" />
+                    <Image resource="nixie_flash_2" />
+                    <Image resource="nixie_flash_3" />
+                    <Image resource="nixie_flash_4" />
+                    <Image resource="nixie_flash_5" />
+                    <Image resource="nixie_flash_6" />
+                </SequenceImages>
+            </PartAnimatedImage>
+            <PartAnimatedImage x="260" y="108" width="71" height="128" tintColor="[CONFIGURATION.theme.1]">
+                <AnimationController play="ON_VISIBLE ON_NEXT_MINUTE" beforePlaying="HIDE" afterPlaying="HIDE" />
+                <SequenceImages loopCount="1" frameRate="24">
+                    <Image resource="nixie_flash_1" />
+                    <Image resource="nixie_flash_2" />
+                    <Image resource="nixie_flash_3" />
+                    <Image resource="nixie_flash_4" />
+                    <Image resource="nixie_flash_5" />
+                    <Image resource="nixie_flash_6" />
+                </SequenceImages>
+            </PartAnimatedImage>
+            <PartAnimatedImage x="335" y="108" width="71" height="128" tintColor="[CONFIGURATION.theme.1]">
+                <AnimationController play="ON_VISIBLE ON_NEXT_MINUTE" beforePlaying="HIDE" afterPlaying="HIDE" />
+                <SequenceImages loopCount="1" frameRate="24">
+                    <Image resource="nixie_flash_1" />
+                    <Image resource="nixie_flash_2" />
+                    <Image resource="nixie_flash_3" />
+                    <Image resource="nixie_flash_4" />
+                    <Image resource="nixie_flash_5" />
+                    <Image resource="nixie_flash_6" />
+                </SequenceImages>
+            </PartAnimatedImage>
+        </Group>
+        <Group name="tube_glass_front" x="0" y="0" width="480" height="480">
+            <Variant mode="AMBIENT" target="alpha" value="0" />
+            <PartImage x="0" y="0" width="480" height="480">
+                <Image resource="tube_glass_array" />
+            </PartImage>
+        </Group>
+        <Group name="instrument_plate" x="92" y="252" width="296" height="60">
+            <Variant mode="AMBIENT" target="alpha" value="0" />
+            <Group name="inst_heart" x="12" y="4" width="84" height="36">
+                <Launch target="com.samsung.android.wear.shealth/com.samsung.android.wear.shealth.app.home.HomeActivity" />
+                <PartImage x="14" y="11" width="16" height="16" tintColor="#FFFF6056">
+                    <Image resource="ic_heart" />
+                </PartImage>
+                <PartText x="28" y="-1" width="44" height="41">
+                    <Text align="CENTER" maxLines="1" ellipsis="TRUE">
+                        <Font family="teko_bold" size="27" weight="BOLD" color="#FFFF6056"><Template>%s<Parameter expression="[HEART_RATE] &gt; 0 ? [HEART_RATE] : '--'" /></Template></Font>
+                    </Text>
+                </PartText>
+            </Group>
+            <Group name="inst_steps" x="98" y="4" width="102" height="36">
+                <Launch target="com.samsung.android.wear.shealth/com.samsung.android.wear.shealth.app.home.HomeActivity" />
+                <PartImage x="10" y="11" width="16" height="16" tintColor="#FF7CD696">
+                    <Image resource="ic_steps" />
+                </PartImage>
+                <Group name="steps_sz_27" x="28" y="0" width="74" height="36">
+                    <Transform target="alpha" value="[STEP_COUNT] &lt; 10000 ? 255 : 0" />
+                    <PartText x="0" y="-1" width="60" height="41">
+                        <Text align="CENTER" maxLines="1" ellipsis="TRUE">
+                            <Font family="teko_bold" size="27" weight="BOLD" color="#FFFFE0A2"><Template>%s<Parameter expression="[STEP_COUNT]" /></Template></Font>
+                        </Text>
+                    </PartText>
+                </Group>
+                <Group name="steps_sz_22" x="28" y="0" width="74" height="36">
+                    <Transform target="alpha" value="[STEP_COUNT] &lt; 10000 ? 0 : 255" />
+                    <PartText x="0" y="3" width="60" height="33">
+                        <Text align="CENTER" maxLines="1" ellipsis="TRUE">
+                            <Font family="teko_bold" size="22" weight="BOLD" color="#FFFFE0A2"><Template>%s<Parameter expression="[STEP_COUNT]" /></Template></Font>
+                        </Text>
+                    </PartText>
+                </Group>
+            </Group>
+            <Group name="inst_batt" x="202" y="4" width="84" height="36">
+                <Launch target="BATTERY_STATUS" />
+                <Group name="batt_ok" x="0" y="0" width="84" height="36">
+                    <Transform target="alpha" value="[BATTERY_PERCENT] &lt;= 20 ? 0 : 255" />
+                    <PartImage x="8" y="11" width="16" height="16" tintColor="[CONFIGURATION.theme.2]">
+                        <Image resource="ic_battery" />
+                    </PartImage>
+                    <PartText x="22" y="-1" width="52" height="41">
+                        <Text align="CENTER" maxLines="1" ellipsis="TRUE">
+                            <Font family="teko_bold" size="27" weight="BOLD" color="[CONFIGURATION.theme.2]"><Template>%s%%<Parameter expression="[BATTERY_PERCENT]" /></Template></Font>
+                        </Text>
+                    </PartText>
+                </Group>
+                <Group name="batt_low" x="0" y="0" width="84" height="36">
+                    <Transform target="alpha" value="[BATTERY_PERCENT] &lt;= 20 ? 255 : 0" />
+                    <PartImage x="8" y="11" width="16" height="16" tintColor="#FFFF6056">
+                        <Image resource="ic_battery" />
+                    </PartImage>
+                    <PartText x="22" y="-1" width="52" height="41">
+                        <Text align="CENTER" maxLines="1" ellipsis="TRUE">
+                            <Font family="teko_bold" size="27" weight="BOLD" color="#FFFF6056"><Template>%s%%<Parameter expression="[BATTERY_PERCENT]" /></Template></Font>
+                        </Text>
+                    </PartText>
+                </Group>
+            </Group>
+            <PartDraw x="26" y="42" width="244" height="4">
+                <RoundRectangle x="0" y="0" width="244" height="4.5" cornerRadiusX="2.2" cornerRadiusY="2.2">
+                    <Fill color="#FF201812" />
+                </RoundRectangle>
+                <RoundRectangle x="0" y="0" width="244" height="4.5" cornerRadiusX="2.2" cornerRadiusY="2.2">
+                    <Transform target="width" value="244 * clamp([STEP_COUNT] / clamp([STEP_GOAL], 1, 1000000), 0, 1)" />
+                    <Fill color="[CONFIGURATION.theme.2]" />
+                </RoundRectangle>
+            </PartDraw>
+        </Group>
+        <ComplicationSlot x="108" y="324" width="86" height="52" slotId="0" displayName="slot_notif_name" isCustomizable="TRUE" supportedTypes="SHORT_TEXT RANGED_VALUE MONOCHROMATIC_IMAGE SMALL_IMAGE EMPTY">
+            <Variant mode="AMBIENT" target="alpha" value="0" />
+            <BoundingRoundBox x="0" y="0" width="86" height="52" cornerRadius="13" />
+            <DefaultProviderPolicy defaultSystemProvider="UNREAD_NOTIFICATION_COUNT" defaultSystemProviderType="SHORT_TEXT" />
+            <Complication type="SHORT_TEXT">
+                <PartImage x="16" y="17" width="18" height="18" tintColor="[CONFIGURATION.theme.2]">
+                    <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                </PartImage>
+                <PartText x="37" y="8" width="38" height="41">
+                    <Text align="CENTER" maxLines="1" ellipsis="TRUE">
+                        <Font family="teko_semibold" size="27" weight="SEMI_BOLD" color="#FFFFE0A2"><Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template></Font>
+                    </Text>
+                </PartText>
+            </Complication>
+            <Complication type="RANGED_VALUE">
+                <PartImage x="16" y="17" width="18" height="18" tintColor="[CONFIGURATION.theme.2]">
+                    <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                </PartImage>
+                <PartText x="37" y="8" width="38" height="41">
+                    <Text align="CENTER" maxLines="1" ellipsis="TRUE">
+                        <Font family="teko_semibold" size="27" weight="SEMI_BOLD" color="#FFFFE0A2"><Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template></Font>
+                    </Text>
+                </PartText>
+            </Complication>
+            <Complication type="MONOCHROMATIC_IMAGE">
+                <PartImage x="31" y="14" width="24" height="24" tintColor="[CONFIGURATION.theme.2]">
+                    <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                </PartImage>
+            </Complication>
+            <Complication type="SMALL_IMAGE">
+                <PartImage x="28" y="11" width="30" height="30">
+                    <Image resource="[COMPLICATION.SMALL_IMAGE]" />
+                </PartImage>
+            </Complication>
+            <Complication type="EMPTY" />
+        </ComplicationSlot>
+        <Group name="weather" x="202" y="324" width="100" height="52">
+            <Variant mode="AMBIENT" target="alpha" value="0" />
+            <Condition>
+                <Expressions>
+                    <Expression name="available">[WEATHER.IS_AVAILABLE]</Expression>
+                </Expressions>
+                <Compare expression="available">
+                    <Condition>
+                        <Expressions>
+                            <Expression name="sun">([WEATHER.CONDITION] == 1 || [WEATHER.CONDITION] == 8) &amp;&amp; [WEATHER.IS_DAY]</Expression>
+                            <Expression name="moon">[WEATHER.CONDITION] == 1 || [WEATHER.CONDITION] == 8</Expression>
+                            <Expression name="partly">[WEATHER.CONDITION] == 14</Expression>
+                            <Expression name="cloud">[WEATHER.CONDITION] == 2</Expression>
+                            <Expression name="fog">[WEATHER.CONDITION] == 3 || [WEATHER.CONDITION] == 13</Expression>
+                            <Expression name="rain">[WEATHER.CONDITION] == 4 || [WEATHER.CONDITION] == 6 || [WEATHER.CONDITION] == 12</Expression>
+                            <Expression name="snow">[WEATHER.CONDITION] == 5 || [WEATHER.CONDITION] == 7 || [WEATHER.CONDITION] == 10 || [WEATHER.CONDITION] == 11</Expression>
+                            <Expression name="storm">[WEATHER.CONDITION] == 9</Expression>
+                            <Expression name="wind">[WEATHER.CONDITION] == 15</Expression>
+                        </Expressions>
+                        <Compare expression="sun">
+                            <PartImage x="16" y="15" width="22" height="22" tintColor="[CONFIGURATION.theme.2]">
+                                <Image resource="wx_sun" />
+                            </PartImage>
+                        </Compare>
+                        <Compare expression="moon">
+                            <PartImage x="16" y="15" width="22" height="22" tintColor="[CONFIGURATION.theme.2]">
+                                <Image resource="wx_moon" />
+                            </PartImage>
+                        </Compare>
+                        <Compare expression="partly">
+                            <PartImage x="16" y="15" width="22" height="22" tintColor="[CONFIGURATION.theme.2]">
+                                <Image resource="wx_partly" />
+                            </PartImage>
+                        </Compare>
+                        <Compare expression="cloud">
+                            <PartImage x="16" y="15" width="22" height="22" tintColor="[CONFIGURATION.theme.2]">
+                                <Image resource="wx_cloud" />
+                            </PartImage>
+                        </Compare>
+                        <Compare expression="fog">
+                            <PartImage x="16" y="15" width="22" height="22" tintColor="[CONFIGURATION.theme.2]">
+                                <Image resource="wx_fog" />
+                            </PartImage>
+                        </Compare>
+                        <Compare expression="rain">
+                            <PartImage x="16" y="15" width="22" height="22" tintColor="[CONFIGURATION.theme.2]">
+                                <Image resource="wx_rain" />
+                            </PartImage>
+                        </Compare>
+                        <Compare expression="snow">
+                            <PartImage x="16" y="15" width="22" height="22" tintColor="[CONFIGURATION.theme.2]">
+                                <Image resource="wx_snow" />
+                            </PartImage>
+                        </Compare>
+                        <Compare expression="storm">
+                            <PartImage x="16" y="15" width="22" height="22" tintColor="[CONFIGURATION.theme.2]">
+                                <Image resource="wx_storm" />
+                            </PartImage>
+                        </Compare>
+                        <Compare expression="wind">
+                            <PartImage x="16" y="15" width="22" height="22" tintColor="[CONFIGURATION.theme.2]">
+                                <Image resource="wx_wind" />
+                            </PartImage>
+                        </Compare>
+                        <Default>
+                            <PartImage x="16" y="15" width="22" height="22" tintColor="[CONFIGURATION.theme.2]">
+                                <Image resource="wx_cloud" />
+                            </PartImage>
+                        </Default>
+                    </Condition>
+                    <PartText x="40" y="8" width="52" height="41">
+                        <Text align="CENTER" maxLines="1" ellipsis="TRUE">
+                            <Font family="teko_semibold" size="27" weight="SEMI_BOLD" color="#FFFFE0A2"><Template>%s°<Parameter expression="[WEATHER.TEMPERATURE]" /></Template></Font>
+                        </Text>
+                    </PartText>
+                </Compare>
+                <Default>
+                    <PartImage x="16" y="15" width="22" height="22" tintColor="#FF38322C">
+                        <Image resource="wx_cloud" />
+                    </PartImage>
+                    <PartText x="40" y="8" width="52" height="41">
+                        <Text align="CENTER" maxLines="1" ellipsis="TRUE">
+                            <Font family="teko_semibold" size="27" weight="SEMI_BOLD" color="#FF38322C">--</Font>
+                        </Text>
+                    </PartText>
+                </Default>
+            </Condition>
+        </Group>
+        <Group name="recorder_btn" x="310" y="324" width="62" height="52">
+            <Variant mode="AMBIENT" target="alpha" value="0" />
+            <Launch target="com.samsung.android.wear.voicerecorder/com.samsung.android.wear.voicerecorder.view.MainActivity" />
+            <PartImage x="20" y="15" width="22" height="22" tintColor="[CONFIGURATION.theme.2]">
+                <Image resource="ic_mic" />
+            </PartImage>
+        </Group>
+        <PartText x="195" y="387" width="90" height="30">
+            <Variant mode="AMBIENT" target="alpha" value="0" />
+            <Text align="CENTER" maxLines="1" ellipsis="TRUE">
+                <Font family="teko_semibold" size="20" weight="SEMI_BOLD" color="[CONFIGURATION.theme.2]"><Template>%s%s SEC<Parameter expression="floor([SECOND] / 10)" /><Parameter expression="[SECOND] % 10" /></Template></Font>
+            </Text>
+        </PartText>
+        <Group name="aod_silhouettes" x="0" y="0" width="480" height="480">
+            <Variant mode="AMBIENT" target="alpha" value="255" />
+            <PartDraw x="0" y="0" width="480" height="480">
+                <RoundRectangle x="74" y="114" width="71" height="122" cornerRadiusX="17" cornerRadiusY="17">
+                    <Stroke color="#FF38322C" thickness="1.2" />
+                </RoundRectangle>
+                <RoundRectangle x="149" y="114" width="71" height="122" cornerRadiusX="17" cornerRadiusY="17">
+                    <Stroke color="#FF38322C" thickness="1.2" />
+                </RoundRectangle>
+                <RoundRectangle x="260" y="114" width="71" height="122" cornerRadiusX="17" cornerRadiusY="17">
+                    <Stroke color="#FF38322C" thickness="1.2" />
+                </RoundRectangle>
+                <RoundRectangle x="335" y="114" width="71" height="122" cornerRadiusX="17" cornerRadiusY="17">
+                    <Stroke color="#FF38322C" thickness="1.2" />
+                </RoundRectangle>
+                <RoundRectangle x="238.5" y="14.5" width="3" height="3" cornerRadiusX="1.5" cornerRadiusY="1.5">
+                    <Fill color="#FF38322C" />
+                </RoundRectangle>
+                <RoundRectangle x="462.5" y="238.5" width="3" height="3" cornerRadiusX="1.5" cornerRadiusY="1.5">
+                    <Fill color="#FF38322C" />
+                </RoundRectangle>
+                <RoundRectangle x="238.5" y="462.5" width="3" height="3" cornerRadiusX="1.5" cornerRadiusY="1.5">
+                    <Fill color="#FF38322C" />
+                </RoundRectangle>
+                <RoundRectangle x="14.5" y="238.5" width="3" height="3" cornerRadiusX="1.5" cornerRadiusY="1.5">
+                    <Fill color="#FF38322C" />
+                </RoundRectangle>
+            </PartDraw>
+        </Group>
+    </Scene>
+</WatchFace>

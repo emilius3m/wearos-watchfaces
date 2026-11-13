@@ -1,0 +1,34 @@
+# Keystores, signing secrets, and local Play Store credentials
+*.keystore
+*.jks
+*.p12
+*.pem
+*.idsig
+PlayRelease/README-PLAYSTORE.md
+
+# Packaged binaries and archives
+*.apk
+*.aab
+*.jar
+*.zip
+*.tar.gz
+
+# Build and staging directories
+build/
+obj/
+stage/
+backups/
+PlayRelease/*/build/
+PlayRelease/*/stage/
+
+# Python / OS / Editor artifacts
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+Thumbs.db
+*.mp4
+
+# Non-watchface companion tools kept local
+WalletButtonRemap/
+WatchRec/

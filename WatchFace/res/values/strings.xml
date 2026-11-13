@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="watch_face_name">Palette Meteo</string>
+    <string name="a11y_time">Ore %1$s e %2$s minuti</string>
+    <string name="color_warm">Ambra · Classico</string>
+    <string name="theme_color_name">Accento</string>
+    <string name="color_volt">Volt · Lime</string>
+    <string name="color_ice">Ice · Ghiaccio</string>
+    <string name="color_ember">Ember · Arancio</string>
+    <string name="color_white">Titanium · Bianco</string>
+    <string name="color_red">Pulse · Rosso</string>
+    <string name="slot_left_name">Scorciatoia sinistra</string>
+    <string name="slot_right_name">Scorciatoia destra</string>
+</resources>

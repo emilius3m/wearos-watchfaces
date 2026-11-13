@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="watch_face_name">ECLISSE</string>
+    <string name="theme_color_name">Corona</string>
+    <string name="color_oro">Corona · Oro</string>
+    <string name="color_plasma">Plasma · Magenta</string>
+    <string name="color_aurora">Aurora · Verde</string>
+    <string name="color_zaffiro">Zaffiro · Blu</string>
+    <string name="color_brace">Brace · Rosso</string>
+    <string name="color_luna">Luna · Argento</string>
+    <string name="slot_left_name">Luna in alto a sinistra</string>
+    <string name="slot_right_name">Luna in alto a destra</string>
+</resources>

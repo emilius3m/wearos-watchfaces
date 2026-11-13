@@ -1,0 +1,216 @@
+SERVICE com.samsung.wear.watchface.runtime/com.google.wear.watchface.runtime.DeclarativeWatchFaceRuntime0 4360ed0 pid=25499 user=0
+  Client:
+    State of wallpaper com.google.wear.watchface.runtime.DeclarativeWatchFaceRuntime0@402bec5:
+      Engine v0.z0@6f67b09:
+        mInitializing=false mDestroyed=false
+        mVisible=true mReportedVisible=true
+     mIsScreenTurningOn=false
+        mDisplay=Display id 0: DisplayInfo{"Schermo incorporato", displayId 0, displayGroupId 0, FLAG_SECURE, FLAG_SUPPORTS_PROTECTED_BUFFERS, FLAG_ROUND, FLAG_TRUSTED, real 480 x 480, largest app 480 x 480, smallest app 480 x 480, appVsyncOff 0, presDeadline 17666667, mode 1, renderFrameRate 60.0, hasArrSupport false, frameRateCategoryRate FrameRateCategoryRate {normal=60.0, high=90.0}, supportedRefreshRates [60.0], defaultMode 1, userPreferredModeId -1, supportedModes [{id=1, width=480, height=480, fps=60.0, vsync=60.0, synthetic=false, alternativeRefreshRates=[], supportedHdrTypes=[]}], appsSupportedModes [{id=1, width=480, height=480, fps=60.0, vsync=60.0, synthetic=false, alternativeRefreshRates=[], supportedHdrTypes=[]}], hdrCapabilities HdrCapabilities{mSupportedHdrTypes=[], mMaxLuminance=500.0, mMaxAverageLuminance=500.0, mMinLuminance=0.0}, isForceSdr false, userDisabledHdrTypes [], minimalPostProcessingSupported false, rotation 0, state ON, committedState ON}, DisplayMetrics{density=2.125, width=480, height=480, scaledDensity=2.125, xdpi=329.51352, ydpi=329.51352}, isValid=true
+        mCreated=true mSurfaceCreated=true mReportedSurfaceCreated=true mIsCreating=false mDrawingAllowed=true
+        mWidth=-1 mCurWidth=480 mHeight=-1 mCurHeight=480
+        mType=-1 mWindowFlags=16 mCurWindowFlags=16
+        mWindowPrivateFlags=4 mCurWindowPrivateFlags=4
+        mWinFrames=
+    ClientWindowFrames{frame=[0,0][480,480] display=[-100000,-100000][100000,100000] parentFrame=[0,0][0,0]}
+        mConfiguration={1.0 ?mcc0mnc [it_IT] ldltr sw226dp w226dp h226dp 340dpi smll port watch finger -keyb/v/h -nav/h winConfig={ mBounds=Rect(0, 0 - 480, 480) mAppBounds=Rect(0, 0 - 480, 480) mMaxBounds=Rect(0, 0 - 480, 480) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0} s.102 fontWeightAdjustment=0 ff=0}
+        mLayout={(0,0)(fillxfill) gr=TOP START CENTER ty=WALLPAPER fmt=RGBX_8888 wanim=0x103031e
+      fl=NOT_FOCUSABLE NOT_TOUCHABLE LAYOUT_IN_SCREEN LAYOUT_NO_LIMITS LAYOUT_INSET_DECOR
+      pfl=WANTS_OFFSET_NOTIFICATIONS
+      bhv=DEFAULT
+      frameRateBoostOnTouch=true
+      dvrrWindowFrameRateHint=true}
+        mZoom=0.0
+        mPreviewSurfacePosition=null
+        mPendingXOffset=0.0 mPendingXOffset=0.0
+        mPendingXOffsetStep=-1.0 mPendingXOffsetStep=-1.0
+        mOffsetMessageEnqueued=false mPendingSync=false
+    AndroidX WatchFaceService com.samsung.wear.watchface.runtime
+    InteractiveInstanceManager instances:
+    	InteractiveInstanceManager:
+    		impl.instanceId=wfId-14
+    		refcount=2
+    		WatchFaceEngine:
+    			Androidx style init flow
+    			createdBy=Boot with pendingWallpaperInstance
+    			asyncWatchFaceConstructionPending=false
+    			systemViewOfContentDescriptionLabelsIsStale=false
+    			interactiveInstanceId=wfId-14
+    			frameCallbackPending=false
+    			destroyed=false
+    			surfaceDestroyed=false
+    			lastComplications={11=ShortTextComplicationData(text=ComplicationText{mSurroundingText=REDACTED, mTimeDependentText=null, mDynamicText=null}, title=null, monochromaticImage=MonochromaticImage(image=Icon(typ=RESOURCE pkg=com.android.providers.calendar id=0x7f070060), ambientImage=null), smallImage=null, contentDescription=ComplicationText{mSurroundingText=REDACTED, mTimeDependentText=null, mDynamicText=null}, tapActionLostDueToSerialization=false, tapAction=PendingIntent{fcf3ecc: android.os.BinderProxy@f49696a}, validTimeRange=TimeRange(REDACTED), dataSource=ComponentInfo{com.android.providers.calendar/com.android.providers.calendar.complication.NextEventProviderService}, persistencePolicy=0, displayPolicy=0, dynamicValueInvalidationFallback=null, extras=PersistableBundle[{}]), 12=ShortTextComplicationData(text=ComplicationText{mSurroundingText=REDACTED, mTimeDependentText=null, mDynamicText=null}, title=null, monochromaticImage=MonochromaticImage(image=Icon(typ=RESOURCE pkg=com.samsung.android.wearable.sysui id=0x7f0802b5), ambientImage=Icon(typ=RESOURCE pkg=com.samsung.android.wearable.sysui id=0x7f0802b4)), smallImage=null, contentDescription=ComplicationText{mSurroundingText=REDACTED, mTimeDependentText=null, mDynamicText=null}, tapActionLostDueToSerialization=false, tapAction=null, validTimeRange=TimeRange(REDACTED), dataSource=ComponentInfo{com.samsung.android.wearable.sysui/com.google.android.clockwork.sysui.experiences.complications.providers.UnreadNotificationsProviderService}, persistencePolicy=0, displayPolicy=0, dynamicValueInvalidationFallback=null, extras=PersistableBundle[{}]), 19=GoalProgressComplicationData(value=REDACTED, dynamicValue=REDACTED, targetValue=10000.0, monochromaticImage=MonochromaticImage(image=Icon(typ=RESOURCE pkg=com.samsung.android.wear.shealth id=0x7f080a4d), ambientImage=null), smallImage=SmallImage(image=Icon(typ=RESOURCE pkg=com.samsung.android.wear.shealth id=0x7f080a4d), type=ICON, ambientImage=null), title=ComplicationText{mSurroundingText=REDACTED, mTimeDependentText=null, mDynamicText=null}, text=ComplicationText{mSurroundingText=REDACTED, mTimeDependentText=null, mDynamicText=null}, contentDescription=ComplicationText{mSurroundingText=REDACTED, mTimeDependentText=null, mDynamicText=null}), tapActionLostDueToSerialization=false, tapAction=PendingIntent{25c5e5b: android.os.BinderProxy@b7616f8}, validTimeRange=TimeRange(REDACTED), dataSource=ComponentInfo{com.samsung.android.wear.shealth/com.samsung.android.wear.shealth.complications.steps.StepsComplicationProviderService}, colorRamp=null, persistencePolicy=0, displayPolicy=0, dynamicValueInvalidationFallback=null, extras=PersistableBundle[{}]), 0=ShortTextComplicationData(text=ComplicationText{mSurroundingText=REDACTED, mTimeDependentText=null, mDynamicText=null}, title=ComplicationText{mSurroundingText=REDACTED, mTimeDependentText=null, mDynamicText=null}, monochromaticImage=MonochromaticImage(image=Icon(typ=RESOURCE pkg=com.samsung.android.wear.shealth id=0x7f080a4d), ambientImage=null), smallImage=SmallImage(image=Icon(typ=RESOURCE pkg=com.samsung.android.wear.shealth id=0x7f080a4d), type=ICON, ambientImage=null), contentDescription=ComplicationText{mSurroundingText=REDACTED, mTimeDependentText=null, mDynamicText=null}, tapActionLostDueToSerialization=false, tapAction=PendingIntent{81787d1: android.os.BinderProxy@a0cb236}, validTimeRange=TimeRange(REDACTED), dataSource=ComponentInfo{com.samsung.android.wear.shealth/com.samsung.android.wear.shealth.complications.steps.StepsComplicationProviderService}, persistencePolicy=0, displayPolicy=0, dynamicValueInvalidationFallback=null, extras=PersistableBundle[{}]), 20=ShortTextComplicationData(text=ComplicationText{mSurroundingText=REDACTED, mTimeDependentText=null, mDynamicText=null}, title=null, monochromaticImage=MonochromaticImage(image=Icon(typ=RESOURCE pkg=com.samsung.android.wear.shealth id=0x7f080a4b), ambientImage=null), smallImage=SmallImage(image=Icon(typ=RESOURCE pkg=com.samsung.android.wear.shealth id=0x7f080a4b), type=ICON, ambientImage=null), contentDescription=ComplicationText{mSurroundingText=REDACTED, mTimeDependentText=null, mDynamicText=null}, tapActionLostDueToSerialization=false, tapAction=PendingIntent{1788537: android.os.BinderProxy@871aaa4}, validTimeRange=TimeRange(REDACTED), dataSource=ComponentInfo{com.samsung.android.wear.shealth/com.samsung.android.wear.shealth.complications.heartrate.HeartrateComplicationProviderService}, persistencePolicy=0, displayPolicy=0, dynamicValueInvalidationFallback=null, extras=PersistableBundle[{}])}
+    			pendingUpdateTime=true
+    			Resource only package name com.local.watchface.syshud
+    			privIsVisible=true
+    			pauseAnimationDeathRecipient=null
+    			overriddenComplications=null
+    			listener = android.os.BinderProxy@c601e17
+    			listener = android.os.BinderProxy@73eb528
+    			WatchFaceImpl (ComponentInfo{com.local.watchface.syshud/null}): 
+    				mockTime.maxTime=9223372036854775807
+    				mockTime.minTime=0
+    				mockTime.speed=1.0
+    				lastDrawTimeMillis=1794486559053
+    				nextDrawTimeMillis=1794486600000
+    				muteMode=false
+    				lastTappedComplicationId=null
+    				currentUserStyleRepository.userStyle=UserStyle[themeColor -> amber]
+    				currentUserStyleRepository.schema=[{themeColor : cyan, green, amber, red, ice}]
+    				editorObscuresWatchFace=false
+    				additionalContentDescriptionLabels:
+    					19: Redacted
+    					20: Redacted
+    					21: Redacted
+    					22: Redacted
+    				OverlayStyle:
+    					backgroundColor=null
+    					foregroundColor=null
+    				WatchState:
+    					interruptionFilter=0
+    					isAmbient=false
+    					isBatteryLowAndNotCharging=false
+    					isVisible=true
+    					hasLowBitAmbient=false
+    					hasBurnInProtection=false
+    					analogPreviewReferenceTimeMillis=904903710000
+    					digitalPreviewReferenceTimeMillis=904903710000
+    					chinHeight=0
+    					isHeadless=false
+    					watchFaceInstanceId=wfId-14
+    				ComplicationSlotsManager:
+    				lastComplicationTapDownEvents=
+    					ComplicationSlot 11:
+    						fixedComplicationDataSource=false
+    						enabled=true
+    						boundsType=0
+    						configExtras=Bundle[{}]
+    						supportedTypes=SHORT_TEXT, RANGED_VALUE, MONOCHROMATIC_IMAGE, SMALL_IMAGE, EMPTY
+    						initiallyEnabled=true
+    						defaultDataSourcePolicy.primaryDataSource=null
+    						defaultDataSourcePolicy.primaryDataSourceDefaultDataSourceType=null
+    						defaultDataSourcePolicy.secondaryDataSource=null
+    						defaultDataSourcePolicy.secondaryDataSourceDefaultDataSourceType=null
+    						defaultDataSourcePolicy.systemDataSourceFallback=7
+    						defaultDataSourcePolicy.systemDataSourceFallbackDefaultType=SHORT_TEXT
+    						timelineComplicationData=ShortTextComplicationData(text=ComplicationText{mSurroundingText=REDACTED, mTimeDependentText=null, mDynamicText=null}, title=null, monochromaticImage=MonochromaticImage(image=Icon(typ=RESOURCE pkg=com.android.providers.calendar id=0x7f070060), ambientImage=null), smallImage=null, contentDescription=ComplicationText{mSurroundingText=REDACTED, mTimeDependentText=null, mDynamicText=null}, tapActionLostDueToSerialization=false, tapAction=PendingIntent{fcf3ecc: android.os.BinderProxy@f49696a}, validTimeRange=TimeRange(REDACTED), dataSource=ComponentInfo{com.android.providers.calendar/com.android.providers.calendar.complication.NextEventProviderService}, persistencePolicy=0, displayPolicy=0, dynamicValueInvalidationFallback=null, extras=PersistableBundle[{}])
+    						timelineEntries=v0.h@e281515
+    						data=ShortTextComplicationData(text=ComplicationText{mSurroundingText=REDACTED, mTimeDependentText=null, mDynamicText=null}, title=null, monochromaticImage=MonochromaticImage(image=Icon(typ=RESOURCE pkg=com.android.providers.calendar id=0x7f070060), ambientImage=null), smallImage=null, contentDescription=ComplicationText{mSurroundingText=REDACTED, mTimeDependentText=null, mDynamicText=null}, tapActionLostDueToSerialization=false, tapAction=PendingIntent{fcf3ecc: android.os.BinderProxy@f49696a}, validTimeRange=TimeRange(REDACTED), dataSource=ComponentInfo{com.android.providers.calendar/com.android.providers.calendar.complication.NextEventProviderService}, persistencePolicy=0, displayPolicy=0, dynamicValueInvalidationFallback=null, extras=PersistableBundle[{}])
+    						boundingArc=null
+    						complicationSlotBounds=ComplicationSlotBounds(perComplicationTypeBounds={NO_DATA=RectF(0.18666667, 0.6933333, 0.36888888, 0.8755556), EMPTY=RectF(0.18666667, 0.6933333, 0.36888888, 0.8755556), NOT_CONFIGURED=RectF(0.18666667, 0.6933333, 0.36888888, 0.8755556), SHORT_TEXT=RectF(0.18666667, 0.6933333, 0.36888888, 0.8755556), LONG_TEXT=RectF(0.18666667, 0.6933333, 0.36888888, 0.8755556), RANGED_VALUE=RectF(0.18666667, 0.6933333, 0.36888888, 0.8755556), MONOCHROMATIC_IMAGE=RectF(0.18666667, 0.6933333, 0.36888888, 0.8755556), SMALL_IMAGE=RectF(0.18666667, 0.6933333, 0.36888888, 0.8755556), PHOTO_IMAGE=RectF(0.18666667, 0.6933333, 0.36888888, 0.8755556), NO_PERMISSION=RectF(0.18666667, 0.6933333, 0.36888888, 0.8755556), GOAL_PROGRESS=RectF(0.18666667, 0.6933333, 0.36888888, 0.8755556), WEIGHTED_ELEMENTS=RectF(0.18666667, 0.6933333, 0.36888888, 0.8755556)}, perComplicationTypeMargins={NO_DATA=RectF(0.0, 0.0, 0.0, 0.0), EMPTY=RectF(0.0, 0.0, 0.0, 0.0), NOT_CONFIGURED=RectF(0.0, 0.0, 0.0, 0.0), SHORT_TEXT=RectF(0.0, 0.0, 0.0, 0.0), LONG_TEXT=RectF(0.0, 0.0, 0.0, 0.0), RANGED_VALUE=RectF(0.0, 0.0, 0.0, 0.0), MONOCHROMATIC_IMAGE=RectF(0.0, 0.0, 0.0, 0.0), SMALL_IMAGE=RectF(0.0, 0.0, 0.0, 0.0), PHOTO_IMAGE=RectF(0.0, 0.0, 0.0, 0.0), NO_PERMISSION=RectF(0.0, 0.0, 0.0, 0.0), GOAL_PROGRESS=RectF(0.0, 0.0, 0.0, 0.0), WEIGHTED_ELEMENTS=RectF(0.0, 0.0, 0.0, 0.0)})
+    						lastComplicationUpdate=2026-11-12T12:26:04.215Z
+    						data history
+    					ComplicationSlot 12:
+    						fixedComplicationDataSource=false
+    						enabled=true
+    						boundsType=0
+    						configExtras=Bundle[{}]
+    						supportedTypes=SHORT_TEXT, RANGED_VALUE, MONOCHROMATIC_IMAGE, SMALL_IMAGE, EMPTY
+    						initiallyEnabled=true
+    						defaultDataSourcePolicy.primaryDataSource=null
+    						defaultDataSourcePolicy.primaryDataSourceDefaultDataSourceType=null
+    						defaultDataSourcePolicy.secondaryDataSource=null
+    						defaultDataSourcePolicy.secondaryDataSourceDefaultDataSourceType=null
+    						defaultDataSourcePolicy.systemDataSourceFallback=9
+    						defaultDataSourcePolicy.systemDataSourceFallbackDefaultType=SHORT_TEXT
+    						timelineComplicationData=ShortTextComplicationData(text=ComplicationText{mSurroundingText=REDACTED, mTimeDependentText=null, mDynamicText=null}, title=null, monochromaticImage=MonochromaticImage(image=Icon(typ=RESOURCE pkg=com.samsung.android.wearable.sysui id=0x7f0802b5), ambientImage=Icon(typ=RESOURCE pkg=com.samsung.android.wearable.sysui id=0x7f0802b4)), smallImage=null, contentDescription=ComplicationText{mSurroundingText=REDACTED, mTimeDependentText=null, mDynamicText=null}, tapActionLostDueToSerialization=false, tapAction=null, validTimeRange=TimeRange(REDACTED), dataSource=ComponentInfo{com.samsung.android.wearable.sysui/com.google.android.clockwork.sysui.experiences.complications.providers.UnreadNotificationsProviderService}, persistencePolicy=0, displayPolicy=0, dynamicValueInvalidationFallback=null, extras=PersistableBundle[{}])
+    						timelineEntries=null
+    						data=ShortTextComplicationData(text=ComplicationText{mSurroundingText=REDACTED, mTimeDependentText=null, mDynamicText=null}, title=null, monochromaticImage=MonochromaticImage(image=Icon(typ=RESOURCE pkg=com.samsung.android.wearable.sysui id=0x7f0802b5), ambientImage=Icon(typ=RESOURCE pkg=com.samsung.android.wearable.sysui id=0x7f0802b4)), smallImage=null, contentDescription=ComplicationText{mSurroundingText=REDACTED, mTimeDependentText=null, mDynamicText=null}, tapActionLostDueToSerialization=false, tapAction=null, validTimeRange=TimeRange(REDACTED), dataSource=ComponentInfo{com.samsung.android.wearable.sysui/com.google.android.clockwork.sysui.experiences.complications.providers.UnreadNotificationsProviderService}, persistencePolicy=0, displayPolicy=0, dynamicValueInvalidationFallback=null, extras=PersistableBundle[{}])
+    						boundingArc=null
+    						complicationSlotBounds=ComplicationSlotBounds(perComplicationTypeBounds={NO_DATA=RectF(0.6311111, 0.6933333, 0.81333333, 0.8755556), EMPTY=RectF(0.6311111, 0.6933333, 0.81333333, 0.8755556), NOT_CONFIGURED=RectF(0.6311111, 0.6933333, 0.81333333, 0.8755556), SHORT_TEXT=RectF(0.6311111, 0.6933333, 0.81333333, 0.8755556), LONG_TEXT=RectF(0.6311111, 0.6933333, 0.81333333, 0.8755556), RANGED_VALUE=RectF(0.6311111, 0.6933333, 0.81333333, 0.8755556), MONOCHROMATIC_IMAGE=RectF(0.6311111, 0.6933333, 0.81333333, 0.8755556), SMALL_IMAGE=RectF(0.6311111, 0.6933333, 0.81333333, 0.8755556), PHOTO_IMAGE=RectF(0.6311111, 0.6933333, 0.81333333, 0.8755556), NO_PERMISSION=RectF(0.6311111, 0.6933333, 0.81333333, 0.8755556), GOAL_PROGRESS=RectF(0.6311111, 0.6933333, 0.81333333, 0.8755556), WEIGHTED_ELEMENTS=RectF(0.6311111, 0.6933333, 0.81333333, 0.8755556)}, perComplicationTypeMargins={NO_DATA=RectF(0.0, 0.0, 0.0, 0.0), EMPTY=RectF(0.0, 0.0, 0.0, 0.0), NOT_CONFIGURED=RectF(0.0, 0.0, 0.0, 0.0), SHORT_TEXT=RectF(0.0, 0.0, 0.0, 0.0), LONG_TEXT=RectF(0.0, 0.0, 0.0, 0.0), RANGED_VALUE=RectF(0.0, 0.0, 0.0, 0.0), MONOCHROMATIC_IMAGE=RectF(0.0, 0.0, 0.0, 0.0), SMALL_IMAGE=RectF(0.0, 0.0, 0.0, 0.0), PHOTO_IMAGE=RectF(0.0, 0.0, 0.0, 0.0), NO_PERMISSION=RectF(0.0, 0.0, 0.0, 0.0), GOAL_PROGRESS=RectF(0.0, 0.0, 0.0, 0.0), WEIGHTED_ELEMENTS=RectF(0.0, 0.0, 0.0, 0.0)})
+    						lastComplicationUpdate=2026-11-12T12:26:04.215Z
+    						data history
+    					ComplicationSlot 19:
+    						fixedComplicationDataSource=true
+    						enabled=true
+    						boundsType=0
+    						configExtras=Bundle[{}]
+    						supportedTypes=GOAL_PROGRESS
+    						initiallyEnabled=true
+    						defaultDataSourcePolicy.primaryDataSource=null
+    						defaultDataSourcePolicy.primaryDataSourceDefaultDataSourceType=null
+    						defaultDataSourcePolicy.secondaryDataSource=null
+    						defaultDataSourcePolicy.secondaryDataSourceDefaultDataSourceType=null
+    						defaultDataSourcePolicy.systemDataSourceFallback=4
+    						defaultDataSourcePolicy.systemDataSourceFallbackDefaultType=GOAL_PROGRESS
+    						timelineComplicationData=GoalProgressComplicationData(value=REDACTED, dynamicValue=REDACTED, targetValue=10000.0, monochromaticImage=MonochromaticImage(image=Icon(typ=RESOURCE pkg=com.samsung.android.wear.shealth id=0x7f080a4d), ambientImage=null), smallImage=SmallImage(image=Icon(typ=RESOURCE pkg=com.samsung.android.wear.shealth id=0x7f080a4d), type=ICON, ambientImage=null), title=ComplicationText{mSurroundingText=REDACTED, mTimeDependentText=null, mDynamicText=null}, text=ComplicationText{mSurroundingText=REDACTED, mTimeDependentText=null, mDynamicText=null}, contentDescription=ComplicationText{mSurroundingText=REDACTED, mTimeDependentText=null, mDynamicText=null}), tapActionLostDueToSerialization=false, tapAction=PendingIntent{25c5e5b: android.os.BinderProxy@b7616f8}, validTimeRange=TimeRange(REDACTED), dataSource=ComponentInfo{com.samsung.android.wear.shealth/com.samsung.android.wear.shealth.complications.steps.StepsComplicationProviderService}, colorRamp=null, persistencePolicy=0, displayPolicy=0, dynamicValueInvalidationFallback=null, extras=PersistableBundle[{}])
+    						timelineEntries=null
+    						data=GoalProgressComplicationData(value=REDACTED, dynamicValue=REDACTED, targetValue=10000.0, monochromaticImage=MonochromaticImage(image=Icon(typ=RESOURCE pkg=com.samsung.android.wear.shealth id=0x7f080a4d), ambientImage=null), smallImage=SmallImage(image=Icon(typ=RESOURCE pkg=com.samsung.android.wear.shealth id=0x7f080a4d), type=ICON, ambientImage=null), title=ComplicationText{mSurroundingText=REDACTED, mTimeDependentText=null, mDynamicText=null}, text=ComplicationText{mSurroundingText=REDACTED, mTimeDependentText=null, mDynamicText=null}, contentDescription=ComplicationText{mSurroundingText=REDACTED, mTimeDependentText=null, mDynamicText=null}), tapActionLostDueToSerialization=false, tapAction=PendingIntent{25c5e5b: android.os.BinderProxy@b7616f8}, validTimeRange=TimeRange(REDACTED), dataSource=ComponentInfo{com.samsung.android.wear.shealth/com.samsung.android.wear.shealth.complications.steps.StepsComplicationProviderService}, colorRamp=null, persistencePolicy=0, displayPolicy=0, dynamicValueInvalidationFallback=null, extras=PersistableBundle[{}])
+    						boundingArc=null
+    						complicationSlotBounds=ComplicationSlotBounds(perComplicationTypeBounds={NO_DATA=RectF(0.0, 0.0, 0.0, 0.0), EMPTY=RectF(0.0, 0.0, 0.0, 0.0), NOT_CONFIGURED=RectF(0.0, 0.0, 0.0, 0.0), SHORT_TEXT=RectF(0.0, 0.0, 0.0, 0.0), LONG_TEXT=RectF(0.0, 0.0, 0.0, 0.0), RANGED_VALUE=RectF(0.0, 0.0, 0.0, 0.0), MONOCHROMATIC_IMAGE=RectF(0.0, 0.0, 0.0, 0.0), SMALL_IMAGE=RectF(0.0, 0.0, 0.0, 0.0), PHOTO_IMAGE=RectF(0.0, 0.0, 0.0, 0.0), NO_PERMISSION=RectF(0.0, 0.0, 0.0, 0.0), GOAL_PROGRESS=RectF(0.0, 0.0, 0.0, 0.0), WEIGHTED_ELEMENTS=RectF(0.0, 0.0, 0.0, 0.0)}, perComplicationTypeMargins={NO_DATA=RectF(0.0, 0.0, 0.0, 0.0), EMPTY=RectF(0.0, 0.0, 0.0, 0.0), NOT_CONFIGURED=RectF(0.0, 0.0, 0.0, 0.0), SHORT_TEXT=RectF(0.0, 0.0, 0.0, 0.0), LONG_TEXT=RectF(0.0, 0.0, 0.0, 0.0), RANGED_VALUE=RectF(0.0, 0.0, 0.0, 0.0), MONOCHROMATIC_IMAGE=RectF(0.0, 0.0, 0.0, 0.0), SMALL_IMAGE=RectF(0.0, 0.0, 0.0, 0.0), PHOTO_IMAGE=RectF(0.0, 0.0, 0.0, 0.0), NO_PERMISSION=RectF(0.0, 0.0, 0.0, 0.0), GOAL_PROGRESS=RectF(0.0, 0.0, 0.0, 0.0), WEIGHTED_ELEMENTS=RectF(0.0, 0.0, 0.0, 0.0)})
+    						lastComplicationUpdate=2026-11-12T12:26:04.215Z
+    						data history
+    					ComplicationSlot 0:
+    						fixedComplicationDataSource=true
+    						enabled=true
+    						boundsType=0
+    						configExtras=Bundle[{}]
+    						supportedTypes=SHORT_TEXT
+    						initiallyEnabled=true
+    						defaultDataSourcePolicy.primaryDataSource=null
+    						defaultDataSourcePolicy.primaryDataSourceDefaultDataSourceType=null
+    						defaultDataSourcePolicy.secondaryDataSource=null
+    						defaultDataSourcePolicy.secondaryDataSourceDefaultDataSourceType=null
+    						defaultDataSourcePolicy.systemDataSourceFallback=4
+    						defaultDataSourcePolicy.systemDataSourceFallbackDefaultType=SHORT_TEXT
+    						timelineComplicationData=ShortTextComplicationData(text=ComplicationText{mSurroundingText=REDACTED, mTimeDependentText=null, mDynamicText=null}, title=ComplicationText{mSurroundingText=REDACTED, mTimeDependentText=null, mDynamicText=null}, monochromaticImage=MonochromaticImage(image=Icon(typ=RESOURCE pkg=com.samsung.android.wear.shealth id=0x7f080a4d), ambientImage=null), smallImage=SmallImage(image=Icon(typ=RESOURCE pkg=com.samsung.android.wear.shealth id=0x7f080a4d), type=ICON, ambientImage=null), contentDescription=ComplicationText{mSurroundingText=REDACTED, mTimeDependentText=null, mDynamicText=null}, tapActionLostDueToSerialization=false, tapAction=PendingIntent{81787d1: android.os.BinderProxy@a0cb236}, validTimeRange=TimeRange(REDACTED), dataSource=ComponentInfo{com.samsung.android.wear.shealth/com.samsung.android.wear.shealth.complications.steps.StepsComplicationProviderService}, persistencePolicy=0, displayPolicy=0, dynamicValueInvalidationFallback=null, extras=PersistableBundle[{}])
+    						timelineEntries=null
+    						data=ShortTextComplicationData(text=ComplicationText{mSurroundingText=REDACTED, mTimeDependentText=null, mDynamicText=null}, title=ComplicationText{mSurroundingText=REDACTED, mTimeDependentText=null, mDynamicText=null}, monochromaticImage=MonochromaticImage(image=Icon(typ=RESOURCE pkg=com.samsung.android.wear.shealth id=0x7f080a4d), ambientImage=null), smallImage=SmallImage(image=Icon(typ=RESOURCE pkg=com.samsung.android.wear.shealth id=0x7f080a4d), type=ICON, ambientImage=null), contentDescription=ComplicationText{mSurroundingText=REDACTED, mTimeDependentText=null, mDynamicText=null}, tapActionLostDueToSerialization=false, tapAction=PendingIntent{81787d1: android.os.BinderProxy@a0cb236}, validTimeRange=TimeRange(REDACTED), dataSource=ComponentInfo{com.samsung.android.wear.shealth/com.samsung.android.wear.shealth.complications.steps.StepsComplicationProviderService}, persistencePolicy=0, displayPolicy=0, dynamicValueInvalidationFallback=null, extras=PersistableBundle[{}])
+    						boundingArc=null
+    						complicationSlotBounds=ComplicationSlotBounds(perComplicationTypeBounds={NO_DATA=RectF(0.0, 0.0, 0.0, 0.0), EMPTY=RectF(0.0, 0.0, 0.0, 0.0), NOT_CONFIGURED=RectF(0.0, 0.0, 0.0, 0.0), SHORT_TEXT=RectF(0.0, 0.0, 0.0, 0.0), LONG_TEXT=RectF(0.0, 0.0, 0.0, 0.0), RANGED_VALUE=RectF(0.0, 0.0, 0.0, 0.0), MONOCHROMATIC_IMAGE=RectF(0.0, 0.0, 0.0, 0.0), SMALL_IMAGE=RectF(0.0, 0.0, 0.0, 0.0), PHOTO_IMAGE=RectF(0.0, 0.0, 0.0, 0.0), NO_PERMISSION=RectF(0.0, 0.0, 0.0, 0.0), GOAL_PROGRESS=RectF(0.0, 0.0, 0.0, 0.0), WEIGHTED_ELEMENTS=RectF(0.0, 0.0, 0.0, 0.0)}, perComplicationTypeMargins={NO_DATA=RectF(0.0, 0.0, 0.0, 0.0), EMPTY=RectF(0.0, 0.0, 0.0, 0.0), NOT_CONFIGURED=RectF(0.0, 0.0, 0.0, 0.0), SHORT_TEXT=RectF(0.0, 0.0, 0.0, 0.0), LONG_TEXT=RectF(0.0, 0.0, 0.0, 0.0), RANGED_VALUE=RectF(0.0, 0.0, 0.0, 0.0), MONOCHROMATIC_IMAGE=RectF(0.0, 0.0, 0.0, 0.0), SMALL_IMAGE=RectF(0.0, 0.0, 0.0, 0.0), PHOTO_IMAGE=RectF(0.0, 0.0, 0.0, 0.0), NO_PERMISSION=RectF(0.0, 0.0, 0.0, 0.0), GOAL_PROGRESS=RectF(0.0, 0.0, 0.0, 0.0), WEIGHTED_ELEMENTS=RectF(0.0, 0.0, 0.0, 0.0)})
+    						lastComplicationUpdate=2026-11-12T12:26:04.215Z
+    						data history
+    					ComplicationSlot 20:
+    						fixedComplicationDataSource=true
+    						enabled=true
+    						boundsType=0
+    						configExtras=Bundle[{}]
+    						supportedTypes=SHORT_TEXT
+    						initiallyEnabled=true
+    						defaultDataSourcePolicy.primaryDataSource=null
+    						defaultDataSourcePolicy.primaryDataSourceDefaultDataSourceType=null
+    						defaultDataSourcePolicy.secondaryDataSource=null
+    						defaultDataSourcePolicy.secondaryDataSourceDefaultDataSourceType=null
+    						defaultDataSourcePolicy.systemDataSourceFallback=17
+    						defaultDataSourcePolicy.systemDataSourceFallbackDefaultType=SHORT_TEXT
+    						timelineComplicationData=ShortTextComplicationData(text=ComplicationText{mSurroundingText=REDACTED, mTimeDependentText=null, mDynamicText=null}, title=null, monochromaticImage=MonochromaticImage(image=Icon(typ=RESOURCE pkg=com.samsung.android.wear.shealth id=0x7f080a4b), ambientImage=null), smallImage=SmallImage(image=Icon(typ=RESOURCE pkg=com.samsung.android.wear.shealth id=0x7f080a4b), type=ICON, ambientImage=null), contentDescription=ComplicationText{mSurroundingText=REDACTED, mTimeDependentText=null, mDynamicText=null}, tapActionLostDueToSerialization=false, tapAction=PendingIntent{1788537: android.os.BinderProxy@871aaa4}, validTimeRange=TimeRange(REDACTED), dataSource=ComponentInfo{com.samsung.android.wear.shealth/com.samsung.android.wear.shealth.complications.heartrate.HeartrateComplicationProviderService}, persistencePolicy=0, displayPolicy=0, dynamicValueInvalidationFallback=null, extras=PersistableBundle[{}])
+    						timelineEntries=null
+    						data=ShortTextComplicationData(text=ComplicationText{mSurroundingText=REDACTED, mTimeDependentText=null, mDynamicText=null}, title=null, monochromaticImage=MonochromaticImage(image=Icon(typ=RESOURCE pkg=com.samsung.android.wear.shealth id=0x7f080a4b), ambientImage=null), smallImage=SmallImage(image=Icon(typ=RESOURCE pkg=com.samsung.android.wear.shealth id=0x7f080a4b), type=ICON, ambientImage=null), contentDescription=ComplicationText{mSurroundingText=REDACTED, mTimeDependentText=null, mDynamicText=null}, tapActionLostDueToSerialization=false, tapAction=PendingIntent{1788537: android.os.BinderProxy@871aaa4}, validTimeRange=TimeRange(REDACTED), dataSource=ComponentInfo{com.samsung.android.wear.shealth/com.samsung.android.wear.shealth.complications.heartrate.HeartrateComplicationProviderService}, persistencePolicy=0, displayPolicy=0, dynamicValueInvalidationFallback=null, extras=PersistableBundle[{}])
+    						boundingArc=null
+    						complicationSlotBounds=ComplicationSlotBounds(perComplicationTypeBounds={NO_DATA=RectF(0.0, 0.0, 0.0, 0.0), EMPTY=RectF(0.0, 0.0, 0.0, 0.0), NOT_CONFIGURED=RectF(0.0, 0.0, 0.0, 0.0), SHORT_TEXT=RectF(0.0, 0.0, 0.0, 0.0), LONG_TEXT=RectF(0.0, 0.0, 0.0, 0.0), RANGED_VALUE=RectF(0.0, 0.0, 0.0, 0.0), MONOCHROMATIC_IMAGE=RectF(0.0, 0.0, 0.0, 0.0), SMALL_IMAGE=RectF(0.0, 0.0, 0.0, 0.0), PHOTO_IMAGE=RectF(0.0, 0.0, 0.0, 0.0), NO_PERMISSION=RectF(0.0, 0.0, 0.0, 0.0), GOAL_PROGRESS=RectF(0.0, 0.0, 0.0, 0.0), WEIGHTED_ELEMENTS=RectF(0.0, 0.0, 0.0, 0.0)}, perComplicationTypeMargins={NO_DATA=RectF(0.0, 0.0, 0.0, 0.0), EMPTY=RectF(0.0, 0.0, 0.0, 0.0), NOT_CONFIGURED=RectF(0.0, 0.0, 0.0, 0.0), SHORT_TEXT=RectF(0.0, 0.0, 0.0, 0.0), LONG_TEXT=RectF(0.0, 0.0, 0.0, 0.0), RANGED_VALUE=RectF(0.0, 0.0, 0.0, 0.0), MONOCHROMATIC_IMAGE=RectF(0.0, 0.0, 0.0, 0.0), SMALL_IMAGE=RectF(0.0, 0.0, 0.0, 0.0), PHOTO_IMAGE=RectF(0.0, 0.0, 0.0, 0.0), NO_PERMISSION=RectF(0.0, 0.0, 0.0, 0.0), GOAL_PROGRESS=RectF(0.0, 0.0, 0.0, 0.0), WEIGHTED_ELEMENTS=RectF(0.0, 0.0, 0.0, 0.0)})
+    						lastComplicationUpdate=2026-11-12T12:26:04.215Z
+    						data history
+    				CanvasRenderer:
+    					canvasType=1
+    					screenBounds=Rect(0, 0 - 480, 480)
+    					interactiveDrawModeUpdateDelayMillis=60000
+    					shouldAnimate=true
+    					RenderParameters:
+    						drawMode=INTERACTIVE
+    						watchFaceLayers=BASE, COMPLICATIONS, COMPLICATIONS_OVERLAY
+    						lastComplicationTapDownEvents=
+    DWF Runtime info: 
+
+    ########### DWF renderer 4.0.16 (40016) ###########
+    ## no_name / com.local.watchface.syshud 1.0 (1)
+    ## clipShape : CIRCLE
+    ## resolution : 450x450
+    ## clock type : ANALOG
+    ## com.google.wear.watchface.format.version : 2
+    ## com.samsung.wear.watchface.runtime : 4.0.00.16 (400000016)
+    ############################################################
+    Apk declared format version 2
+    Max supported format version 4
+    Flavors:
+    	[]
+
+    #### Persisted photos start ####
+
+
+    #### Persisted photos end ####
+
+    				BroadcastsObserver:
+    					batteryLow=false
+    					charging=true
+    					sysUiHasSentWatchUiState=true
+    EditorService:
+    HeadlessWatchFace instances:

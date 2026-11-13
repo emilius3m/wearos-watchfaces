@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="watch_face_name">PALETTE</string>
+  <string name="accent_name">Accent Color</string>
+  <string name="color_arancio">Orange</string>
+  <string name="color_ottone">Brass</string>
+  <string name="color_rosso">Red</string>
+  <string name="color_verde">Green</string>
+  <string name="color_azzurro">Sky Blue</string>
+  <string name="slot_shortcut_name">Top Right Shortcut</string>
+</resources>

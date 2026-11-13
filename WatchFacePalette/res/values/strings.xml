@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="watch_face_name">PALETTE</string>
+    <string name="accent_name">Colore</string>
+    <string name="color_arancio">Arancio</string>
+    <string name="color_ottone">Ottone</string>
+    <string name="color_rosso">Rosso</string>
+    <string name="color_verde">Verde</string>
+    <string name="color_azzurro">Azzurro</string>
+</resources>

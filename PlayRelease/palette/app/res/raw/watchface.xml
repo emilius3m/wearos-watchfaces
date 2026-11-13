@@ -1,0 +1,439 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<WatchFace width="480" height="480" clipShape="CIRCLE">
+    <Metadata key="CLOCK_TYPE" value="DIGITAL"/>
+    <Metadata key="PREVIEW_TIME" value="09:27:36"/>
+    <UserConfigurations>
+        <ColorConfiguration id="accent" displayName="accent_name" defaultValue="arancio">
+            <ColorOption id="arancio" displayName="color_arancio" colors="#FFF47024"/>
+            <ColorOption id="ottone" displayName="color_ottone" colors="#FFE8B254"/>
+            <ColorOption id="rosso" displayName="color_rosso" colors="#FFFF4D4D"/>
+            <ColorOption id="verde" displayName="color_verde" colors="#FF5FE08A"/>
+            <ColorOption id="azzurro" displayName="color_azzurro" colors="#FF5CB8FF"/>
+        </ColorConfiguration>
+    </UserConfigurations>
+    <Scene backgroundColor="#FF000000">
+        <Group name="bodies" x="0" y="0" width="480" height="480">
+            <Variant mode="AMBIENT" target="alpha" value="0"/>
+            <PartImage x="48" y="104" width="150" height="164">
+                <Image resource="flap_big"/>
+            </PartImage>
+            <PartImage x="206" y="104" width="150" height="164">
+                <Image resource="flap_big"/>
+            </PartImage>
+            <PartDraw x="0" y="0" width="480" height="480">
+                <RoundRectangle x="140" y="46" width="66" height="42" cornerRadiusX="7" cornerRadiusY="7">
+                    <Fill color="#FF28292E"/>
+                    <Stroke color="#FF4A4C54" thickness="1.2"/>
+                </RoundRectangle>
+                <RoundRectangle x="212" y="46" width="50" height="42" cornerRadiusX="7" cornerRadiusY="7">
+                    <Fill color="#FF28292E"/>
+                    <Stroke color="#FF4A4C54" thickness="1.2"/>
+                </RoundRectangle>
+                <RoundRectangle x="268" y="46" width="66" height="42" cornerRadiusX="7" cornerRadiusY="7">
+                    <Fill color="#FF28292E"/>
+                    <Stroke color="#FF4A4C54" thickness="1.2"/>
+                </RoundRectangle>
+            </PartDraw>
+        </Group>
+        <Group name="time" x="0" y="0" width="480" height="480">
+            <PartText x="54" y="89" width="70" height="213">
+                <Variant mode="AMBIENT" target="alpha" value="175"/>
+                <Text align="CENTER" maxLines="1" ellipsis="TRUE">
+                    <Font family="teko_semibold" size="142" weight="SEMI_BOLD" color="#FFF2E8D2"><Template>%s<Parameter expression="floor([HOUR_0_23] / 10)"/></Template></Font>
+                </Text>
+            </PartText>
+            <PartText x="122" y="89" width="70" height="213">
+                <Variant mode="AMBIENT" target="alpha" value="175"/>
+                <Text align="CENTER" maxLines="1" ellipsis="TRUE">
+                    <Font family="teko_semibold" size="142" weight="SEMI_BOLD" color="#FFF2E8D2"><Template>%s<Parameter expression="[HOUR_0_23] % 10"/></Template></Font>
+                </Text>
+            </PartText>
+            <PartText x="212" y="89" width="70" height="213">
+                <Variant mode="AMBIENT" target="alpha" value="175"/>
+                <Text align="CENTER" maxLines="1" ellipsis="TRUE">
+                    <Font family="teko_semibold" size="142" weight="SEMI_BOLD" color="#FFF2E8D2"><Template>%s<Parameter expression="floor([MINUTE] / 10)"/></Template></Font>
+                </Text>
+            </PartText>
+            <PartText x="280" y="89" width="70" height="213">
+                <Variant mode="AMBIENT" target="alpha" value="175"/>
+                <Text align="CENTER" maxLines="1" ellipsis="TRUE">
+                    <Font family="teko_semibold" size="142" weight="SEMI_BOLD" color="#FFF2E8D2"><Template>%s<Parameter expression="[MINUTE] % 10"/></Template></Font>
+                </Text>
+            </PartText>
+            <PartText x="142" y="47" width="62" height="45">
+                <Variant mode="AMBIENT" target="alpha" value="175"/>
+                <Text align="CENTER" maxLines="1" ellipsis="TRUE">
+                    <Font family="teko_semibold" size="30" weight="SEMI_BOLD" color="#FFF2E8D2"><Upper><Template>%s<Parameter expression="[DAY_OF_WEEK_S]"/></Template></Upper></Font>
+                </Text>
+            </PartText>
+            <PartText x="214" y="47" width="46" height="45">
+                <Variant mode="AMBIENT" target="alpha" value="175"/>
+                <Text align="CENTER" maxLines="1" ellipsis="TRUE">
+                    <Font family="teko_semibold" size="30" weight="SEMI_BOLD" color="#FFF2E8D2"><Upper><Template>%s<Parameter expression="[DAY]"/></Template></Upper></Font>
+                </Text>
+            </PartText>
+            <PartText x="270" y="47" width="62" height="45">
+                <Variant mode="AMBIENT" target="alpha" value="175"/>
+                <Text align="CENTER" maxLines="1" ellipsis="TRUE">
+                    <Font family="teko_semibold" size="30" weight="SEMI_BOLD" color="#FFF2E8D2"><Upper><Template>%s<Parameter expression="[MONTH_S]"/></Template></Upper></Font>
+                </Text>
+            </PartText>
+        </Group>
+        <Group name="hinges" x="0" y="0" width="480" height="480">
+            <Variant mode="AMBIENT" target="alpha" value="0"/>
+            <PartImage x="43" y="104" width="160" height="164">
+                <Image resource="flap_big_overlay"/>
+            </PartImage>
+            <PartAnimatedImage x="48" y="104" width="150" height="164">
+                <AnimationController play="ON_NEXT_HOUR" beforePlaying="HIDE" afterPlaying="HIDE"/>
+                <SequenceImages loopCount="1" frameRate="20">
+                    <Image resource="flip_big_1"/>
+                    <Image resource="flip_big_2"/>
+                    <Image resource="flip_big_3"/>
+                    <Image resource="flip_big_4"/>
+                    <Image resource="flip_big_5"/>
+                    <Image resource="flip_big_6"/>
+                </SequenceImages>
+            </PartAnimatedImage>
+            <PartImage x="201" y="104" width="160" height="164">
+                <Image resource="flap_big_overlay"/>
+            </PartImage>
+            <PartAnimatedImage x="206" y="104" width="150" height="164">
+                <AnimationController play="ON_NEXT_MINUTE" beforePlaying="HIDE" afterPlaying="HIDE"/>
+                <SequenceImages loopCount="1" frameRate="20">
+                    <Image resource="flip_big_1"/>
+                    <Image resource="flip_big_2"/>
+                    <Image resource="flip_big_3"/>
+                    <Image resource="flip_big_4"/>
+                    <Image resource="flip_big_5"/>
+                    <Image resource="flip_big_6"/>
+                </SequenceImages>
+            </PartAnimatedImage>
+            <PartDraw x="0" y="0" width="480" height="480">
+                <Line startX="141" startY="67" endX="205" endY="67">
+                    <Stroke color="#D7040405" thickness="1" cap="BUTT"/>
+                </Line>
+                <Line startX="213" startY="67" endX="261" endY="67">
+                    <Stroke color="#D7040405" thickness="1" cap="BUTT"/>
+                </Line>
+                <Line startX="269" startY="67" endX="333" endY="67">
+                    <Stroke color="#D7040405" thickness="1" cap="BUTT"/>
+                </Line>
+            </PartDraw>
+        </Group>
+        <Group name="seconds" x="364" y="196" width="72" height="72">
+            <Variant mode="AMBIENT" target="alpha" value="0"/>
+            <PartDraw x="0" y="0" width="72" height="72">
+                <RoundRectangle x="0" y="0" width="72" height="72" cornerRadiusX="10" cornerRadiusY="10">
+                    <Fill color="#FF28292E"/>
+                    <Stroke color="#FF4A4C54" thickness="1.2"/>
+                </RoundRectangle>
+            </PartDraw>
+            <PartText x="2" y="-3" width="68" height="87">
+                <Text align="CENTER" maxLines="1" ellipsis="TRUE">
+                    <Font family="teko_semibold" size="58" weight="SEMI_BOLD" color="[CONFIGURATION.accent.0]"><Template>%s<Parameter expression="[SECOND_Z]"/></Template></Font>
+                </Text>
+            </PartText>
+            <PartDraw x="0" y="0" width="72" height="72">
+                <Line startX="1" startY="36" endX="71" endY="36">
+                    <Stroke color="#FF040405" thickness="1.6" cap="BUTT"/>
+                </Line>
+            </PartDraw>
+            <PartAnimatedImage x="0" y="0" width="72" height="72">
+                <AnimationController play="ON_NEXT_SECOND" beforePlaying="HIDE" afterPlaying="HIDE"/>
+                <SequenceImages loopCount="1" frameRate="30">
+                    <Image resource="flip_small_1"/>
+                    <Image resource="flip_small_2"/>
+                    <Image resource="flip_small_3"/>
+                    <Image resource="flip_small_4"/>
+                </SequenceImages>
+            </PartAnimatedImage>
+        </Group>
+        <Group name="steps" x="64" y="284" width="112" height="116">
+            <Launch target="HEALTH_HEART_RATE"/>
+            <Variant mode="AMBIENT" target="alpha" value="0"/>
+            <PartDraw x="0" y="0" width="112" height="116">
+                <RoundRectangle x="0" y="0" width="112" height="76" cornerRadiusX="11" cornerRadiusY="11">
+                    <Fill color="#FF28292E"/>
+                    <Stroke color="#FF4A4C54" thickness="1.2"/>
+                </RoundRectangle>
+            </PartDraw>
+            <Group name="steps_size0" x="0" y="0" width="112" height="76">
+                <Transform target="alpha" value="[STEP_COUNT] &lt; 10000 ? 255 : 0"/>
+                <PartText x="4" y="7" width="104" height="69">
+                    <Text align="CENTER" maxLines="1" ellipsis="TRUE">
+                        <Font family="teko_semibold" size="46" weight="SEMI_BOLD" color="#FFF2E8D2"><Template>%s<Parameter expression="[STEP_COUNT]"/></Template></Font>
+                    </Text>
+                </PartText>
+            </Group>
+            <Group name="steps_size1" x="0" y="0" width="112" height="76">
+                <Transform target="alpha" value="[STEP_COUNT] &lt; 10000 ? 0 : 255"/>
+                <PartText x="4" y="12" width="104" height="57">
+                    <Text align="CENTER" maxLines="1" ellipsis="TRUE">
+                        <Font family="teko_semibold" size="38" weight="SEMI_BOLD" color="#FFF2E8D2"><Template>%s<Parameter expression="[STEP_COUNT]"/></Template></Font>
+                    </Text>
+                </PartText>
+            </Group>
+            <PartDraw x="0" y="0" width="112" height="116">
+                <Line startX="1" startY="38" endX="111" endY="38">
+                    <Stroke color="#D7040405" thickness="1" cap="BUTT"/>
+                </Line>
+                <Rectangle x="12" y="81" width="88" height="4">
+                    <Fill color="#FF2A2B30"/>
+                </Rectangle>
+                <Rectangle x="12" y="81" width="88" height="4">
+                    <Transform target="width" value="88 * clamp([STEP_COUNT] / clamp([STEP_GOAL], 1, 1000000), 0, 1)"/>
+                    <Fill color="[CONFIGURATION.accent.0]"/>
+                </Rectangle>
+            </PartDraw>
+            <PartImage x="44" y="90" width="24" height="24" tintColor="[CONFIGURATION.accent.0]">
+                <Image resource="ic_steps"/>
+            </PartImage>
+        </Group>
+        <Group name="heart" x="184" y="284" width="112" height="116">
+            <Launch target="HEALTH_HEART_RATE"/>
+            <Variant mode="AMBIENT" target="alpha" value="0"/>
+            <PartDraw x="0" y="0" width="112" height="116">
+                <RoundRectangle x="0" y="0" width="112" height="76" cornerRadiusX="11" cornerRadiusY="11">
+                    <Fill color="#FF28292E"/>
+                    <Stroke color="#FF4A4C54" thickness="1.2"/>
+                </RoundRectangle>
+            </PartDraw>
+            <PartText x="4" y="7" width="104" height="69">
+                <Text align="CENTER" maxLines="1" ellipsis="TRUE">
+                    <Font family="teko_semibold" size="46" weight="SEMI_BOLD" color="#FFF2E8D2"><Template>%s<Parameter expression="[HEART_RATE] &gt; 0 ? [HEART_RATE] : '--'"/></Template></Font>
+                </Text>
+            </PartText>
+            <PartDraw x="0" y="0" width="112" height="116">
+                <Line startX="1" startY="38" endX="111" endY="38">
+                    <Stroke color="#D7040405" thickness="1" cap="BUTT"/>
+                </Line>
+            </PartDraw>
+            <PartImage x="44" y="90" width="24" height="24" tintColor="[CONFIGURATION.accent.0]">
+                <Image resource="ic_heart"/>
+            </PartImage>
+        </Group>
+        <Group name="battery" x="304" y="284" width="112" height="116">
+            <Launch target="BATTERY_STATUS"/>
+            <Variant mode="AMBIENT" target="alpha" value="0"/>
+            <PartDraw x="0" y="0" width="112" height="116">
+                <RoundRectangle x="0" y="0" width="112" height="76" cornerRadiusX="11" cornerRadiusY="11">
+                    <Fill color="#FF28292E"/>
+                    <Stroke color="#FF4A4C54" thickness="1.2"/>
+                </RoundRectangle>
+            </PartDraw>
+            <PartText x="4" y="7" width="104" height="69">
+                <Text align="CENTER" maxLines="1" ellipsis="TRUE">
+                    <Font family="teko_semibold" size="46" weight="SEMI_BOLD" color="#FFF2E8D2"><Template>%s%%<Parameter expression="[BATTERY_PERCENT]"/></Template></Font>
+                </Text>
+            </PartText>
+            <PartDraw x="0" y="0" width="112" height="116">
+                <Line startX="1" startY="38" endX="111" endY="38">
+                    <Stroke color="#D7040405" thickness="1" cap="BUTT"/>
+                </Line>
+                <Rectangle x="12" y="81" width="88" height="4">
+                    <Fill color="#FF2A2B30"/>
+                </Rectangle>
+                <Rectangle x="12" y="81" width="88" height="4">
+                    <Transform target="width" value="88 * clamp([BATTERY_PERCENT], 0, 100) / 100"/>
+                    <Fill color="[CONFIGURATION.accent.0]"/>
+                </Rectangle>
+            </PartDraw>
+            <PartImage x="44" y="90" width="24" height="24" tintColor="[CONFIGURATION.accent.0]">
+                <Image resource="ic_battery"/>
+            </PartImage>
+        </Group>
+        <Group name="weather" x="140" y="404" width="200" height="38">
+            <Variant mode="AMBIENT" target="alpha" value="0"/>
+            <PartDraw x="0" y="0" width="200" height="38">
+                <RoundRectangle x="0" y="0" width="96" height="38" cornerRadiusX="8" cornerRadiusY="8">
+                    <Fill color="#FF28292E"/>
+                    <Stroke color="#FF4A4C54" thickness="1.2"/>
+                </RoundRectangle>
+                <RoundRectangle x="104" y="0" width="96" height="38" cornerRadiusX="8" cornerRadiusY="8">
+                    <Fill color="#FF28292E"/>
+                    <Stroke color="#FF4A4C54" thickness="1.2"/>
+                </RoundRectangle>
+            </PartDraw>
+            <Condition>
+                <Expressions>
+                    <Expression name="available">[WEATHER.IS_AVAILABLE]</Expression>
+                </Expressions>
+                <Compare expression="available">
+                    <Condition>
+                        <Expressions>
+                            <Expression name="sun">([WEATHER.CONDITION] == 1 || [WEATHER.CONDITION] == 8) &amp;&amp; [WEATHER.IS_DAY]</Expression>
+                            <Expression name="moon">[WEATHER.CONDITION] == 1 || [WEATHER.CONDITION] == 8</Expression>
+                            <Expression name="partly">[WEATHER.CONDITION] == 14</Expression>
+                            <Expression name="cloud">[WEATHER.CONDITION] == 2</Expression>
+                            <Expression name="fog">[WEATHER.CONDITION] == 3 || [WEATHER.CONDITION] == 13</Expression>
+                            <Expression name="rain">[WEATHER.CONDITION] == 4 || [WEATHER.CONDITION] == 6 || [WEATHER.CONDITION] == 12</Expression>
+                            <Expression name="snow">[WEATHER.CONDITION] == 5 || [WEATHER.CONDITION] == 7 || [WEATHER.CONDITION] == 10 || [WEATHER.CONDITION] == 11</Expression>
+                            <Expression name="storm">[WEATHER.CONDITION] == 9</Expression>
+                            <Expression name="wind">[WEATHER.CONDITION] == 15</Expression>
+                        </Expressions>
+                        <Compare expression="sun">
+                            <PartImage x="8" y="7" width="24" height="24" tintColor="[CONFIGURATION.accent.0]">
+                                <Image resource="wx_sun"/>
+                            </PartImage>
+                        </Compare>
+                        <Compare expression="moon">
+                            <PartImage x="8" y="7" width="24" height="24" tintColor="[CONFIGURATION.accent.0]">
+                                <Image resource="wx_moon"/>
+                            </PartImage>
+                        </Compare>
+                        <Compare expression="partly">
+                            <PartImage x="8" y="7" width="24" height="24" tintColor="[CONFIGURATION.accent.0]">
+                                <Image resource="wx_partly"/>
+                            </PartImage>
+                        </Compare>
+                        <Compare expression="cloud">
+                            <PartImage x="8" y="7" width="24" height="24" tintColor="[CONFIGURATION.accent.0]">
+                                <Image resource="wx_cloud"/>
+                            </PartImage>
+                        </Compare>
+                        <Compare expression="fog">
+                            <PartImage x="8" y="7" width="24" height="24" tintColor="[CONFIGURATION.accent.0]">
+                                <Image resource="wx_fog"/>
+                            </PartImage>
+                        </Compare>
+                        <Compare expression="rain">
+                            <PartImage x="8" y="7" width="24" height="24" tintColor="[CONFIGURATION.accent.0]">
+                                <Image resource="wx_rain"/>
+                            </PartImage>
+                        </Compare>
+                        <Compare expression="snow">
+                            <PartImage x="8" y="7" width="24" height="24" tintColor="[CONFIGURATION.accent.0]">
+                                <Image resource="wx_snow"/>
+                            </PartImage>
+                        </Compare>
+                        <Compare expression="storm">
+                            <PartImage x="8" y="7" width="24" height="24" tintColor="[CONFIGURATION.accent.0]">
+                                <Image resource="wx_storm"/>
+                            </PartImage>
+                        </Compare>
+                        <Compare expression="wind">
+                            <PartImage x="8" y="7" width="24" height="24" tintColor="[CONFIGURATION.accent.0]">
+                                <Image resource="wx_wind"/>
+                            </PartImage>
+                        </Compare>
+                        <Default>
+                            <PartImage x="8" y="7" width="24" height="24" tintColor="[CONFIGURATION.accent.0]">
+                                <Image resource="wx_cloud"/>
+                            </PartImage>
+                        </Default>
+                    </Condition>
+                    <PartText x="36" y="0" width="56" height="42">
+                        <Text align="CENTER" maxLines="1" ellipsis="TRUE">
+                            <Font family="teko_semibold" size="28" weight="SEMI_BOLD" color="#FFF2E8D2"><Template>%s°<Parameter expression="[WEATHER.TEMPERATURE]"/></Template></Font>
+                        </Text>
+                    </PartText>
+                    <PartImage x="112" y="7" width="24" height="24" tintColor="[CONFIGURATION.accent.0]">
+                        <Image resource="ic_umbrella"/>
+                    </PartImage>
+                    <PartText x="140" y="1" width="56" height="39">
+                        <Text align="CENTER" maxLines="1" ellipsis="TRUE">
+                            <Font family="teko_semibold" size="26" weight="SEMI_BOLD" color="#FFF2E8D2"><Template>%s%%<Parameter expression="[WEATHER.CHANCE_OF_PRECIPITATION]"/></Template></Font>
+                        </Text>
+                    </PartText>
+                </Compare>
+                <Default>
+                    <PartImage x="8" y="7" width="24" height="24" tintColor="#FF4A4C54">
+                        <Image resource="wx_cloud"/>
+                    </PartImage>
+                    <PartText x="36" y="0" width="56" height="42">
+                        <Text align="CENTER" maxLines="1" ellipsis="TRUE">
+                            <Font family="teko_semibold" size="28" weight="SEMI_BOLD" color="#FFF2E8D2">--</Font>
+                        </Text>
+                    </PartText>
+                    <PartImage x="112" y="7" width="24" height="24" tintColor="#FF4A4C54">
+                        <Image resource="ic_umbrella"/>
+                    </PartImage>
+                    <PartText x="140" y="1" width="56" height="39">
+                        <Text align="CENTER" maxLines="1" ellipsis="TRUE">
+                            <Font family="teko_semibold" size="26" weight="SEMI_BOLD" color="#FFF2E8D2">--</Font>
+                        </Text>
+                    </PartText>
+                </Default>
+            </Condition>
+            <PartDraw x="0" y="0" width="200" height="38">
+                <Line startX="1" startY="19" endX="95" endY="19">
+                    <Stroke color="#D7040405" thickness="1" cap="BUTT"/>
+                </Line>
+                <Line startX="105" startY="19" endX="199" endY="19">
+                    <Stroke color="#D7040405" thickness="1" cap="BUTT"/>
+                </Line>
+            </PartDraw>
+        </Group>
+        <Group name="outline" x="0" y="0" width="480" height="480" alpha="0">
+            <Variant mode="AMBIENT" target="alpha" value="255"/>
+            <PartDraw x="0" y="0" width="480" height="480">
+                <RoundRectangle x="48" y="104" width="150" height="164" cornerRadiusX="16" cornerRadiusY="16">
+                    <Stroke color="#FF3A3B41" thickness="1.5"/>
+                </RoundRectangle>
+                <Line startX="48" startY="186" endX="198" endY="186">
+                    <Stroke color="#FF000000" thickness="3" cap="BUTT"/>
+                </Line>
+                <Line startX="48" startY="188" endX="198" endY="188">
+                    <Stroke color="#FF3A3B41" thickness="1" cap="BUTT"/>
+                </Line>
+                <RoundRectangle x="206" y="104" width="150" height="164" cornerRadiusX="16" cornerRadiusY="16">
+                    <Stroke color="#FF3A3B41" thickness="1.5"/>
+                </RoundRectangle>
+                <Line startX="206" startY="186" endX="356" endY="186">
+                    <Stroke color="#FF000000" thickness="3" cap="BUTT"/>
+                </Line>
+                <Line startX="206" startY="188" endX="356" endY="188">
+                    <Stroke color="#FF3A3B41" thickness="1" cap="BUTT"/>
+                </Line>
+            </PartDraw>
+        </Group>
+        <ComplicationSlot x="366" y="112" width="68" height="68" slotId="0" displayName="slot_shortcut_name" isCustomizable="TRUE" supportedTypes="MONOCHROMATIC_IMAGE SMALL_IMAGE SHORT_TEXT EMPTY">
+            <Variant mode="AMBIENT" target="alpha" value="0"/>
+            <BoundingOval x="0" y="0" width="68" height="68"/>
+            <DefaultProviderPolicy defaultSystemProvider="APP_SHORTCUT" defaultSystemProviderType="MONOCHROMATIC_IMAGE"/>
+            <Complication type="MONOCHROMATIC_IMAGE">
+                <PartDraw x="0" y="0" width="68" height="68">
+                    <Ellipse x="0" y="0" width="68" height="68">
+                        <Fill color="[CONFIGURATION.accent.0]"/>
+                    </Ellipse>
+                </PartDraw>
+                <PartImage x="15" y="15" width="38" height="38" tintColor="#FF14100C">
+                    <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]"/>
+                </PartImage>
+            </Complication>
+            <Complication type="SMALL_IMAGE">
+                <PartDraw x="0" y="0" width="68" height="68">
+                    <Ellipse x="0" y="0" width="68" height="68">
+                        <Fill color="[CONFIGURATION.accent.0]"/>
+                    </Ellipse>
+                </PartDraw>
+                <PartImage x="13" y="13" width="42" height="42">
+                    <Image resource="[COMPLICATION.SMALL_IMAGE]"/>
+                </PartImage>
+            </Complication>
+            <Complication type="SHORT_TEXT">
+                <PartDraw x="0" y="0" width="68" height="68">
+                    <Ellipse x="0" y="0" width="68" height="68">
+                        <Fill color="[CONFIGURATION.accent.0]"/>
+                    </Ellipse>
+                </PartDraw>
+                <PartText x="4" y="4" width="60" height="60">
+                    <Text align="CENTER" maxLines="1" ellipsis="TRUE">
+                        <Font family="teko_semibold" size="18" weight="SEMI_BOLD" color="#FF14100C"><Template>%s<Parameter expression="[COMPLICATION.TEXT]"/></Template></Font>
+                    </Text>
+                </PartText>
+            </Complication>
+            <Complication type="EMPTY">
+                <PartDraw x="0" y="0" width="68" height="68">
+                    <Ellipse x="0" y="0" width="68" height="68">
+                        <Fill color="[CONFIGURATION.accent.0]"/>
+                    </Ellipse>
+                </PartDraw>
+                <PartImage x="15" y="15" width="38" height="38" tintColor="#FF14100C">
+                    <Image resource="ic_mic"/>
+                </PartImage>
+            </Complication>
+        </ComplicationSlot>
+    </Scene>
+</WatchFace>

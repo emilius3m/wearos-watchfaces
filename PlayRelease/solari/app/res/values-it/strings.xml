@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="watch_face_name">SOLARI</string>
+  <string name="theme_color_name">Corona e Minuti</string>
+  <string name="color_ambra">Solari · Ambra</string>
+  <string name="color_corallo">Corallo · Caldo</string>
+  <string name="color_giada">Giada · Verde</string>
+  <string name="color_cobalto">Cobalto · Blu</string>
+  <string name="color_avorio">Avorio · Mono</string>
+  <string name="slot_left_name">Complicazione in basso</string>
+  <string name="slot_shortcut_name">Scorciatoia rapida</string>
+</resources>
