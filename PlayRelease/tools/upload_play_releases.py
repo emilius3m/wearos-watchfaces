@@ -113,8 +113,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument('--key', help='Path to Google Cloud service account JSON key.')
     parser.add_argument('--apps', nargs='+', choices=[f['slug'] for f in FACES],
                         help='Watch face slugs to process (default: all 4).')
-    parser.add_argument('--track', default='wear:alpha',
-                        help='Target Play track (default: wear:alpha).')
+    parser.add_argument('--track', default='wear:Alpha',
+                        help='Target Play track (default: wear:Alpha).')
     parser.add_argument('--status', default='completed',
                         choices=['completed', 'draft', 'inProgress', 'halted'],
                         help='Release status on track (default: completed).')
