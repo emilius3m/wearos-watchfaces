@@ -5,9 +5,11 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFilter, ImageChops
 
 from layout import (
-    S, C, REHAUT_IN, BEZEL_IN, TUBE_Y0, TUBE_Y1, TUBE_W, TUBE_H, TUBE_XS,
+    S, C, OUTER_CASE_R, BEZEL_IN, REHAUT_IN, SCREW_R,
+    TUBE_Y0, TUBE_Y1, TUBE_W, TUBE_H, TUBE_XS,
     GLYPH_W, GLYPH_H, GLYPH_Y, COLON_CY, COLON_SPREAD, FLASH_FRAMES,
-    INST_X0, INST_Y0, INST_X1, INST_Y1, SLOT_X, SLOT_W, WX_X, WX_W, MIC_X, MIC_W, BOT_Y0, BOT_Y1,
+    INST_X0, INST_Y0, INST_X1, INST_Y1, WX_X0, WX_Y0, WX_X1, WX_Y1,
+    SLOT_L_X, SLOT_R_X, SLOT_W, BOT_Y0, BOT_H, BOT_CAP_R, MIC_X, MIC_Y, MIC_D,
 )
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -153,27 +155,28 @@ def build_dial_hardware(style_key):
 
     # Matte dial base + warm subtle ambient pocket behind tube row
     dial_col = st['dial_base'][None, None, :] + plate_grain[..., None] * 1.4 + top_light[..., None] * 7.5
-    tube_field = np.exp(-((dx / 145.0) ** 2 + ((dy + 55.0) / 68.0) ** 2))
+    tube_mid_dy = (TUBE_Y0 + TUBE_Y1) / 2.0 - C
+    tube_field = np.exp(-((dx / 152.0) ** 2 + ((dy - tube_mid_dy) / 68.0) ** 2))
     dial_col += tube_field[..., None] * np.array([18.0, 8.0, 3.0], dtype=np.float32)
     img[..., :3] = dial_col
 
-    # Recessed rehaut wall (203..212)
+    # Recessed rehaut wall (REHAUT_IN..BEZEL_IN)
     lip_mask = (r >= REHAUT_IN) & (r < BEZEL_IN)
     lip_shade = 0.55 + 0.45 * np.sin(ang + math.pi * 0.75)
     img[..., :3] = np.where(lip_mask[..., None],
                             st['rehaut_base'][None, None, :] * lip_shade[..., None] + concentric[..., None] * 2.5,
                             img[..., :3])
 
-    # Brushed bezel chamfer (212..234)
-    bezel_mask = (r >= BEZEL_IN) & (r < 234.0)
-    bevel = np.sin((r - BEZEL_IN) / (234.0 - BEZEL_IN) * math.pi)
+    # Slim brushed bezel chamfer (BEZEL_IN..OUTER_CASE_R)
+    bezel_mask = (r >= BEZEL_IN) & (r < OUTER_CASE_R)
+    bevel = np.sin((r - BEZEL_IN) / (OUTER_CASE_R - BEZEL_IN) * math.pi)
     bezel_col = st['bezel_base'][None, None, :] * (
         0.72 + 0.38 * aniso[..., None] + 0.25 * top_light[..., None] + 0.22 * bevel[..., None]
     ) + concentric[..., None] * 4.5
     img[..., :3] = np.where(bezel_mask[..., None], bezel_col, img[..., :3])
 
-    # Outer case wall (>= 234)
-    case_mask = r >= 234.0
+    # Outer case edge bevel (>= OUTER_CASE_R)
+    case_mask = r >= OUTER_CASE_R
     case_col = st['case_base'][None, None, :] * (
         0.75 + 0.35 * aniso[..., None] + 0.30 * top_light[..., None]
     ) + concentric[..., None] * 3.0
@@ -186,16 +189,15 @@ def build_dial_hardware(style_key):
     # 60 machined rehaut ticks + 4 diagonal bezel screws
     for m in range(60):
         a = math.radians(m * 6)
-        r0, r1 = (204.5, 211.0) if m % 5 == 0 else (206.5, 210.5)
+        r0, r1 = (REHAUT_IN + 1.0, BEZEL_IN - 0.8) if m % 5 == 0 else (REHAUT_IN + 2.5, BEZEL_IN - 1.2)
         col = (*metal, 185) if m % 5 == 0 else (112, 104, 96, 110)
         d.line([((C + r0 * math.sin(a)) * Q, (C - r0 * math.cos(a)) * Q),
                 ((C + r1 * math.sin(a)) * Q, (C - r1 * math.cos(a)) * Q)],
                fill=col, width=max(1, round((1.4 if m % 5 == 0 else 0.9) * Q)))
 
     for sa in (45, 135, 225, 315):
-        sr = 223.0
-        draw_screw(d, C + sr * math.sin(math.radians(sa)), C - sr * math.cos(math.radians(sa)),
-                   4.2, metal=(146, 122, 92) if style_key == 'brass' else (152, 158, 168), slot_deg=sa + 22)
+        draw_screw(d, C + SCREW_R * math.sin(math.radians(sa)), C - SCREW_R * math.cos(math.radians(sa)),
+                   3.0, metal=(146, 122, 92) if style_key == 'brass' else (152, 158, 168), slot_deg=sa + 22)
 
     # 4 recessed Nixie bulb cavities, sockets, porcelain pins & stacked unlit cathodes
     for x0 in TUBE_XS:
@@ -222,8 +224,8 @@ def build_dial_hardware(style_key):
             d.rectangle([(px - 1.2) * Q, (TUBE_Y1 - 19) * Q, (px + 1.2) * Q, (TUBE_Y1 - 6) * Q],
                         fill=(176, 132, 76, 215))
 
-        # Stacked unlit dark wire cathodes inside bulb
-        dx0, dy0, dw, dh = (x0 + 14) * Q, (TUBE_Y0 + 22) * Q, (TUBE_W - 28) * Q, (TUBE_H - 48) * Q
+        # Stacked unlit dark wire cathodes inside bulb (aligned cleanly above base collar)
+        dx0, dy0, dw, dh = (x0 + 14) * Q, (TUBE_Y0 + 20) * Q, (TUBE_W - 28) * Q, 86 * Q
         for idx, gch in enumerate(('8', '3', '5')):
             ox, oy = (idx - 1) * 1.3 * Q, (idx - 1) * 1.1 * Q
             draw_wire_digit(d, gch, dx0 + ox, dy0 + oy, dw, dh, 1.9 * Q, (42, 30, 24, 110))
@@ -236,28 +238,33 @@ def build_dial_hardware(style_key):
         d.line([((C - 2.2) * Q, (cy_c - 3.2) * Q), ((C - 2.2) * Q, (cy_c + 3.2) * Q)], fill=(116, 86, 58, 200), width=Q)
         d.line([((C + 2.2) * Q, (cy_c - 3.2) * Q), ((C + 2.2) * Q, (cy_c + 3.2) * Q)], fill=(116, 86, 58, 200), width=Q)
 
-    # Upper riveted instrument aperture (Heart, Steps, Battery)
-    d.rounded_rectangle([INST_X0 * Q, INST_Y0 * Q, INST_X1 * Q, INST_Y1 * Q], radius=13 * Q,
-                        fill=(26, 21, 18, 255), outline=(*metal, 235), width=max(1, round(1.8 * Q)))
-    d.rounded_rectangle([(INST_X0 + 5) * Q, (INST_Y0 + 5) * Q, (INST_X1 - 5) * Q, (INST_Y1 - 5) * Q], radius=9 * Q,
-                        fill=(11, 9, 8, 255), outline=(58, 46, 36, 220), width=Q)
-    draw_screw(d, INST_X0 + 12, (INST_Y0 + INST_Y1) / 2, 3.2, metal=metal, slot_deg=25)
-    draw_screw(d, INST_X1 - 12, (INST_Y0 + INST_Y1) / 2, 3.2, metal=metal, slot_deg=-40)
+    def draw_riveted_window(x0, y0, x1, y1, screw_r=2.8):
+        d.rounded_rectangle([x0 * Q, y0 * Q, x1 * Q, y1 * Q], radius=13 * Q,
+                            fill=(26, 21, 18, 255), outline=(*metal, 235), width=max(1, round(1.8 * Q)))
+        d.rounded_rectangle([(x0 + 5) * Q, (y0 + 5) * Q, (x1 - 5) * Q, (y1 - 5) * Q], radius=9 * Q,
+                            fill=(11, 9, 8, 255), outline=(58, 46, 36, 220), width=Q)
+        draw_screw(d, x0 + 11, (y0 + y1) / 2, screw_r, metal=metal, slot_deg=25)
+        draw_screw(d, x1 - 11, (y0 + y1) / 2, screw_r, metal=metal, slot_deg=-40)
 
-    # Bottom physical apertures (Notifications, Weather, Recorder push-button)
-    for bx0, bw, fill_in, rad in (
-        (SLOT_X, SLOT_W, (24, 20, 17, 255), 13),
-        (WX_X, WX_W, (24, 20, 17, 255), 13),
-        (MIC_X, MIC_W, (42, 34, 28, 255), 15),
-    ):
-        bx1 = bx0 + bw
-        d.rounded_rectangle([bx0 * Q, BOT_Y0 * Q, bx1 * Q, BOT_Y1 * Q], radius=rad * Q,
-                            fill=fill_in, outline=(*metal, 235), width=max(1, round(1.7 * Q)))
-        inner_fill = (22, 18, 15, 255) if bx0 == MIC_X else (11, 9, 8, 255)
-        inner_edge = (92, 72, 54, 190) if bx0 == MIC_X else (54, 44, 36, 200)
-        pad = 5 if bx0 == MIC_X else 4
-        d.rounded_rectangle([(bx0 + pad) * Q, (BOT_Y0 + pad) * Q, (bx1 - pad) * Q, (BOT_Y1 - pad) * Q],
-                            radius=(rad - 4) * Q, fill=inner_fill, outline=inner_edge, width=Q)
+    # Tier 1: Wide upper riveted telemetry aperture (Heart, Steps, Battery + bar)
+    draw_riveted_window(INST_X0, INST_Y0, INST_X1, INST_Y1, screw_r=2.9)
+
+    # Tier 2: Full-width riveted weather & forecast console aperture
+    draw_riveted_window(WX_X0, WX_Y0, WX_X1, WX_Y1, screw_r=2.7)
+
+    # Tier 3: Curved bottom hardware capsules (Left Complication, Right Complication) + Center Round Push-Button
+    for bx0 in (SLOT_L_X, SLOT_R_X):
+        bx1, by1 = bx0 + SLOT_W, BOT_Y0 + BOT_H
+        d.rounded_rectangle([bx0 * Q, BOT_Y0 * Q, bx1 * Q, by1 * Q], radius=BOT_CAP_R * Q,
+                            fill=(24, 20, 17, 255), outline=(*metal, 235), width=max(1, round(1.7 * Q)))
+        d.rounded_rectangle([(bx0 + 4) * Q, (BOT_Y0 + 4) * Q, (bx1 - 4) * Q, (by1 - 4) * Q],
+                            radius=(BOT_CAP_R - 4) * Q, fill=(11, 9, 8, 255), outline=(54, 44, 36, 200), width=Q)
+
+    # Center recessed round push-button collar + sunken concave cap
+    d.ellipse([MIC_X * Q, MIC_Y * Q, (MIC_X + MIC_D) * Q, (MIC_Y + MIC_D) * Q],
+              fill=(38, 31, 26, 255), outline=(*metal, 240), width=max(1, round(1.8 * Q)))
+    d.ellipse([(MIC_X + 5) * Q, (MIC_Y + 5) * Q, (MIC_X + MIC_D - 5) * Q, (MIC_Y + MIC_D - 5) * Q],
+              fill=(18, 15, 13, 255), outline=(88, 70, 52, 200), width=Q)
 
     save(pil.resize((S, S), Image.LANCZOS), f'dial_{style_key}')
 
@@ -318,12 +325,15 @@ def build_glass_overlay():
     for x0 in TUBE_XS:
         canvas.alpha_composite(tube_gl, (round(x0 * Q), round(TUBE_Y0 * Q)))
 
-    # Subtle diagonal sapphire sheen over the upper instrument window
+    # Subtle diagonal sapphire sheen over telemetry & weather windows
     sheen = Image.new('RGBA', (N, N), (0, 0, 0, 0))
-    ImageDraw.Draw(sheen).polygon(
-        [(98 * Q, 256 * Q), (190 * Q, 256 * Q), (138 * Q, 308 * Q), (98 * Q, 308 * Q)],
-        fill=(255, 244, 228, 16)
-    )
+    sd = ImageDraw.Draw(sheen)
+    for x0, y0, y1 in ((INST_X0, INST_Y0, INST_Y1), (WX_X0, WX_Y0, WX_Y1)):
+        sd.polygon(
+            [((x0 + 6) * Q, (y0 + 4) * Q), ((x0 + 104) * Q, (y0 + 4) * Q),
+             ((x0 + 52) * Q, (y1 - 4) * Q), ((x0 + 6) * Q, (y1 - 4) * Q)],
+            fill=(255, 244, 228, 14)
+        )
     canvas.alpha_composite(sheen)
     save(canvas.resize((S, S), Image.LANCZOS), 'tube_glass_array')
 
@@ -332,9 +342,9 @@ def build_glass_overlay():
 # 3. Theme-tintable Nixie BitmapFont glyphs (nixie_glow_0..9 & nixie_core_0..9)
 # ---------------------------------------------------------------------------
 def build_nixie_bitmap_fonts():
-    # Box is GLYPH_W (71) x GLYPH_H (108). Inside tube, cathode sits at dx=14, dy=18, dw=43, dh=80
+    # Box is GLYPH_W (73) x GLYPH_H (114). Inside tube, cathode sits at dx=14, dy=16, dw=45, dh=86
     w, h = GLYPH_W * Q, GLYPH_H * Q
-    dx0, dy0, dw, dh = 14 * Q, 18 * Q, (GLYPH_W - 28) * Q, 80 * Q
+    dx0, dy0, dw, dh = 14 * Q, 16 * Q, (GLYPH_W - 28) * Q, 86 * Q
     for digit in '0123456789':
         # Glow sprite (wide cloud + tight sheath, pure white alpha so WFF tints it by PLASMA_COL)
         wide = Image.new('RGBA', (w, h), (0, 0, 0, 0))
@@ -527,7 +537,7 @@ if __name__ == '__main__':
         ('ic_heart', glyph_heart, 16),
         ('ic_steps', glyph_steps, 16),
         ('ic_battery', glyph_battery, 16),
-        ('ic_mic', glyph_mic, 22),
+        ('ic_mic', glyph_mic, 26),
         ('wx_sun', glyph_wx_sun, 22),
         ('wx_moon', glyph_wx_moon, 22),
         ('wx_partly', glyph_wx_partly, 22),

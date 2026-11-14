@@ -10,6 +10,7 @@
   <string name="color_cobalto">Ionic Cobalt</string>
   <string name="color_rubino">Warm Ruby</string>
   <string name="slot_notif_name">Bottom Left Complication</string>
-  <string name="slot_shortcut_name">Bottom Right Shortcut</string>
+  <string name="slot_right_name">Bottom Right Complication</string>
+  <string name="slot_shortcut_name">Bottom Center Shortcut</string>
   <string name="slot_weather_name">Weather Shortcut</string>
 </resources>

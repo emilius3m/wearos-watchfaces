@@ -9,7 +9,8 @@ from layout import (
     S, C, REHAUT_MID, DATE_Y, TUBE_Y0, TUBE_W, TUBE_H, TUBE_XS,
     GLYPH_W, GLYPH_H, GLYPH_Y, COLON_CY, FLASH_FRAMES,
     INST_X0, INST_Y0, INST_W, INST_H, INST_BAR_X, INST_BAR_Y, INST_BAR_W, INST_BAR_H, ICON_SM,
-    BOT_Y0, BOT_H, SLOT_X, SLOT_W, WX_X, WX_W, MIC_X, MIC_W, SEC_LABEL_Y,
+    WX_X0, WX_Y0, WX_W, WX_H,
+    BOT_Y0, BOT_H, BOT_CAP_R, SLOT_L_X, SLOT_R_X, SLOT_W, MIC_X, MIC_Y, MIC_D,
 )
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -39,13 +40,21 @@ SAMPLE = dict(
     hour=9, minute=27, second=36,
     steps=6480, goal=10000, heart=72, battery=84,
     weekday='GIOVEDÌ', day=12, month='NOV',
-    weather=dict(icon='partly', temperature=14),
+    weather=dict(
+        icon='partly', temperature=14, precip=20,
+        days=[
+            dict(day=1, label='DOMANI', icon='cloud', high=10, low=6),
+            dict(day=2, label='SAB 14', icon='partly', high=15, low=8),
+        ],
+    ),
 )
 FONTS = {'teko_semibold': 'SEMI_BOLD', 'teko_bold': 'BOLD'}
 CAP_SHIFT = 0.0695
 BASELINE = (0.958 - 0.475) / 2
 HEALTH = 'com.samsung.android.wear.shealth/com.samsung.android.wear.shealth.app.home.HomeActivity'
 RECORDER = 'com.samsung.android.wear.voicerecorder/com.samsung.android.wear.voicerecorder.view.MainActivity'
+WEATHER = 'com.samsung.android.watch.weather/com.samsung.android.watch.weather.ui.WeatherActivity'
+DIVIDER = '#FF382C22'
 
 
 def fmt(v):
@@ -276,6 +285,29 @@ class DrawProxy:
             self.n.p.shape(fill, self.n.alpha,
                            lambda d, c: d.rounded_rectangle(self._box(x, y, w * sample, h), radius=r * K, fill=c))
 
+    def line(self, x1, y1, x2, y2, stroke, thickness=1.0):
+        ln = el(self.part, 'Line', startX=float(x1), startY=float(y1), endX=float(x2), endY=float(y2))
+        el(ln, 'Stroke', color=xml_color(stroke), thickness=float(thickness))
+        if self.n.shown:
+            self.n.p.shape(stroke, self.n.alpha, lambda d, c: d.line(
+                [(self.n.ox + self.ox + x1) * K, (self.n.oy + self.oy + y1) * K,
+                 (self.n.ox + self.ox + x2) * K, (self.n.oy + self.oy + y2) * K],
+                fill=c, width=max(1, round(thickness * K))))
+
+    def ellipse(self, x, y, w, h, fill=None, stroke=None, thickness=1.0):
+        e = el(self.part, 'Ellipse', x=float(x), y=float(y), width=float(w), height=float(h))
+        if fill:
+            el(e, 'Fill', color=xml_color(fill))
+        if stroke:
+            el(e, 'Stroke', color=xml_color(stroke), thickness=float(thickness))
+        if not self.n.shown:
+            return
+        if fill:
+            self.n.p.shape(fill, self.n.alpha, lambda d, c: d.ellipse(self._box(x, y, w, h), fill=c))
+        if stroke:
+            self.n.p.shape(stroke, self.n.alpha, lambda d, c: d.ellipse(
+                self._box(x, y, w, h), outline=c, width=max(1, round(thickness * K))))
+
 
 def d_preview(c):
     return Node(ET.Element('Preview'), c.p, c.ox, c.oy, c.w, c.h, c.vis, c.alpha)
@@ -320,40 +352,65 @@ def icon_bell(d, cx, cy):
     h.ellipse(cx, cy + 7.4, 1.6, fill='ACCENT')
 
 
-def any_of(*codes):
-    return ' || '.join(f'[WEATHER.CONDITION] == {c}' for c in codes)
+def icon_calendar(d, cx, cy):
+    """Tiny calendar glyph for previewing the right customizable NEXT_EVENT capsule."""
+    h = _ShapeDrawHelper(d)
+    # Outer frame lines + header bar
+    h.line(cx - 7.0, cy - 5.5, cx + 7.0, cy - 5.5, 'ACCENT', 1.8)
+    h.line(cx - 7.0, cy - 1.5, cx + 7.0, cy - 1.5, 'ACCENT', 1.5)
+    h.line(cx - 7.0, cy + 7.0, cx + 7.0, cy + 7.0, 'ACCENT', 1.8)
+    h.line(cx - 7.0, cy - 5.5, cx - 7.0, cy + 7.0, 'ACCENT', 1.8)
+    h.line(cx + 7.0, cy - 5.5, cx + 7.0, cy + 7.0, 'ACCENT', 1.8)
+    h.line(cx - 3.6, cy - 8.0, cx - 3.6, cy - 4.2, 'ACCENT', 1.8)
+    h.line(cx + 3.6, cy - 8.0, cx + 3.6, cy - 4.2, 'ACCENT', 1.8)
+    h.ellipse(cx, cy + 3.0, 1.6, fill='ACCENT')
 
 
-WEATHER_ICONS = [
-    ('sun', f'({any_of(1, 8)}) && [WEATHER.IS_DAY]', 'wx_sun'),
-    ('moon', any_of(1, 8), 'wx_moon'),
-    ('partly', any_of(14), 'wx_partly'),
-    ('cloud', any_of(2), 'wx_cloud'),
-    ('fog', any_of(3, 13), 'wx_fog'),
-    ('rain', any_of(4, 6, 12), 'wx_rain'),
-    ('snow', any_of(5, 7, 10, 11), 'wx_snow'),
-    ('storm', any_of(9), 'wx_storm'),
-    ('wind', any_of(15), 'wx_wind'),
-]
+def any_of(var, *codes):
+    return ' || '.join(f'{var} == {c}' for c in codes)
 
 
-def build_notifications_slot(scene):
-    s = el(scene.node, 'ComplicationSlot', x=SLOT_X, y=BOT_Y0, width=SLOT_W, height=BOT_H,
-           slotId=0, displayName='slot_notif_name', isCustomizable='TRUE',
+def weather_icon_cond(node, cond_expr, x, y, size, sample_key, tint='ACCENT', check_is_day=False):
+    icons = [
+        ('sun', f'({any_of(cond_expr, 1, 8)}) && [WEATHER.IS_DAY]' if check_is_day else any_of(cond_expr, 1, 8), 'wx_sun'),
+    ]
+    if check_is_day:
+        icons.append(('moon', any_of(cond_expr, 1, 8), 'wx_moon'))
+    icons += [
+        ('partly', any_of(cond_expr, 14), 'wx_partly'),
+        ('cloud', any_of(cond_expr, 2), 'wx_cloud'),
+        ('fog', any_of(cond_expr, 3, 13), 'wx_fog'),
+        ('rain', any_of(cond_expr, 4, 6, 12), 'wx_rain'),
+        ('snow', any_of(cond_expr, 5, 7, 10, 11), 'wx_snow'),
+        ('storm', any_of(cond_expr, 9), 'wx_storm'),
+        ('wind', any_of(cond_expr, 15), 'wx_wind'),
+    ]
+    icon = lambda res: (lambda n: n.image(res, x, y, size, size, tint=tint))
+    node.condition(
+        {name: expr for name, expr, _ in icons},
+        [(name, icon(res)) for name, _, res in icons],
+        default=icon('wx_cloud'),
+        preview=sample_key,
+    )
+
+
+def build_capsule_slot(scene, slot_id, x0, display_name, provider, sample_text, text_size, preview_icon_fn):
+    s = el(scene.node, 'ComplicationSlot', x=x0, y=BOT_Y0, width=SLOT_W, height=BOT_H,
+           slotId=slot_id, displayName=display_name, isCustomizable='TRUE',
            supportedTypes='SHORT_TEXT RANGED_VALUE MONOCHROMATIC_IMAGE SMALL_IMAGE EMPTY')
     scene.ambient(s, 0)
-    el(s, 'BoundingRoundBox', x=0, y=0, width=SLOT_W, height=BOT_H, cornerRadius=13)
-    el(s, 'DefaultProviderPolicy', defaultSystemProvider='UNREAD_NOTIFICATION_COUNT', defaultSystemProviderType='SHORT_TEXT')
+    el(s, 'BoundingRoundBox', x=0, y=0, width=SLOT_W, height=BOT_H, cornerRadius=BOT_CAP_R)
+    el(s, 'DefaultProviderPolicy', defaultSystemProvider=provider, defaultSystemProviderType='SHORT_TEXT')
     silent = Painter('none', scene.p.theme, scene.p.case_finish)
     for kind in ('SHORT_TEXT', 'RANGED_VALUE', 'MONOCHROMATIC_IMAGE', 'SMALL_IMAGE', 'EMPTY'):
         live = kind == 'SHORT_TEXT'
-        c = Node(el(s, 'Complication', type=kind), scene.p if live else silent, SLOT_X, BOT_Y0, SLOT_W, BOT_H, 'active')
+        c = Node(el(s, 'Complication', type=kind), scene.p if live else silent, x0, BOT_Y0, SLOT_W, BOT_H, 'active')
         if kind in ('SHORT_TEXT', 'RANGED_VALUE'):
             im = el(c.node, 'PartImage', x=16, y=round(BOT_H / 2 - 9), width=18, height=18, tintColor=xml_color('ACCENT'))
             el(im, 'Image', resource='[COMPLICATION.MONOCHROMATIC_IMAGE]')
             if live:
-                icon_bell(d_preview(c), 25, BOT_H / 2)
-            c.text(56, BOT_H / 2 + 1, 38, 27, CREAM, '2', '%s', ['[COMPLICATION.TEXT]'])
+                preview_icon_fn(d_preview(c), 25, BOT_H / 2)
+            c.text(59, BOT_H / 2 + 1, 48, text_size, CREAM, sample_text, '%s', ['[COMPLICATION.TEXT]'])
         elif kind == 'MONOCHROMATIC_IMAGE':
             im = el(c.node, 'PartImage', x=round(SLOT_W / 2 - 12), y=round(BOT_H / 2 - 12),
                     width=24, height=24, tintColor=xml_color('ACCENT'))
@@ -361,25 +418,77 @@ def build_notifications_slot(scene):
         elif kind == 'SMALL_IMAGE':
             im = el(c.node, 'PartImage', x=round(SLOT_W / 2 - 15), y=round(BOT_H / 2 - 15), width=30, height=30)
             el(im, 'Image', resource='[COMPLICATION.SMALL_IMAGE]')
+        elif kind == 'EMPTY':
+            c.text(round(SLOT_W / 2), BOT_H / 2 + 1, SLOT_W - 24, 20, SLATE_AOD, '—', '—')
 
 
-def build_weather_slot(scene, sample):
-    g = scene.group('weather', WX_X, BOT_Y0, WX_W, BOT_H, vis='active')
-
-    def icon(name, tint='ACCENT'):
-        return lambda n: n.image(name, 16, round(BOT_H / 2 - 11), 22, 22, tint=tint)
+def build_weather_console(scene, sample):
+    g = scene.group('weather', WX_X0, WX_Y0, WX_W, WX_H, vis='active', launch=WEATHER)
 
     def live(n):
-        n.condition({name: expr for name, expr, _ in WEATHER_ICONS},
-                    [(name, icon(res)) for name, _, res in WEATHER_ICONS],
-                    default=icon('wx_cloud'), preview=sample['icon'])
-        n.text(66, BOT_H / 2 + 1, 52, 27, CREAM, '%d°' % sample['temperature'], '%s°', ['[WEATHER.TEMPERATURE]'])
+        # Engraved vertical column dividers between Today | Tomorrow | Day+2
+        # Usable content inner span inside left/right screws (x=18..326 -> 3 cols of 102px)
+        div = n.part_draw(0, 0, WX_W, WX_H)
+        for dx in (121, 225):
+            div.line(dx, 10, dx, WX_H - 10, DIVIDER, 1.0)
+
+        # Col 1: Current conditions + chance of precipitation + live temperature (x=18..120)
+        c1 = n.group('wx_today', 18, 0, 102, WX_H)
+        c1.text(51, 14, 96, 15, PARCHMENT, f"OGGI · {sample['precip']}%",
+                'OGGI · %s%%', ['[WEATHER.CHANCE_OF_PRECIPITATION]'], family='teko_semibold')
+        weather_icon_cond(c1, '[WEATHER.CONDITION]', 18, 25, 22, sample['icon'], tint='ACCENT', check_is_day=True)
+        c1.text(67, 36, 52, 25, CREAM, f"{sample['temperature']}°", '%s°',
+                ['[WEATHER.TEMPERATURE]'], family='teko_bold')
+
+        # Subtle dot indicator in top-left corner only when cached weather needs refresh
+        c1.condition({'stale': '[WEATHER.IS_ERROR]'},
+                     [('stale', lambda sn: sn.part_draw(0, 0, 12, 14).ellipse(3, 5, 5, 5, fill='ACCENT'))])
+
+        # Cols 2 & 3: Tomorrow (x=122..224) + Day+2 (x=226..328) forecasts with high/low temps
+        for d_info in sample['days']:
+            d = d_info['day']
+            fx0 = 122 if d == 1 else 226
+            col = n.group(f'wx_day_{d}', fx0, 0, 102, WX_H)
+            if d == 1:
+                col.text(51, 14, 94, 15, PARCHMENT, d_info['label'], 'DOMANI', family='teko_semibold')
+            else:
+                stamp = f'[UTC_TIMESTAMP] - [SECONDS_IN_DAY] * 1000 - [MILLISECOND] + {d * 86400000 + 43200000}'
+                col.text(51, 14, 94, 15, PARCHMENT, d_info['label'], '%s',
+                         [f'icuText("EEE d", {stamp})'], family='teko_semibold', upper=True)
+
+            def day_ok(dn, di=d_info, day_num=d):
+                weather_icon_cond(dn, f'[WEATHER.DAYS.{day_num}.CONDITION_DAY]', 10, 26, 20, di['icon'], tint='ACCENT')
+                dn.text(63, 36, 62, 21, CREAM, f"{di['high']}°/{di['low']}°", '%s°/%s°',
+                        [f'[WEATHER.DAYS.{day_num}.TEMPERATURE_HIGH]',
+                         f'[WEATHER.DAYS.{day_num}.TEMPERATURE_LOW]'],
+                        family='teko_semibold')
+
+            def day_na(dn):
+                dn.image('wx_cloud', 10, 26, 20, 20, tint=SLATE_AOD)
+                dn.text(63, 36, 62, 21, SLATE_AOD, '--°/--°', '--°/--°', family='teko_semibold')
+
+            col.condition({f'd{d}_avail': f'[WEATHER.DAYS.{d}.IS_AVAILABLE]'},
+                          [(f'd{d}_avail', day_ok)], default=day_na, preview=f'd{d}_avail')
 
     def missing(n):
-        icon('wx_cloud', tint=SLATE_AOD)(n)
-        n.text(66, BOT_H / 2 + 1, 52, 27, SLATE_AOD, '--', '--')
+        n.image('wx_cloud', 74, round(WX_H / 2 - 11), 22, 22, tint=SLATE_AOD)
+        n.text(192, WX_H / 2 + 1, 210, 20, SLATE_AOD, 'METEO NON DISPONIBILE', 'METEO NON DISPONIBILE')
 
     g.condition({'available': '[WEATHER.IS_AVAILABLE]'}, [('available', live)], default=missing, preview='available')
+
+    # Transparent customizable APP_SHORTCUT slot: local taps fall through EMPTY to Samsung Weather;
+    # configured shortcuts override it seamlessly on Play Store watches.
+    ws = el(scene.node, 'ComplicationSlot', x=WX_X0, y=WX_Y0, width=WX_W, height=WX_H,
+            slotId=3, displayName='slot_weather_name', isCustomizable='TRUE',
+            supportedTypes='MONOCHROMATIC_IMAGE SMALL_IMAGE SHORT_TEXT RANGED_VALUE EMPTY')
+    scene.ambient(ws, 0)
+    el(ws, 'BoundingRoundBox', x=0, y=0, width=WX_W, height=WX_H, cornerRadius=13)
+    el(ws, 'DefaultProviderPolicy', defaultSystemProvider='APP_SHORTCUT', defaultSystemProviderType='MONOCHROMATIC_IMAGE')
+    for kind in ('MONOCHROMATIC_IMAGE', 'SMALL_IMAGE', 'SHORT_TEXT', 'RANGED_VALUE'):
+        c = el(ws, 'Complication', type=kind)
+        sh = el(el(c, 'PartDraw', x=0, y=0, width=WX_W, height=WX_H), 'Rectangle', x=0, y=0, width=WX_W, height=WX_H)
+        el(sh, 'Fill', color='#00000000')
+    el(ws, 'Complication', type='EMPTY')
 
 
 def build(mode, theme, case_finish='titanium'):
@@ -413,14 +522,14 @@ def build(mode, theme, case_finish='titanium'):
         opt = dial_grp.child(el(lc, 'ListOption', id=cf), vis='active' if cf == case_finish else 'never')
         opt.image(f'dial_{cf}', 0, 0, S, S)
 
-    # 2 · Orbiting neon seconds indicator bead along inner rehaut track (r = 207.5)
+    # 2 · Orbiting neon seconds indicator bead along inner rehaut track (REHAUT_MID)
     sec_grp = scene.group('sec_crown', vis='active')
     analog = sec_grp.child(el(sec_grp.node, 'AnalogClock', x=0, y=0, width=S, height=S))
     analog.hand('SecondHand', 'sec_bead', C - 8, round(C - REHAUT_MID - 8), 16, 16, v['second'] * 6, 'ACCENT')
 
     # 3 · Top Italian date caption
     date_sample = f"{v['weekday']} · {v['day']} {v['month']}"
-    scene.text(C, DATE_Y - 5, 220, 25, PARCHMENT, date_sample, '%s · %s %s',
+    scene.text(C, DATE_Y - 2, 200, 24, PARCHMENT, date_sample, '%s · %s %s',
                ['[DAY_OF_WEEK_F]', '[DAY]', '[MONTH_S]'], upper=True, ambient=155)
 
     # 4 · Vibrating Nixie filament plasma layer (integer-cycle harmonics in 1000ms for smooth hum)
@@ -459,46 +568,47 @@ def build(mode, theme, case_finish='titanium'):
     glass_grp = scene.group('tube_glass_front', vis='active')
     glass_grp.image('tube_glass_array', 0, 0, S, S)
 
-    # 8 · Upper recessed instrument window (Heart Rate, Steps + bar, Battery + low-batt alert)
+    # 8 · Tier 1: Wide upper riveted instrument window (Heart Rate, Steps + bar, Battery + low-batt alert)
     inst = scene.group('instrument_plate', INST_X0, INST_Y0, INST_W, INST_H, vis='active')
-    hr_g = inst.group('inst_heart', 12, 4, 84, 36, launch=HEALTH)
-    hr_g.image('ic_heart', 14, 11, ICON_SM, ICON_SM, tint=CORAL)
-    hr_g.text(50, 18, 44, 27, CORAL, str(v['heart']), '%s', ["[HEART_RATE] > 0 ? [HEART_RATE] : '--'"], family='teko_bold')
+    hr_g = inst.group('inst_heart', 18, 4, 100, 36, launch=HEALTH)
+    hr_g.image('ic_heart', 12, 10, ICON_SM, ICON_SM, tint=CORAL)
+    hr_g.text(56, 18, 54, 27, CORAL, str(v['heart']), '%s', ["[HEART_RATE] > 0 ? [HEART_RATE] : '--'"], family='teko_bold')
 
-    st_g = inst.group('inst_steps', 98, 4, 102, 36, launch=HEALTH)
-    st_g.image('ic_steps', 10, 11, ICON_SM, ICON_SM, tint=SAGE)
+    st_g = inst.group('inst_steps', 118, 4, 120, 36, launch=HEALTH)
+    st_g.image('ic_steps', 14, 10, ICON_SM, ICON_SM, tint=SAGE)
     for size, cond, prev in ((27, '[STEP_COUNT] < 10000 ? 255 : 0', True),
                              (22, '[STEP_COUNT] < 10000 ? 0 : 255', False)):
-        sub = st_g.group(f'steps_sz_{size}', 28, 0, 74, 36, preview=prev)
+        sub = st_g.group(f'steps_sz_{size}', 34, 0, 82, 36, preview=prev)
         el(sub.node, 'Transform', target='alpha', value=cond)
-        sub.text(30, 18, 60, size, CREAM, str(v['steps']), '%s', ['[STEP_COUNT]'], family='teko_bold')
+        sub.text(36, 18, 72, size, CREAM, str(v['steps']), '%s', ['[STEP_COUNT]'], family='teko_bold')
 
-    bt_g = inst.group('inst_batt', 202, 4, 84, 36, launch='BATTERY_STATUS')
-    ok_b = bt_g.group('batt_ok', 0, 0, 84, 36, preview=True)
+    bt_g = inst.group('inst_batt', 238, 4, 100, 36, launch='BATTERY_STATUS')
+    ok_b = bt_g.group('batt_ok', 0, 0, 100, 36, preview=True)
     el(ok_b.node, 'Transform', target='alpha', value='[BATTERY_PERCENT] <= 20 ? 0 : 255')
-    ok_b.image('ic_battery', 8, 11, ICON_SM, ICON_SM, tint='ACCENT')
-    ok_b.text(48, 18, 52, 27, 'ACCENT', f"{v['battery']}%", '%s%%', ['[BATTERY_PERCENT]'], family='teko_bold')
-    low_b = bt_g.group('batt_low', 0, 0, 84, 36, preview=False)
+    ok_b.image('ic_battery', 12, 10, ICON_SM, ICON_SM, tint='ACCENT')
+    ok_b.text(56, 18, 56, 27, 'ACCENT', f"{v['battery']}%", '%s%%', ['[BATTERY_PERCENT]'], family='teko_bold')
+    low_b = bt_g.group('batt_low', 0, 0, 100, 36, preview=False)
     el(low_b.node, 'Transform', target='alpha', value='[BATTERY_PERCENT] <= 20 ? 255 : 0')
-    low_b.image('ic_battery', 8, 11, ICON_SM, ICON_SM, tint=CORAL)
-    low_b.text(48, 18, 52, 27, CORAL, f"{v['battery']}%", '%s%%', ['[BATTERY_PERCENT]'], family='teko_bold')
+    low_b.image('ic_battery', 12, 10, ICON_SM, ICON_SM, tint=CORAL)
+    low_b.text(56, 18, 56, 27, CORAL, f"{v['battery']}%", '%s%%', ['[BATTERY_PERCENT]'], family='teko_bold')
 
-    # Thin luminous bargraph across lower rim of upper instrument window
+    # Full-width luminous bargraph across lower rim of Tier 1
     bar = inst.part_draw(INST_BAR_X, INST_BAR_Y, INST_BAR_W, INST_BAR_H)
     bar.rect_bar(0, 0, INST_BAR_W, INST_BAR_H, 2.2, TRACK_BG)
     bar.rect_bar(0, 0, INST_BAR_W, INST_BAR_H, 2.2, 'ACCENT',
                  expr=f'{INST_BAR_W} * clamp([STEP_COUNT] / clamp([STEP_GOAL], 1, 1000000), 0, 1)',
                  sample=v['steps'] / v['goal'])
 
-    # 9 · Bottom physical modules: Notifications complication + Native Weather + Voice Recorder push-button
-    build_notifications_slot(scene)
-    build_weather_slot(scene, v['weather'])
-    rec_g = scene.group('recorder_btn', MIC_X, BOT_Y0, MIC_W, BOT_H, vis='active', launch=RECORDER)
-    rec_g.image('ic_mic', round(MIC_W / 2 - 11), round(BOT_H / 2 - 11), 22, 22, tint='ACCENT')
+    # 9 · Tier 2: Full-width recessed Weather & 2-Day Forecast Console + customizable shortcut
+    build_weather_console(scene, v['weather'])
 
-    # 10 · Plain seconds readout below (active mode only; hidden in AOD)
-    scene.text(C, SEC_LABEL_Y - 3, 90, 20, 'ACCENT', f"{v['second']:02d} SEC", '%s%s SEC',
-               ['floor([SECOND] / 10)', '[SECOND] % 10'], ambient=0)
+    # 10 · Tier 3: Curved bottom hardware row (Notifications + Big Round Voice Push-Button + Agenda/Complication)
+    build_capsule_slot(scene, 0, SLOT_L_X, 'slot_notif_name', 'UNREAD_NOTIFICATION_COUNT', '2', 27, icon_bell)
+    build_capsule_slot(scene, 1, SLOT_R_X, 'slot_right_name', 'NEXT_EVENT', '10:30', 21, icon_calendar)
+    rec_g = scene.group('recorder_btn', MIC_X, MIC_Y, MIC_D, MIC_D, vis='active', launch=RECORDER)
+    rec_ring = rec_g.part_draw(0, 0, MIC_D, MIC_D)
+    rec_ring.ellipse(9, 9, MIC_D - 18, MIC_D - 18, stroke='ACCENT', thickness=1.5)
+    rec_g.image('ic_mic', round((MIC_D - 26) / 2), round((MIC_D - 26) / 2), 26, 26, tint='ACCENT')
 
     # 11 · Minimal Always-On Display glass silhouettes
     aod = scene.group('aod_silhouettes', vis='ambient').part_draw()
@@ -506,8 +616,8 @@ def build(mode, theme, case_finish='titanium'):
         aod.rrect(x0, TUBE_Y0 + 6, TUBE_W, TUBE_H - 6, 17, stroke=SLATE_AOD, thickness=1.2)
     for deg in (0, 90, 180, 270):
         rad = math.radians(deg)
-        x1 = C + 224 * math.sin(rad)
-        y1 = C - 224 * math.cos(rad)
+        x1 = C + REHAUT_MID * math.sin(rad)
+        y1 = C - REHAUT_MID * math.cos(rad)
         aod.rrect(x1 - 1.5, y1 - 1.5, 3, 3, 1.5, fill=SLATE_AOD)
 
     return wf, painter.img.resize((S, S), Image.LANCZOS)

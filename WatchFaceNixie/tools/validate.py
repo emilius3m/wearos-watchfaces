@@ -1,8 +1,15 @@
-"""Validate NIXIE against the official WFF 2 schema and check all packaged assets."""
+"""Validate NIXIE against the official WFF 2 schema, packaged assets, and circular geometry."""
+import math
 from pathlib import Path
 import re
 from lxml import etree
 import xmlschema
+
+from layout import (
+    C, REHAUT_IN, TUBE_XS, TUBE_Y0, TUBE_W, TUBE_H,
+    INST_X0, INST_Y0, INST_W, INST_H, WX_X0, WX_Y0, WX_W, WX_H,
+    SLOT_L_X, SLOT_R_X, SLOT_W, BOT_Y0, BOT_H, BOT_CAP_R, MIC_X, MIC_Y, MIC_D,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 FACE = ROOT / 'res/raw/watchface.xml'
@@ -36,4 +43,34 @@ for config in face.xpath('//ColorConfiguration'):
     assert not used or max(used) < len(next(iter(options.values()))), 'palette index out of range'
 groups = [g.get('name') for g in face.xpath('//Group')]
 assert len(groups) == len(set(groups)), 'duplicate group names'
-print(f'PASS: official WFF 2 XSD, {len(face.xpath("//*"))} elements, strings, fonts, drawables, palettes.')
+
+# Circular dial clearances and non-overlapping interactive targets
+def max_r_rounded(x, y, w, h, cr):
+    return max(math.hypot(px - C, py - C) + cr
+               for px in (x + cr, x + w - cr) for py in (y + cr, y + h - cr))
+
+for idx, x0 in enumerate(TUBE_XS):
+    mr = max_r_rounded(x0, TUBE_Y0 + 6, TUBE_W, TUBE_H - 6, 17)
+    assert mr < REHAUT_IN - 2.0, f'tube {idx} too close to rehaut: {mr:.2f} >= {REHAUT_IN}'
+
+for label, rect, cr in (
+    ('inst', (INST_X0, INST_Y0, INST_W, INST_H), 13),
+    ('weather', (WX_X0, WX_Y0, WX_W, WX_H), 13),
+    ('slot_left', (SLOT_L_X, BOT_Y0, SLOT_W, BOT_H), BOT_CAP_R),
+    ('slot_right', (SLOT_R_X, BOT_Y0, SLOT_W, BOT_H), BOT_CAP_R),
+    ('mic_center', (MIC_X, MIC_Y, MIC_D, MIC_D), MIC_D / 2),
+):
+    mr = max_r_rounded(*rect, cr)
+    assert mr < REHAUT_IN - 2.0, f'{label} clips rehaut: {mr:.2f} >= {REHAUT_IN}'
+
+bottom_boxes = [
+    ('left', (SLOT_L_X, BOT_Y0, SLOT_W, BOT_H)),
+    ('center', (MIC_X, MIC_Y, MIC_D, MIC_D)),
+    ('right', (SLOT_R_X, BOT_Y0, SLOT_W, BOT_H)),
+]
+for i, (na, ra) in enumerate(bottom_boxes):
+    assert WX_Y0 + WX_H < ra[1], f'weather overlaps {na}'
+    for nb, rb in bottom_boxes[i + 1:]:
+        assert ra[0] + ra[2] < rb[0] or rb[0] + rb[2] < ra[0], f'{na} overlaps {nb}'
+
+print(f'PASS: official WFF 2 XSD, {len(face.xpath("//*"))} elements, strings, fonts, drawables, palettes, clearances.')

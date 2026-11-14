@@ -33,8 +33,8 @@ FACES = [
         slug='nixie',
         src=WATCH_PROJECTS / 'WatchFaceNixie',
         package='it.e3mcorp.watchface.nixie',
-        version_code='2',
-        version_name='1.1',
+        version_code='3',
+        version_name='2.0',
         title_en='NIXIE',
         title_it='NIXIE',
         tagline='60s IN-18 Tube Chronograph',
@@ -49,7 +49,8 @@ FACES = [
             'color_cobalto': 'Ionic Cobalt',
             'color_rubino': 'Warm Ruby',
             'slot_notif_name': 'Bottom Left Complication',
-            'slot_shortcut_name': 'Bottom Right Shortcut',
+            'slot_right_name': 'Bottom Right Complication',
+            'slot_shortcut_name': 'Bottom Center Shortcut',
             'slot_weather_name': 'Weather Shortcut',
         },
         strings_it={
@@ -62,8 +63,9 @@ FACES = [
             'color_vfd': 'VFD Verde Fosforo',
             'color_cobalto': 'Cobalto Ionico',
             'color_rubino': 'Rubino Caldo',
-            'slot_notif_name': 'Complicazione in basso a sinistra',
-            'slot_shortcut_name': 'Scorciatoia in basso a destra',
+            'slot_notif_name': 'Complicazione Notifiche',
+            'slot_right_name': 'Complicazione Agenda',
+            'slot_shortcut_name': 'Scorciatoia centrale',
             'slot_weather_name': 'Scorciatoia Meteo',
         },
     ),
@@ -197,7 +199,7 @@ def write_strings_xml(path: Path, mapping: dict):
 def make_shortcut_slot(slot_id, x, y, w, h, display_name, accent_color, circle=False,
                        bg_fill=None, bg_stroke=None, stroke_w='1.4',
                        icon_color='#FFFFFFFF', fallback_res='ic_mic', fallback_sz=22,
-                       draw_vector_mic_color=None):
+                       draw_vector_mic_color=None, ring_inset=0):
     """Build a schema-valid WFF 2 ComplicationSlot (direct Scene child) for universal Wear OS shortcuts."""
     slot = etree.Element(
         'ComplicationSlot',
@@ -223,7 +225,8 @@ def make_shortcut_slot(slot_id, x, y, w, h, display_name, accent_color, circle=F
         if bg_fill or bg_stroke:
             pd = etree.SubElement(parent, 'PartDraw', x='0', y='0', width=str(w), height=str(h))
             if circle:
-                sh = etree.SubElement(pd, 'Ellipse', x='0', y='0', width=str(w), height=str(h))
+                sh = etree.SubElement(pd, 'Ellipse', x=str(ring_inset), y=str(ring_inset),
+                                      width=str(w - 2 * ring_inset), height=str(h - 2 * ring_inset))
             else:
                 sh = etree.SubElement(pd, 'RoundRectangle', x='0', y='0', width=str(w), height=str(h),
                                       cornerRadiusX='13', cornerRadiusY='13')
@@ -298,12 +301,21 @@ def transform_watchface_xml(slug, xml_path: Path):
         for g in root.xpath('//Group[@name="recorder_btn"]'):
             g.getparent().remove(g)
         scene.append(make_shortcut_slot(
-            slot_id=1, x=310, y=324, w=62, h=52,
+            slot_id=2, x=200, y=356, w=80, h=80,
             display_name='slot_shortcut_name',
             accent_color='[CONFIGURATION.theme.2]',
-            circle=False, bg_fill=None, bg_stroke=None,
-            icon_color='[CONFIGURATION.theme.2]', fallback_res='ic_mic', fallback_sz=22,
+            circle=True, bg_fill=None, bg_stroke='[CONFIGURATION.theme.2]', stroke_w='1.5',
+            icon_color='[CONFIGURATION.theme.2]', fallback_res='ic_mic', fallback_sz=26,
+            ring_inset=9,
         ))
+        repl_nixie = {
+            'OGGI · %s%%': 'TODAY · %s%%',
+            'DOMANI': 'TOMORROW',
+            'METEO NON DISPONIBILE': 'WEATHER UNAVAILABLE',
+        }
+        for node in root.iter():
+            if node.text and node.text.strip() in repl_nixie:
+                node.text = repl_nixie[node.text.strip()]
     elif slug == 'solari':
         for g in root.xpath('//Group[@name="recorder"]'):
             g.getparent().remove(g)
