@@ -13,7 +13,8 @@ ROOT=Path(__file__).resolve().parents[1]
 TREE=ET.parse(ROOT/'res/raw/watchface.xml')
 S=2
 DEMO={'WEATHER.IS_AVAILABLE':True,'WEATHER.IS_ERROR':False,'WEATHER.TEMPERATURE':16,'WEATHER.CONDITION':14,'WEATHER.CONDITION_NAME':'Poco nuvoloso',
-      'STEP_COUNT':510,'HEART_RATE':77,'BATTERY_PERCENT':81,'CONFIGURATION.verticalPalette.0':'#FFD5FF45',
+      'STEP_COUNT':510,'HEART_RATE':77,'BATTERY_PERCENT':81,
+      'CONFIGURATION.verticalPalette.0':'#FFD5FF45','CONFIGURATION.verticalPalette.1':'#FFF3ECDD',
       'COMPLICATION.TEXT':'Nessuno','COMPLICATION.MONOCHROMATIC_IMAGE':'demo_calendar'}
 for i,(condition,low,high) in enumerate([(2,6,10),(6,9,14),(14,8,15)],1):
     DEMO.update({f'WEATHER.DAYS.{i}.IS_AVAILABLE':True,f'WEATHER.DAYS.{i}.CONDITION_DAY':condition,
@@ -96,7 +97,7 @@ class Renderer:
         if tag=='PartImage':
             resource=node.find('Image').get('resource')
             if resource.startswith('[COMPLICATION.'):
-                icon=Image.new('RGBA',(40,40));d=ImageDraw.Draw(icon);color=self.color(self.data['CONFIGURATION.verticalPalette.0'])
+                icon=Image.new('RGBA',(40,40));d=ImageDraw.Draw(icon);color=self.color(self.data['CONFIGURATION.verticalPalette.1'])
                 if self.data['COMPLICATION.MONOCHROMATIC_IMAGE']=='demo_calendar':
                     d.rounded_rectangle((5,6,35,36),radius=3,outline=color,width=3)
                     d.line((5,14,35,14),fill=color,width=2)

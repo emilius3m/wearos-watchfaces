@@ -2,7 +2,7 @@
 
 Quadrante nativo Wear OS in Watch Face Format 2, pacchetto `com.local.watchface.syshud`. Ripristina la disposizione verticale richiesta: ore sopra i minuti a sinistra, secondi e salute a destra, previsioni e comandi in basso.
 
-La versione 5.0 realizza il mockup A scelto dall'utente: tre grandi pulsanti rotondi lungo un arco, con icona e nome **Agenda**, **Voce**, **Avvisi**. Ogni area di tocco misura 100 × 100 unità WFF: sul display misurato da 480 px e 340 dpi corrisponde a 106,67 px, cioè **50,20 dp**. Le aree sono separate, interamente nel display e non intercettate dalla scorciatoia meteo. Le due complicazioni laterali mantengono gli ID 0 e 1, così come la scorciatoia meteo configurabile mantiene l'ID 3.
+La versione 5.0 realizza il mockup A scelto dall'utente: tre grandi pulsanti rotondi lungo un arco, con icona e nome **Agenda**, **Voce**, **Avvisi**. I cerchi misurano 100 unità WFF: sul display misurato da 480 px e 340 dpi corrispondono a circa 106,67 px, cioè **50,20 dp**. Voce ha un'area sensibile più ampia (112 unità) per compensare le dimensioni non scalate dei Group riportate dall'accessibilità del runtime Samsung. Le aree sono separate, interamente nel display e non intercettate dalla scorciatoia meteo. Le due complicazioni laterali mantengono gli ID 0 e 1, così come la scorciatoia meteo configurabile mantiene l'ID 3.
 
 Per fare spazio ai tasti, le palette sono leggermente più compatte e ogni previsione presenta il simbolo accanto alle temperature. Restano disposizione verticale, animazione al cambio cifra, secondi sul bordo, tre giorni di previsioni e always-on a contorno.
 
@@ -12,7 +12,7 @@ Per fare spazio ai tasti, le palette sono leggermente più compatte e ogni previ
 - Solo le cifre che cambiano si ribaltano dall'alto. La metà superiore precedente ruota verso la cerniera e la nuova metà inferiore si apre in 600 ms. Gestiti anche 23:59 → 00:00 e i cambi delle decine.
 - Sessanta tacche sul bordo. Il secondo corrente ha una tacca luminosa più lunga e quattro tacche di scia attenuata; avanza di una posizione al secondo. Il numero piccolo a destra non ha un altro anello.
 - Battito con etichetta BPM, passi con etichetta PASSI e batteria con percentuale. Nessuna corona laterale ripetuta. Sotto il 20% la percentuale della batteria diventa rossa.
-- Previsioni per i prossimi tre giorni con giorno, simbolo, massima e minima. La legenda MAX / MIN esplicita l'ordine delle temperature. Il tocco usa la scorciatoia Meteo configurabile già presente nel progetto: selezionare Meteo Samsung come app associata se il quadrante viene installato per la prima volta.
+- Previsioni per i prossimi tre giorni con giorno, simbolo, massima e minima. La legenda MAX / MIN esplicita l'ordine delle temperature. Il tocco mantiene la scorciatoia Meteo configurabile del progetto; se lo slot non è assegnato, è previsto l'avvio di Meteo Samsung come destinazione predefinita.
 - I dati provengono dalle sorgenti native `WEATHER.*`. Se mancano, il quadrante mostra trattini. Un aggiornamento fallito conserva i dati disponibili e mostra l'orario dell'ultimo aggiornamento. Gestite tutte le 16 condizioni del formato.
 - Registratore Samsung al centro in basso; calendario e notifiche nelle due complicazioni modificabili. Restano le scorciatoie per cuore, passi e batteria. Un aggiornamento conserva le assegnazioni delle complicazioni scelte dall'utente.
 - Always-on: stessa disposizione delle cifre, solo contorni e data attenuata, senza secondi, animazioni, meteo o pulsanti. Non cambia l'impostazione AOD del Watch.
@@ -44,7 +44,7 @@ I file `preview-*` e `flip-preview.gif` sono rendering locali; i loro numeri met
 
 Il 14 novembre 2026: controlli di schema, risorse, firma e compilazione superati; verificati i sei cambi di cifra, la posizione dei secondi, l'AOD statico e i casi meteo. Ispezionate le anteprime. Il controllo `validate_touch.py` verifica le dimensioni minime di 48 dp, la separazione dei tasti, il margine circolare e l'assenza di sovrapposizione della scorciatoia meteo.
 
-Installazione e prova della versione 5.0 ancora da completare: il Watch ha chiuso il collegamento di debug dopo la lettura delle misure. Le impostazioni rilevate erano `ambient_enabled=0` e `ambient_force_when_docked=0`; non sono state modificate.
+La variante A 5.0 è stata installata e visualizzata il 14 novembre 2026: `device-initial-install.png` documenta la disposizione reale e i dati meteo disponibili. Il successivo APK, con padding aggiuntivo per Voce e destinazione meteo predefinita, resta da installare e verificare perché il collegamento si è nuovamente interrotto. Le impostazioni rilevate erano `ambient_enabled=0` e `ambient_force_when_docked=0`; non sono state modificate. Il Watch mostrava il risparmio energetico attivo.
 
 ## Verifiche storiche della versione 4.0
 

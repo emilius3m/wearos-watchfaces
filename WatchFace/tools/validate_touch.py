@@ -50,7 +50,7 @@ def main():
     report={'screen_px':args.pixels,'density_dpi':args.density,'minimum_target_dp':48,'targets':targets}
     out=ROOT/'design/round-buttons';out.mkdir(parents=True,exist_ok=True)
     (out/'touch-geometry.json').write_text(json.dumps(report,indent=2),encoding='utf-8')
-    print('PASS: three 50.20 dp hit areas, separate bounds, safe circular margins, no weather overlap.')
+    print('PASS: three hit areas above 48 dp, separate bounds, safe circular margins, no weather overlap.')
 
 
 if __name__=='__main__':main()

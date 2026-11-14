@@ -137,8 +137,8 @@ FACES = [
         slug='syshud',
         src=WATCH_PROJECTS / 'WatchFace',
         package='it.e3mcorp.watchface.syshud',
-        version_code='6',
-        version_name='5.0',
+        version_code='7',
+        version_name='5.1',
         title_en='APEX METEO',
         title_it='Palette Meteo',
         tagline='Vertical Split-Flap & 3-Day Forecast',
@@ -146,13 +146,13 @@ FACES = [
             'watch_face_name': 'APEX METEO',
             'a11y_time': '%1$s hours %2$s minutes',
             'a11y_voice': 'Open voice recorder',
-            'color_warm': 'Amber · Classic',
-            'theme_color_name': 'Accent',
-            'color_volt': 'Volt · Lime',
-            'color_ice': 'Ice · Frost',
-            'color_ember': 'Ember · Orange',
-            'color_white': 'Titanium · White',
-            'color_red': 'Pulse · Red',
+            'theme_color_name': 'Palette',
+            'color_warm': 'Amber · Ice',
+            'color_volt': 'Volt · Ivory',
+            'color_ice': 'Ice · Amber',
+            'color_ember': 'Ember · Ivory',
+            'color_white': 'Titanium · Mint',
+            'color_red': 'Ruby · Gold',
             'slot_left_name': 'Left Complication',
             'slot_right_name': 'Right Complication',
             'slot_shortcut_name': 'Bottom Shortcut',
@@ -162,13 +162,13 @@ FACES = [
             'watch_face_name': 'Palette Meteo',
             'a11y_time': 'Ore %1$s e %2$s minuti',
             'a11y_voice': 'Apri registratore vocale',
-            'color_warm': 'Ambra · Classico',
-            'theme_color_name': 'Accento',
-            'color_volt': 'Volt · Lime',
-            'color_ice': 'Ice · Ghiaccio',
-            'color_ember': 'Ember · Arancio',
-            'color_white': 'Titanium · Bianco',
-            'color_red': 'Pulse · Rosso',
+            'theme_color_name': 'Palette',
+            'color_warm': 'Ambra · Ghiaccio',
+            'color_volt': 'Volt · Avorio',
+            'color_ice': 'Ghiaccio · Ambra',
+            'color_ember': 'Ember · Avorio',
+            'color_white': 'Titanio · Menta',
+            'color_red': 'Rubino · Oro',
             'slot_left_name': 'Scorciatoia sinistra',
             'slot_right_name': 'Scorciatoia destra',
             'slot_shortcut_name': 'Scorciatoia centrale',
@@ -340,8 +340,7 @@ def transform_watchface_xml(slug, xml_path: Path):
             'PASSI': 'STEPS',
             'Avvisi': 'Alerts',
             'METEO NON DISPONIBILE': 'WEATHER UNAVAILABLE',
-            'PROSSIMI 3 GIORNI · MAX / MIN': '3-DAY FORECAST · MAX / MIN',
-            'Da aggiornare · %s · MAX / MIN': 'Updated · %s · MAX / MIN',
+            'Da aggiornare · %s': 'Updated · %s',
             'Domani': '+1 DAY',
             'Tra 2 giorni': '+2 DAYS',
             'Tra 3 giorni': '+3 DAYS',
@@ -478,12 +477,15 @@ def generate_store_assets(spec, stage_dir: Path):
         now = datetime(2026, 11, 13, 9, 27, 36)
         r_main = PF.Renderer(now, ambient=False, weather=True)
         r_main.data['CONFIGURATION.verticalPalette.0'] = '#FFD5FF45'
+        r_main.data['CONFIGURATION.verticalPalette.1'] = '#FFF3ECDD'
         main_im = r_main.render()
         r_warm = PF.Renderer(now, ambient=False, weather=True)
         r_warm.data['CONFIGURATION.verticalPalette.0'] = '#FFFFBE78'
+        r_warm.data['CONFIGURATION.verticalPalette.1'] = '#FF9CDCF0'
         alt_im = r_warm.render()
         r_ice = PF.Renderer(now, ambient=False, weather=True)
         r_ice.data['CONFIGURATION.verticalPalette.0'] = '#FF9CDCF0'
+        r_ice.data['CONFIGURATION.verticalPalette.1'] = '#FFFFBE78'
         alt2_im = r_ice.render()
         aod_im = PF.Renderer(now, ambient=True, weather=False).render()
         sys.path.pop(0)

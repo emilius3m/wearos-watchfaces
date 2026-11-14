@@ -2,11 +2,12 @@
 <WatchFace width="450" height="450" clipShape="CIRCLE">
     <UserConfigurations>
         <ColorConfiguration id="verticalPalette" displayName="theme_color_name" defaultValue="volt">
-            <ColorOption id="volt" displayName="color_volt" colors="#FFD5FF45"/>
-            <ColorOption id="warm" displayName="color_warm" colors="#FFFFBE78"/>
-            <ColorOption id="ice" displayName="color_ice" colors="#FF9CDCF0"/>
-            <ColorOption id="red" displayName="color_red" colors="#FFFF7479"/>
-            <ColorOption id="white" displayName="color_white" colors="#FFE8E3D9"/>
+            <ColorOption id="volt" displayName="color_volt" colors="#FFD5FF45 #FFF3ECDD"/>
+            <ColorOption id="warm" displayName="color_warm" colors="#FFFFBE78 #FF9CDCF0"/>
+            <ColorOption id="ice" displayName="color_ice" colors="#FF9CDCF0 #FFFFBE78"/>
+            <ColorOption id="ember" displayName="color_ember" colors="#FFFF9254 #FFF3ECDD"/>
+            <ColorOption id="red" displayName="color_red" colors="#FFFF7479 #FFFFD670"/>
+            <ColorOption id="white" displayName="color_white" colors="#FFE8E3D9 #FF6EE7B7"/>
         </ColorConfiguration>
     </UserConfigurations>
     <Scene backgroundColor="#FF000000">
@@ -257,7 +258,7 @@
                                 <PartImage x="0" y="0" width="70" height="76">
                                     <Image resource="flip_card"/>
                                 </PartImage>
-                                <PartImage x="0" y="0" width="70" height="76" tintColor="#FFF3ECDD">
+                                <PartImage x="0" y="0" width="70" height="76" tintColor="[CONFIGURATION.verticalPalette.1]">
                                     <Image resource="flip_0"/>
                                 </PartImage>
                             </Group>
@@ -271,7 +272,7 @@
                                             <PartImage x="0" y="0" width="70" height="38">
                                                 <Image resource="flip_card_bottom"/>
                                             </PartImage>
-                                            <PartImage x="0" y="0" width="70" height="38" tintColor="#FFF3ECDD">
+                                            <PartImage x="0" y="0" width="70" height="38" tintColor="[CONFIGURATION.verticalPalette.1]">
                                                 <Image resource="flip_bottom_2"/>
                                             </PartImage>
                                         </Group>
@@ -279,7 +280,7 @@
                                             <PartImage x="0" y="0" width="70" height="38">
                                                 <Image resource="flip_card_top"/>
                                             </PartImage>
-                                            <PartImage x="0" y="0" width="70" height="38" tintColor="#FFF3ECDD">
+                                            <PartImage x="0" y="0" width="70" height="38" tintColor="[CONFIGURATION.verticalPalette.1]">
                                                 <Image resource="flip_top_2"/>
                                             </PartImage>
                                             <Transform target="scaleY" value="cos(rad(90 * clamp([MILLISECOND] / 260, 0, 1)))"/>
@@ -293,7 +294,7 @@
                                             <PartImage x="0" y="0" width="70" height="38">
                                                 <Image resource="flip_card_bottom"/>
                                             </PartImage>
-                                            <PartImage x="0" y="0" width="70" height="38" tintColor="#FFF3ECDD">
+                                            <PartImage x="0" y="0" width="70" height="38" tintColor="[CONFIGURATION.verticalPalette.1]">
                                                 <Image resource="flip_bottom_0"/>
                                             </PartImage>
                                             <Transform target="scaleY" value="sin(rad(90 * clamp(([MILLISECOND] - 260) / 340, 0, 1)))"/>
@@ -314,7 +315,7 @@
                                 <PartImage x="0" y="0" width="70" height="76">
                                     <Image resource="flip_card"/>
                                 </PartImage>
-                                <PartImage x="0" y="0" width="70" height="76" tintColor="#FFF3ECDD">
+                                <PartImage x="0" y="0" width="70" height="76" tintColor="[CONFIGURATION.verticalPalette.1]">
                                     <Image resource="flip_1"/>
                                 </PartImage>
                             </Group>
@@ -328,7 +329,7 @@
                                             <PartImage x="0" y="0" width="70" height="38">
                                                 <Image resource="flip_card_bottom"/>
                                             </PartImage>
-                                            <PartImage x="0" y="0" width="70" height="38" tintColor="#FFF3ECDD">
+                                            <PartImage x="0" y="0" width="70" height="38" tintColor="[CONFIGURATION.verticalPalette.1]">
                                                 <Image resource="flip_bottom_0"/>
                                             </PartImage>
                                         </Group>
@@ -336,7 +337,7 @@
                                             <PartImage x="0" y="0" width="70" height="38">
                                                 <Image resource="flip_card_top"/>
                                             </PartImage>
-                                            <PartImage x="0" y="0" width="70" height="38" tintColor="#FFF3ECDD">
+                                            <PartImage x="0" y="0" width="70" height="38" tintColor="[CONFIGURATION.verticalPalette.1]">
                                                 <Image resource="flip_top_0"/>
                                             </PartImage>
                                             <Transform target="scaleY" value="cos(rad(90 * clamp([MILLISECOND] / 260, 0, 1)))"/>
@@ -350,7 +351,7 @@
                                             <PartImage x="0" y="0" width="70" height="38">
                                                 <Image resource="flip_card_bottom"/>
                                             </PartImage>
-                                            <PartImage x="0" y="0" width="70" height="38" tintColor="#FFF3ECDD">
+                                            <PartImage x="0" y="0" width="70" height="38" tintColor="[CONFIGURATION.verticalPalette.1]">
                                                 <Image resource="flip_bottom_1"/>
                                             </PartImage>
                                             <Transform target="scaleY" value="sin(rad(90 * clamp(([MILLISECOND] - 260) / 340, 0, 1)))"/>
@@ -371,7 +372,7 @@
                                 <PartImage x="0" y="0" width="70" height="76">
                                     <Image resource="flip_card"/>
                                 </PartImage>
-                                <PartImage x="0" y="0" width="70" height="76" tintColor="#FFF3ECDD">
+                                <PartImage x="0" y="0" width="70" height="76" tintColor="[CONFIGURATION.verticalPalette.1]">
                                     <Image resource="flip_2"/>
                                 </PartImage>
                             </Group>
@@ -385,7 +386,7 @@
                                             <PartImage x="0" y="0" width="70" height="38">
                                                 <Image resource="flip_card_bottom"/>
                                             </PartImage>
-                                            <PartImage x="0" y="0" width="70" height="38" tintColor="#FFF3ECDD">
+                                            <PartImage x="0" y="0" width="70" height="38" tintColor="[CONFIGURATION.verticalPalette.1]">
                                                 <Image resource="flip_bottom_1"/>
                                             </PartImage>
                                         </Group>
@@ -393,7 +394,7 @@
                                             <PartImage x="0" y="0" width="70" height="38">
                                                 <Image resource="flip_card_top"/>
                                             </PartImage>
-                                            <PartImage x="0" y="0" width="70" height="38" tintColor="#FFF3ECDD">
+                                            <PartImage x="0" y="0" width="70" height="38" tintColor="[CONFIGURATION.verticalPalette.1]">
                                                 <Image resource="flip_top_1"/>
                                             </PartImage>
                                             <Transform target="scaleY" value="cos(rad(90 * clamp([MILLISECOND] / 260, 0, 1)))"/>
@@ -407,7 +408,7 @@
                                             <PartImage x="0" y="0" width="70" height="38">
                                                 <Image resource="flip_card_bottom"/>
                                             </PartImage>
-                                            <PartImage x="0" y="0" width="70" height="38" tintColor="#FFF3ECDD">
+                                            <PartImage x="0" y="0" width="70" height="38" tintColor="[CONFIGURATION.verticalPalette.1]">
                                                 <Image resource="flip_bottom_2"/>
                                             </PartImage>
                                             <Transform target="scaleY" value="sin(rad(90 * clamp(([MILLISECOND] - 260) / 340, 0, 1)))"/>
@@ -458,7 +459,7 @@
                                 <PartImage x="0" y="0" width="70" height="76">
                                     <Image resource="flip_card"/>
                                 </PartImage>
-                                <PartImage x="0" y="0" width="70" height="76" tintColor="#FFF3ECDD">
+                                <PartImage x="0" y="0" width="70" height="76" tintColor="[CONFIGURATION.verticalPalette.1]">
                                     <Image resource="flip_0"/>
                                 </PartImage>
                             </Group>
@@ -478,7 +479,7 @@
                                                         <PartImage x="0" y="0" width="70" height="38">
                                                             <Image resource="flip_card_bottom"/>
                                                         </PartImage>
-                                                        <PartImage x="0" y="0" width="70" height="38" tintColor="#FFF3ECDD">
+                                                        <PartImage x="0" y="0" width="70" height="38" tintColor="[CONFIGURATION.verticalPalette.1]">
                                                             <Image resource="flip_bottom_3"/>
                                                         </PartImage>
                                                     </Group>
@@ -486,7 +487,7 @@
                                                         <PartImage x="0" y="0" width="70" height="38">
                                                             <Image resource="flip_card_top"/>
                                                         </PartImage>
-                                                        <PartImage x="0" y="0" width="70" height="38" tintColor="#FFF3ECDD">
+                                                        <PartImage x="0" y="0" width="70" height="38" tintColor="[CONFIGURATION.verticalPalette.1]">
                                                             <Image resource="flip_top_3"/>
                                                         </PartImage>
                                                         <Transform target="scaleY" value="cos(rad(90 * clamp([MILLISECOND] / 260, 0, 1)))"/>
@@ -500,7 +501,7 @@
                                                         <PartImage x="0" y="0" width="70" height="38">
                                                             <Image resource="flip_card_bottom"/>
                                                         </PartImage>
-                                                        <PartImage x="0" y="0" width="70" height="38" tintColor="#FFF3ECDD">
+                                                        <PartImage x="0" y="0" width="70" height="38" tintColor="[CONFIGURATION.verticalPalette.1]">
                                                             <Image resource="flip_bottom_0"/>
                                                         </PartImage>
                                                         <Transform target="scaleY" value="sin(rad(90 * clamp(([MILLISECOND] - 260) / 340, 0, 1)))"/>
@@ -518,7 +519,7 @@
                                                         <PartImage x="0" y="0" width="70" height="38">
                                                             <Image resource="flip_card_bottom"/>
                                                         </PartImage>
-                                                        <PartImage x="0" y="0" width="70" height="38" tintColor="#FFF3ECDD">
+                                                        <PartImage x="0" y="0" width="70" height="38" tintColor="[CONFIGURATION.verticalPalette.1]">
                                                             <Image resource="flip_bottom_9"/>
                                                         </PartImage>
                                                     </Group>
@@ -526,7 +527,7 @@
                                                         <PartImage x="0" y="0" width="70" height="38">
                                                             <Image resource="flip_card_top"/>
                                                         </PartImage>
-                                                        <PartImage x="0" y="0" width="70" height="38" tintColor="#FFF3ECDD">
+                                                        <PartImage x="0" y="0" width="70" height="38" tintColor="[CONFIGURATION.verticalPalette.1]">
                                                             <Image resource="flip_top_9"/>
                                                         </PartImage>
                                                         <Transform target="scaleY" value="cos(rad(90 * clamp([MILLISECOND] / 260, 0, 1)))"/>
@@ -540,7 +541,7 @@
                                                         <PartImage x="0" y="0" width="70" height="38">
                                                             <Image resource="flip_card_bottom"/>
                                                         </PartImage>
-                                                        <PartImage x="0" y="0" width="70" height="38" tintColor="#FFF3ECDD">
+                                                        <PartImage x="0" y="0" width="70" height="38" tintColor="[CONFIGURATION.verticalPalette.1]">
                                                             <Image resource="flip_bottom_0"/>
                                                         </PartImage>
                                                         <Transform target="scaleY" value="sin(rad(90 * clamp(([MILLISECOND] - 260) / 340, 0, 1)))"/>
@@ -564,7 +565,7 @@
                                 <PartImage x="0" y="0" width="70" height="76">
                                     <Image resource="flip_card"/>
                                 </PartImage>
-                                <PartImage x="0" y="0" width="70" height="76" tintColor="#FFF3ECDD">
+                                <PartImage x="0" y="0" width="70" height="76" tintColor="[CONFIGURATION.verticalPalette.1]">
                                     <Image resource="flip_1"/>
                                 </PartImage>
                             </Group>
@@ -578,7 +579,7 @@
                                             <PartImage x="0" y="0" width="70" height="38">
                                                 <Image resource="flip_card_bottom"/>
                                             </PartImage>
-                                            <PartImage x="0" y="0" width="70" height="38" tintColor="#FFF3ECDD">
+                                            <PartImage x="0" y="0" width="70" height="38" tintColor="[CONFIGURATION.verticalPalette.1]">
                                                 <Image resource="flip_bottom_0"/>
                                             </PartImage>
                                         </Group>
@@ -586,7 +587,7 @@
                                             <PartImage x="0" y="0" width="70" height="38">
                                                 <Image resource="flip_card_top"/>
                                             </PartImage>
-                                            <PartImage x="0" y="0" width="70" height="38" tintColor="#FFF3ECDD">
+                                            <PartImage x="0" y="0" width="70" height="38" tintColor="[CONFIGURATION.verticalPalette.1]">
                                                 <Image resource="flip_top_0"/>
                                             </PartImage>
                                             <Transform target="scaleY" value="cos(rad(90 * clamp([MILLISECOND] / 260, 0, 1)))"/>
@@ -600,7 +601,7 @@
                                             <PartImage x="0" y="0" width="70" height="38">
                                                 <Image resource="flip_card_bottom"/>
                                             </PartImage>
-                                            <PartImage x="0" y="0" width="70" height="38" tintColor="#FFF3ECDD">
+                                            <PartImage x="0" y="0" width="70" height="38" tintColor="[CONFIGURATION.verticalPalette.1]">
                                                 <Image resource="flip_bottom_1"/>
                                             </PartImage>
                                             <Transform target="scaleY" value="sin(rad(90 * clamp(([MILLISECOND] - 260) / 340, 0, 1)))"/>
@@ -621,7 +622,7 @@
                                 <PartImage x="0" y="0" width="70" height="76">
                                     <Image resource="flip_card"/>
                                 </PartImage>
-                                <PartImage x="0" y="0" width="70" height="76" tintColor="#FFF3ECDD">
+                                <PartImage x="0" y="0" width="70" height="76" tintColor="[CONFIGURATION.verticalPalette.1]">
                                     <Image resource="flip_2"/>
                                 </PartImage>
                             </Group>
@@ -635,7 +636,7 @@
                                             <PartImage x="0" y="0" width="70" height="38">
                                                 <Image resource="flip_card_bottom"/>
                                             </PartImage>
-                                            <PartImage x="0" y="0" width="70" height="38" tintColor="#FFF3ECDD">
+                                            <PartImage x="0" y="0" width="70" height="38" tintColor="[CONFIGURATION.verticalPalette.1]">
                                                 <Image resource="flip_bottom_1"/>
                                             </PartImage>
                                         </Group>
@@ -643,7 +644,7 @@
                                             <PartImage x="0" y="0" width="70" height="38">
                                                 <Image resource="flip_card_top"/>
                                             </PartImage>
-                                            <PartImage x="0" y="0" width="70" height="38" tintColor="#FFF3ECDD">
+                                            <PartImage x="0" y="0" width="70" height="38" tintColor="[CONFIGURATION.verticalPalette.1]">
                                                 <Image resource="flip_top_1"/>
                                             </PartImage>
                                             <Transform target="scaleY" value="cos(rad(90 * clamp([MILLISECOND] / 260, 0, 1)))"/>
@@ -657,7 +658,7 @@
                                             <PartImage x="0" y="0" width="70" height="38">
                                                 <Image resource="flip_card_bottom"/>
                                             </PartImage>
-                                            <PartImage x="0" y="0" width="70" height="38" tintColor="#FFF3ECDD">
+                                            <PartImage x="0" y="0" width="70" height="38" tintColor="[CONFIGURATION.verticalPalette.1]">
                                                 <Image resource="flip_bottom_2"/>
                                             </PartImage>
                                             <Transform target="scaleY" value="sin(rad(90 * clamp(([MILLISECOND] - 260) / 340, 0, 1)))"/>
@@ -678,7 +679,7 @@
                                 <PartImage x="0" y="0" width="70" height="76">
                                     <Image resource="flip_card"/>
                                 </PartImage>
-                                <PartImage x="0" y="0" width="70" height="76" tintColor="#FFF3ECDD">
+                                <PartImage x="0" y="0" width="70" height="76" tintColor="[CONFIGURATION.verticalPalette.1]">
                                     <Image resource="flip_3"/>
                                 </PartImage>
                             </Group>
@@ -692,7 +693,7 @@
                                             <PartImage x="0" y="0" width="70" height="38">
                                                 <Image resource="flip_card_bottom"/>
                                             </PartImage>
-                                            <PartImage x="0" y="0" width="70" height="38" tintColor="#FFF3ECDD">
+                                            <PartImage x="0" y="0" width="70" height="38" tintColor="[CONFIGURATION.verticalPalette.1]">
                                                 <Image resource="flip_bottom_2"/>
                                             </PartImage>
                                         </Group>
@@ -700,7 +701,7 @@
                                             <PartImage x="0" y="0" width="70" height="38">
                                                 <Image resource="flip_card_top"/>
                                             </PartImage>
-                                            <PartImage x="0" y="0" width="70" height="38" tintColor="#FFF3ECDD">
+                                            <PartImage x="0" y="0" width="70" height="38" tintColor="[CONFIGURATION.verticalPalette.1]">
                                                 <Image resource="flip_top_2"/>
                                             </PartImage>
                                             <Transform target="scaleY" value="cos(rad(90 * clamp([MILLISECOND] / 260, 0, 1)))"/>
@@ -714,7 +715,7 @@
                                             <PartImage x="0" y="0" width="70" height="38">
                                                 <Image resource="flip_card_bottom"/>
                                             </PartImage>
-                                            <PartImage x="0" y="0" width="70" height="38" tintColor="#FFF3ECDD">
+                                            <PartImage x="0" y="0" width="70" height="38" tintColor="[CONFIGURATION.verticalPalette.1]">
                                                 <Image resource="flip_bottom_3"/>
                                             </PartImage>
                                             <Transform target="scaleY" value="sin(rad(90 * clamp(([MILLISECOND] - 260) / 340, 0, 1)))"/>
@@ -735,7 +736,7 @@
                                 <PartImage x="0" y="0" width="70" height="76">
                                     <Image resource="flip_card"/>
                                 </PartImage>
-                                <PartImage x="0" y="0" width="70" height="76" tintColor="#FFF3ECDD">
+                                <PartImage x="0" y="0" width="70" height="76" tintColor="[CONFIGURATION.verticalPalette.1]">
                                     <Image resource="flip_4"/>
                                 </PartImage>
                             </Group>
@@ -749,7 +750,7 @@
                                             <PartImage x="0" y="0" width="70" height="38">
                                                 <Image resource="flip_card_bottom"/>
                                             </PartImage>
-                                            <PartImage x="0" y="0" width="70" height="38" tintColor="#FFF3ECDD">
+                                            <PartImage x="0" y="0" width="70" height="38" tintColor="[CONFIGURATION.verticalPalette.1]">
                                                 <Image resource="flip_bottom_3"/>
                                             </PartImage>
                                         </Group>
@@ -757,7 +758,7 @@
                                             <PartImage x="0" y="0" width="70" height="38">
                                                 <Image resource="flip_card_top"/>
                                             </PartImage>
-                                            <PartImage x="0" y="0" width="70" height="38" tintColor="#FFF3ECDD">
+                                            <PartImage x="0" y="0" width="70" height="38" tintColor="[CONFIGURATION.verticalPalette.1]">
                                                 <Image resource="flip_top_3"/>
                                             </PartImage>
                                             <Transform target="scaleY" value="cos(rad(90 * clamp([MILLISECOND] / 260, 0, 1)))"/>
@@ -771,7 +772,7 @@
                                             <PartImage x="0" y="0" width="70" height="38">
                                                 <Image resource="flip_card_bottom"/>
                                             </PartImage>
-                                            <PartImage x="0" y="0" width="70" height="38" tintColor="#FFF3ECDD">
+                                            <PartImage x="0" y="0" width="70" height="38" tintColor="[CONFIGURATION.verticalPalette.1]">
                                                 <Image resource="flip_bottom_4"/>
                                             </PartImage>
                                             <Transform target="scaleY" value="sin(rad(90 * clamp(([MILLISECOND] - 260) / 340, 0, 1)))"/>
@@ -792,7 +793,7 @@
                                 <PartImage x="0" y="0" width="70" height="76">
                                     <Image resource="flip_card"/>
                                 </PartImage>
-                                <PartImage x="0" y="0" width="70" height="76" tintColor="#FFF3ECDD">
+                                <PartImage x="0" y="0" width="70" height="76" tintColor="[CONFIGURATION.verticalPalette.1]">
                                     <Image resource="flip_5"/>
                                 </PartImage>
                             </Group>
@@ -806,7 +807,7 @@
                                             <PartImage x="0" y="0" width="70" height="38">
                                                 <Image resource="flip_card_bottom"/>
                                             </PartImage>
-                                            <PartImage x="0" y="0" width="70" height="38" tintColor="#FFF3ECDD">
+                                            <PartImage x="0" y="0" width="70" height="38" tintColor="[CONFIGURATION.verticalPalette.1]">
                                                 <Image resource="flip_bottom_4"/>
                                             </PartImage>
                                         </Group>
@@ -814,7 +815,7 @@
                                             <PartImage x="0" y="0" width="70" height="38">
                                                 <Image resource="flip_card_top"/>
                                             </PartImage>
-                                            <PartImage x="0" y="0" width="70" height="38" tintColor="#FFF3ECDD">
+                                            <PartImage x="0" y="0" width="70" height="38" tintColor="[CONFIGURATION.verticalPalette.1]">
                                                 <Image resource="flip_top_4"/>
                                             </PartImage>
                                             <Transform target="scaleY" value="cos(rad(90 * clamp([MILLISECOND] / 260, 0, 1)))"/>
@@ -828,7 +829,7 @@
                                             <PartImage x="0" y="0" width="70" height="38">
                                                 <Image resource="flip_card_bottom"/>
                                             </PartImage>
-                                            <PartImage x="0" y="0" width="70" height="38" tintColor="#FFF3ECDD">
+                                            <PartImage x="0" y="0" width="70" height="38" tintColor="[CONFIGURATION.verticalPalette.1]">
                                                 <Image resource="flip_bottom_5"/>
                                             </PartImage>
                                             <Transform target="scaleY" value="sin(rad(90 * clamp(([MILLISECOND] - 260) / 340, 0, 1)))"/>
@@ -849,7 +850,7 @@
                                 <PartImage x="0" y="0" width="70" height="76">
                                     <Image resource="flip_card"/>
                                 </PartImage>
-                                <PartImage x="0" y="0" width="70" height="76" tintColor="#FFF3ECDD">
+                                <PartImage x="0" y="0" width="70" height="76" tintColor="[CONFIGURATION.verticalPalette.1]">
                                     <Image resource="flip_6"/>
                                 </PartImage>
                             </Group>
@@ -863,7 +864,7 @@
                                             <PartImage x="0" y="0" width="70" height="38">
                                                 <Image resource="flip_card_bottom"/>
                                             </PartImage>
-                                            <PartImage x="0" y="0" width="70" height="38" tintColor="#FFF3ECDD">
+                                            <PartImage x="0" y="0" width="70" height="38" tintColor="[CONFIGURATION.verticalPalette.1]">
                                                 <Image resource="flip_bottom_5"/>
                                             </PartImage>
                                         </Group>
@@ -871,7 +872,7 @@
                                             <PartImage x="0" y="0" width="70" height="38">
                                                 <Image resource="flip_card_top"/>
                                             </PartImage>
-                                            <PartImage x="0" y="0" width="70" height="38" tintColor="#FFF3ECDD">
+                                            <PartImage x="0" y="0" width="70" height="38" tintColor="[CONFIGURATION.verticalPalette.1]">
                                                 <Image resource="flip_top_5"/>
                                             </PartImage>
                                             <Transform target="scaleY" value="cos(rad(90 * clamp([MILLISECOND] / 260, 0, 1)))"/>
@@ -885,7 +886,7 @@
                                             <PartImage x="0" y="0" width="70" height="38">
                                                 <Image resource="flip_card_bottom"/>
                                             </PartImage>
-                                            <PartImage x="0" y="0" width="70" height="38" tintColor="#FFF3ECDD">
+                                            <PartImage x="0" y="0" width="70" height="38" tintColor="[CONFIGURATION.verticalPalette.1]">
                                                 <Image resource="flip_bottom_6"/>
                                             </PartImage>
                                             <Transform target="scaleY" value="sin(rad(90 * clamp(([MILLISECOND] - 260) / 340, 0, 1)))"/>
@@ -906,7 +907,7 @@
                                 <PartImage x="0" y="0" width="70" height="76">
                                     <Image resource="flip_card"/>
                                 </PartImage>
-                                <PartImage x="0" y="0" width="70" height="76" tintColor="#FFF3ECDD">
+                                <PartImage x="0" y="0" width="70" height="76" tintColor="[CONFIGURATION.verticalPalette.1]">
                                     <Image resource="flip_7"/>
                                 </PartImage>
                             </Group>
@@ -920,7 +921,7 @@
                                             <PartImage x="0" y="0" width="70" height="38">
                                                 <Image resource="flip_card_bottom"/>
                                             </PartImage>
-                                            <PartImage x="0" y="0" width="70" height="38" tintColor="#FFF3ECDD">
+                                            <PartImage x="0" y="0" width="70" height="38" tintColor="[CONFIGURATION.verticalPalette.1]">
                                                 <Image resource="flip_bottom_6"/>
                                             </PartImage>
                                         </Group>
@@ -928,7 +929,7 @@
                                             <PartImage x="0" y="0" width="70" height="38">
                                                 <Image resource="flip_card_top"/>
                                             </PartImage>
-                                            <PartImage x="0" y="0" width="70" height="38" tintColor="#FFF3ECDD">
+                                            <PartImage x="0" y="0" width="70" height="38" tintColor="[CONFIGURATION.verticalPalette.1]">
                                                 <Image resource="flip_top_6"/>
                                             </PartImage>
                                             <Transform target="scaleY" value="cos(rad(90 * clamp([MILLISECOND] / 260, 0, 1)))"/>
@@ -942,7 +943,7 @@
                                             <PartImage x="0" y="0" width="70" height="38">
                                                 <Image resource="flip_card_bottom"/>
                                             </PartImage>
-                                            <PartImage x="0" y="0" width="70" height="38" tintColor="#FFF3ECDD">
+                                            <PartImage x="0" y="0" width="70" height="38" tintColor="[CONFIGURATION.verticalPalette.1]">
                                                 <Image resource="flip_bottom_7"/>
                                             </PartImage>
                                             <Transform target="scaleY" value="sin(rad(90 * clamp(([MILLISECOND] - 260) / 340, 0, 1)))"/>
@@ -963,7 +964,7 @@
                                 <PartImage x="0" y="0" width="70" height="76">
                                     <Image resource="flip_card"/>
                                 </PartImage>
-                                <PartImage x="0" y="0" width="70" height="76" tintColor="#FFF3ECDD">
+                                <PartImage x="0" y="0" width="70" height="76" tintColor="[CONFIGURATION.verticalPalette.1]">
                                     <Image resource="flip_8"/>
                                 </PartImage>
                             </Group>
@@ -977,7 +978,7 @@
                                             <PartImage x="0" y="0" width="70" height="38">
                                                 <Image resource="flip_card_bottom"/>
                                             </PartImage>
-                                            <PartImage x="0" y="0" width="70" height="38" tintColor="#FFF3ECDD">
+                                            <PartImage x="0" y="0" width="70" height="38" tintColor="[CONFIGURATION.verticalPalette.1]">
                                                 <Image resource="flip_bottom_7"/>
                                             </PartImage>
                                         </Group>
@@ -985,7 +986,7 @@
                                             <PartImage x="0" y="0" width="70" height="38">
                                                 <Image resource="flip_card_top"/>
                                             </PartImage>
-                                            <PartImage x="0" y="0" width="70" height="38" tintColor="#FFF3ECDD">
+                                            <PartImage x="0" y="0" width="70" height="38" tintColor="[CONFIGURATION.verticalPalette.1]">
                                                 <Image resource="flip_top_7"/>
                                             </PartImage>
                                             <Transform target="scaleY" value="cos(rad(90 * clamp([MILLISECOND] / 260, 0, 1)))"/>
@@ -999,7 +1000,7 @@
                                             <PartImage x="0" y="0" width="70" height="38">
                                                 <Image resource="flip_card_bottom"/>
                                             </PartImage>
-                                            <PartImage x="0" y="0" width="70" height="38" tintColor="#FFF3ECDD">
+                                            <PartImage x="0" y="0" width="70" height="38" tintColor="[CONFIGURATION.verticalPalette.1]">
                                                 <Image resource="flip_bottom_8"/>
                                             </PartImage>
                                             <Transform target="scaleY" value="sin(rad(90 * clamp(([MILLISECOND] - 260) / 340, 0, 1)))"/>
@@ -1020,7 +1021,7 @@
                                 <PartImage x="0" y="0" width="70" height="76">
                                     <Image resource="flip_card"/>
                                 </PartImage>
-                                <PartImage x="0" y="0" width="70" height="76" tintColor="#FFF3ECDD">
+                                <PartImage x="0" y="0" width="70" height="76" tintColor="[CONFIGURATION.verticalPalette.1]">
                                     <Image resource="flip_9"/>
                                 </PartImage>
                             </Group>
@@ -1034,7 +1035,7 @@
                                             <PartImage x="0" y="0" width="70" height="38">
                                                 <Image resource="flip_card_bottom"/>
                                             </PartImage>
-                                            <PartImage x="0" y="0" width="70" height="38" tintColor="#FFF3ECDD">
+                                            <PartImage x="0" y="0" width="70" height="38" tintColor="[CONFIGURATION.verticalPalette.1]">
                                                 <Image resource="flip_bottom_8"/>
                                             </PartImage>
                                         </Group>
@@ -1042,7 +1043,7 @@
                                             <PartImage x="0" y="0" width="70" height="38">
                                                 <Image resource="flip_card_top"/>
                                             </PartImage>
-                                            <PartImage x="0" y="0" width="70" height="38" tintColor="#FFF3ECDD">
+                                            <PartImage x="0" y="0" width="70" height="38" tintColor="[CONFIGURATION.verticalPalette.1]">
                                                 <Image resource="flip_top_8"/>
                                             </PartImage>
                                             <Transform target="scaleY" value="cos(rad(90 * clamp([MILLISECOND] / 260, 0, 1)))"/>
@@ -1056,7 +1057,7 @@
                                             <PartImage x="0" y="0" width="70" height="38">
                                                 <Image resource="flip_card_bottom"/>
                                             </PartImage>
-                                            <PartImage x="0" y="0" width="70" height="38" tintColor="#FFF3ECDD">
+                                            <PartImage x="0" y="0" width="70" height="38" tintColor="[CONFIGURATION.verticalPalette.1]">
                                                 <Image resource="flip_bottom_9"/>
                                             </PartImage>
                                             <Transform target="scaleY" value="sin(rad(90 * clamp(([MILLISECOND] - 260) / 340, 0, 1)))"/>
@@ -2424,7 +2425,7 @@
                 </Expressions>
                 <Compare expression="enabled">
                     <Group name="flip_group_231" x="0" y="0" width="330" height="52">
-                        <Group name="flip_group_232" x="7" y="12" width="100" height="40">
+                        <Group name="flip_group_232" x="7" y="10" width="100" height="40">
                             <PartText x="0" y="0" width="100" height="17">
                                 <Text align="CENTER" maxLines="1" ellipsis="TRUE">
                                     <Font family="SYNC_TO_DEVICE" size="14" color="#FFB7B0A4" weight="MEDIUM">+1 DAY</Font>
@@ -2897,7 +2898,7 @@
                                 </Default>
                             </Condition>
                         </Group>
-                        <Group name="flip_group_252" x="115" y="12" width="100" height="40">
+                        <Group name="flip_group_252" x="115" y="10" width="100" height="40">
                             <PartText x="0" y="0" width="100" height="17">
                                 <Text align="CENTER" maxLines="1" ellipsis="TRUE">
                                     <Font family="SYNC_TO_DEVICE" size="14" color="#FFB7B0A4" weight="MEDIUM"><Template>%s<Parameter expression="icuText(&quot;EEE d&quot;, [UTC_TIMESTAMP] - [SECONDS_IN_DAY] * 1000 - [MILLISECOND] + 216000000)"/></Template></Font>
@@ -3370,7 +3371,7 @@
                                 </Default>
                             </Condition>
                         </Group>
-                        <Group name="flip_group_272" x="223" y="12" width="100" height="40">
+                        <Group name="flip_group_272" x="223" y="10" width="100" height="40">
                             <PartText x="0" y="0" width="100" height="17">
                                 <Text align="CENTER" maxLines="1" ellipsis="TRUE">
                                     <Font family="SYNC_TO_DEVICE" size="14" color="#FFB7B0A4" weight="MEDIUM"><Template>%s<Parameter expression="icuText(&quot;EEE d&quot;, [UTC_TIMESTAMP] - [SECONDS_IN_DAY] * 1000 - [MILLISECOND] + 302400000)"/></Template></Font>
@@ -3848,19 +3849,12 @@
                                 <Expression name="enabled">[WEATHER.IS_ERROR]</Expression>
                             </Expressions>
                             <Compare expression="enabled">
-                                <PartText x="20" y="0" width="290" height="12">
+                                <PartText x="20" y="0" width="290" height="10">
                                     <Text align="CENTER" maxLines="1" ellipsis="TRUE">
-                                        <Font family="SYNC_TO_DEVICE" size="9" color="[CONFIGURATION.verticalPalette.0]" weight="MEDIUM"><Template>Updated · %s · MAX / MIN<Parameter expression="icuText(&quot;HH:mm&quot;, [WEATHER.LAST_UPDATED])"/></Template></Font>
+                                        <Font family="SYNC_TO_DEVICE" size="9" color="[CONFIGURATION.verticalPalette.0]" weight="MEDIUM"><Template>Updated · %s<Parameter expression="icuText(&quot;HH:mm&quot;, [WEATHER.LAST_UPDATED])"/></Template></Font>
                                     </Text>
                                 </PartText>
                             </Compare>
-                            <Default>
-                                <PartText x="20" y="0" width="290" height="12">
-                                    <Text align="CENTER" maxLines="1" ellipsis="TRUE">
-                                        <Font family="SYNC_TO_DEVICE" size="9" color="#FFB7B0A4" weight="MEDIUM">3-DAY FORECAST · MAX / MIN</Font>
-                                    </Text>
-                                </PartText>
-                            </Default>
                         </Condition>
                     </Group>
                 </Compare>
@@ -3926,10 +3920,10 @@
                 </Default>
             </Condition>
             <PartDraw x="0" y="0" width="330" height="52">
-                <Line startX="111" startY="17" endX="111" endY="49">
+                <Line startX="111" startY="14" endX="111" endY="46">
                     <Stroke color="#FF242824" thickness="0.7" cap="ROUND"/>
                 </Line>
-                <Line startX="219" startY="17" endX="219" endY="49">
+                <Line startX="219" startY="14" endX="219" endY="46">
                     <Stroke color="#FF242824" thickness="0.7" cap="ROUND"/>
                 </Line>
             </PartDraw>
@@ -3942,7 +3936,7 @@
                 <PartImage x="0" y="0" width="100" height="100">
                     <Image resource="round_action_dark"/>
                 </PartImage>
-                <PartImage x="33" y="19" width="34" height="34" tintColor="[CONFIGURATION.verticalPalette.0]">
+                <PartImage x="33" y="19" width="34" height="34" tintColor="[CONFIGURATION.verticalPalette.1]">
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]"/>
                 </PartImage>
                 <PartText x="8" y="60" width="84" height="25">
@@ -3955,7 +3949,7 @@
                 <PartImage x="0" y="0" width="100" height="100">
                     <Image resource="round_action_dark"/>
                 </PartImage>
-                <PartImage x="33" y="19" width="34" height="34" tintColor="[CONFIGURATION.verticalPalette.0]">
+                <PartImage x="33" y="19" width="34" height="34" tintColor="[CONFIGURATION.verticalPalette.1]">
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]"/>
                 </PartImage>
                 <PartText x="8" y="60" width="84" height="25">
@@ -3968,7 +3962,7 @@
                 <PartImage x="0" y="0" width="100" height="100">
                     <Image resource="round_action_dark"/>
                 </PartImage>
-                <PartImage x="33" y="19" width="34" height="34" tintColor="[CONFIGURATION.verticalPalette.0]">
+                <PartImage x="33" y="19" width="34" height="34" tintColor="[CONFIGURATION.verticalPalette.1]">
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]"/>
                 </PartImage>
                 <PartText x="8" y="60" width="84" height="25">
@@ -4009,7 +4003,7 @@
                 <PartImage x="0" y="0" width="100" height="100">
                     <Image resource="round_action_dark"/>
                 </PartImage>
-                <PartImage x="33" y="19" width="34" height="34" tintColor="[CONFIGURATION.verticalPalette.0]">
+                <PartImage x="33" y="19" width="34" height="34" tintColor="[CONFIGURATION.verticalPalette.1]">
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]"/>
                 </PartImage>
                 <PartText x="8" y="60" width="84" height="25">
@@ -4022,7 +4016,7 @@
                 <PartImage x="0" y="0" width="100" height="100">
                     <Image resource="round_action_dark"/>
                 </PartImage>
-                <PartImage x="33" y="19" width="34" height="34" tintColor="[CONFIGURATION.verticalPalette.0]">
+                <PartImage x="33" y="19" width="34" height="34" tintColor="[CONFIGURATION.verticalPalette.1]">
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]"/>
                 </PartImage>
                 <PartText x="8" y="60" width="84" height="25">
@@ -4035,7 +4029,7 @@
                 <PartImage x="0" y="0" width="100" height="100">
                     <Image resource="round_action_dark"/>
                 </PartImage>
-                <PartImage x="33" y="19" width="34" height="34" tintColor="[CONFIGURATION.verticalPalette.0]">
+                <PartImage x="33" y="19" width="34" height="34" tintColor="[CONFIGURATION.verticalPalette.1]">
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]"/>
                 </PartImage>
                 <PartText x="8" y="60" width="84" height="25">

@@ -22,18 +22,18 @@
     {
       "name": "Voce",
       "rect": [
-        175.0,
-        323.0,
-        100.0,
-        100.0
+        169.0,
+        317.0,
+        112.0,
+        112.0
       ],
       "center": [
         225.0,
         373.0
       ],
-      "diameter_px": 106.67,
-      "diameter_dp": 50.2,
-      "edge_clearance_px": 28.8
+      "diameter_px": 119.47,
+      "diameter_dp": 56.22,
+      "edge_clearance_px": 22.4
     },
     {
       "name": "Avvisi",

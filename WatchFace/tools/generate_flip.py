@@ -10,7 +10,9 @@ import math
 from flip_assets import generate as generate_assets, W as CARD_W, H as CARD_H
 
 ROOT=Path(__file__).resolve().parents[1]
-INK='#FFF3ECDD'; SOFT='#FFB7B0A4'; ACCENT='[CONFIGURATION.verticalPalette.0]'
+INK='#FFF3ECDD'; SOFT='#FFB7B0A4'
+ACCENT='[CONFIGURATION.verticalPalette.0]'
+PAIR='[CONFIGURATION.verticalPalette.1]'
 CARD_POS=[(78,81),(154,81),(78,164),(154,164)]
 BUTTON_SIZE=100
 BUTTON_CENTERS={'agenda':(117,344),'voice':(225,373),'alerts':(333,344)}
@@ -100,7 +102,7 @@ def clock(parent,ambient=False):
     el(reader,'Parameter',expression='[MINUTE_Z]')
     for index,(source,changed,values) in enumerate(DIGITS):
         g=group(parent,*CARD_POS[index],CARD_W,CARD_H)
-        color=INK if index<2 else ACCENT
+        color=PAIR if index<2 else ACCENT
         c=el(g,'Condition'); expressions=el(c,'Expressions')
         for value in values: el(expressions,'Expression',name=f'digit_{value}').text=f'{source} == {value}'
         for value in values:
@@ -187,7 +189,7 @@ def weather_icon(parent,source,x,y,size=36):
     weather_symbol(el(c,'Default'),0,x,y,size)
 
 def forecast(parent,day,cx):
-    g=group(parent,cx-50,12,100,40)
+    g=group(parent,cx-50,10,100,40)
     # Anchor tomorrow/day+N at noon: safe across a one-hour DST transition.
     stamp=f'[UTC_TIMESTAMP] - [SECONDS_IN_DAY] * 1000 - [MILLISECOND] + {day*86400000+43200000}'
     text(g,0,0,100,17,14,value='Domani' if day==1 else None,
@@ -208,12 +210,12 @@ def shortcut(parent,center,slotid,provider,label,caption):
     for kind in ('SHORT_TEXT','RANGED_VALUE'):
         c=el(s,'Complication',type=kind)
         image(c,0,0,100,100,'round_action_dark')
-        image(c,33,19,34,34,'[COMPLICATION.MONOCHROMATIC_IMAGE]',tintColor=ACCENT)
+        image(c,33,19,34,34,'[COMPLICATION.MONOCHROMATIC_IMAGE]',tintColor=PAIR)
         text(c,8,60,84,25,20,value=caption,weight='BOLD')
     for kind in ('MONOCHROMATIC_IMAGE','SMALL_IMAGE'):
         c=el(s,'Complication',type=kind)
         image(c,0,0,100,100,'round_action_dark')
-        image(c,33,19,34,34,f'[COMPLICATION.{kind}]',**({'tintColor':ACCENT} if kind=='MONOCHROMATIC_IMAGE' else {}))
+        image(c,33,19,34,34,f'[COMPLICATION.{kind}]',**({'tintColor':PAIR} if kind=='MONOCHROMATIC_IMAGE' else {}))
         text(c,8,60,84,25,20,value=caption,weight='BOLD')
     c=el(s,'Complication',type='EMPTY')
     image(c,0,0,100,100,'round_action_dark')
@@ -262,8 +264,15 @@ def build():
     generate_assets()
     configs=el(wf,'UserConfigurations')
     palette=el(configs,'ColorConfiguration',id='verticalPalette',displayName='theme_color_name',defaultValue='volt')
-    for key,color in [('volt','#FFD5FF45'),('warm','#FFFFBE78'),('ice','#FF9CDCF0'),('red','#FFFF7479'),('white','#FFE8E3D9')]:
-        el(palette,'ColorOption',id=key,displayName='color_'+key,colors=color)
+    for key,colors in [
+        ('volt','#FFD5FF45 #FFF3ECDD'),
+        ('warm','#FFFFBE78 #FF9CDCF0'),
+        ('ice','#FF9CDCF0 #FFFFBE78'),
+        ('ember','#FFFF9254 #FFF3ECDD'),
+        ('red','#FFFF7479 #FFFFD670'),
+        ('white','#FFE8E3D9 #FF6EE7B7'),
+    ]:
+        el(palette,'ColorOption',id=key,displayName='color_'+key,colors=colors)
     scene=el(wf,'Scene',backgroundColor='#FF000000')
     date=text(scene,90,53,270,26,18,expr='icuText("EEE d MMM")',color=INK)
     mode(date,140)
@@ -274,13 +283,15 @@ def build():
     clock(aod,True)
     health_column(active)
     weather=group(scene,60,241,330,52); mode(weather)
+    # A configured complication can override this. On a fresh install the
+    # empty app-shortcut slot still leaves a useful default weather action.
+    el(weather,'Launch',target='com.samsung.android.watch.weather/com.samsung.android.watch.weather.ui.WeatherActivity')
     c,available=condition(weather,'[WEATHER.IS_AVAILABLE]')
     weather_data=group(available,0,0,330,52)
     for day,cx in [(1,57),(2,165),(3,273)]: forecast(weather_data,day,cx)
     # Preserve available-but-stale data and show its age rather than silently refreshing a date.
-    stale,stale_content=condition(weather_data,'[WEATHER.IS_ERROR]')
-    text(stale_content,20,0,290,12,9,value='Da aggiornare · %s · MAX / MIN',expr='icuText("HH:mm", [WEATHER.LAST_UPDATED])',color=ACCENT)
-    text(el(stale,'Default'),20,0,290,12,9,value='PROSSIMI 3 GIORNI · MAX / MIN',color=SOFT)
+    _,stale_content=condition(weather_data,'[WEATHER.IS_ERROR]')
+    text(stale_content,20,0,290,10,9,value='Da aggiornare · %s',expr='icuText("HH:mm", [WEATHER.LAST_UPDATED])',color=ACCENT)
     missing=group(el(c,'Default'),0,0,330,52)
     text(missing,20,0,290,12,9,value='METEO NON DISPONIBILE',color=SOFT)
     for day,cx in [(1,57),(2,165),(3,273)]:
@@ -288,22 +299,25 @@ def build():
         weather_symbol(missing,0,cx-49,29,25)
         text(missing,cx-22,30,72,22,15,value='— / —',color=SOFT)
     p=draw(weather,0,0,330,52)
-    for x in (111,219):line(p,x,17,x,49,'#FF242824',.7)
+    for x in (111,219):line(p,x,14,x,46,'#FF242824',.7)
     shortcut(scene,BUTTON_CENTERS['agenda'],0,'NEXT_EVENT','slot_left_name','Agenda')
     shortcut(scene,BUTTON_CENTERS['alerts'],1,'UNREAD_NOTIFICATION_COUNT','slot_right_name','Avvisi')
     weather_shortcut(scene,60,241,330,52,3,'slot_weather_name',12)
     cx,cy=BUTTON_CENTERS['voice']
-    mic=group(active,cx-50,cy-50,BUTTON_SIZE,BUTTON_SIZE)
+    # Give the voice key extra invisible padding. This runtime reports Group
+    # accessibility dimensions in unscaled units, unlike ComplicationSlot.
+    mic=group(active,cx-56,cy-56,112,112)
     mic.set('name','primary_voice')
     el(mic,'Launch',target='com.samsung.android.wear.voicerecorder/com.samsung.android.wear.voicerecorder.view.MainActivity')
     el(mic,'ScreenReader',stringId='a11y_voice')
-    p=draw(mic,0,0,100,100); ellipse(p,50,50,49,fill=ACCENT)
+    face=group(mic,6,6,100,100)
+    p=draw(face,0,0,100,100); ellipse(p,50,50,49,fill=ACCENT)
     dark='#FF13190A'
     rect(p,44,18,12,27,dark,6)
     a=el(p,'Arc',centerX=50,centerY=39,width=30,height=30,startAngle=90,endAngle=270,direction='CLOCKWISE')
     el(a,'Stroke',color=dark,thickness=2.8,cap='ROUND')
     line(p,50,55,50,62,dark,2.8); line(p,41,62,59,62,dark,2.8)
-    text(mic,10,65,80,25,21,value='Voce',color=dark,weight='BOLD')
+    text(face,10,65,80,25,21,value='Voce',color=dark,weight='BOLD')
     ET.indent(wf,space='    ')
     ET.ElementTree(wf).write(ROOT/'res/raw/watchface.xml',encoding='utf-8',xml_declaration=True)
     print('Generated Palette Meteo 5: variant A, three 100-unit action keys, vertical flip clock, weather, AOD.')
