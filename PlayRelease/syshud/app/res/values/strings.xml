@@ -2,6 +2,7 @@
 <resources>
   <string name="watch_face_name">APEX METEO</string>
   <string name="a11y_time">%1$s hours %2$s minutes</string>
+  <string name="a11y_voice">Open voice recorder</string>
   <string name="color_warm">Amber · Classic</string>
   <string name="theme_color_name">Accent</string>
   <string name="color_volt">Volt · Lime</string>

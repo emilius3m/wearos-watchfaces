@@ -1,0 +1,55 @@
+{
+  "screen_px": 480,
+  "density_dpi": 340,
+  "minimum_target_dp": 48,
+  "targets": [
+    {
+      "name": "Agenda",
+      "rect": [
+        67.0,
+        294.0,
+        100.0,
+        100.0
+      ],
+      "center": [
+        117.0,
+        344.0
+      ],
+      "diameter_px": 106.67,
+      "diameter_dp": 50.2,
+      "edge_clearance_px": 15.25
+    },
+    {
+      "name": "Voce",
+      "rect": [
+        175.0,
+        323.0,
+        100.0,
+        100.0
+      ],
+      "center": [
+        225.0,
+        373.0
+      ],
+      "diameter_px": 106.67,
+      "diameter_dp": 50.2,
+      "edge_clearance_px": 28.8
+    },
+    {
+      "name": "Avvisi",
+      "rect": [
+        283.0,
+        294.0,
+        100.0,
+        100.0
+      ],
+      "center": [
+        333.0,
+        344.0
+      ],
+      "diameter_px": 106.67,
+      "diameter_dp": 50.2,
+      "edge_clearance_px": 15.25
+    }
+  ]
+}

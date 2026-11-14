@@ -11,7 +11,9 @@ from flip_assets import generate as generate_assets, W as CARD_W, H as CARD_H
 
 ROOT=Path(__file__).resolve().parents[1]
 INK='#FFF3ECDD'; SOFT='#FFB7B0A4'; ACCENT='[CONFIGURATION.verticalPalette.0]'
-CARD_POS=[(74,86),(160,86),(74,194),(160,194)]
+CARD_POS=[(78,81),(154,81),(78,164),(154,164)]
+BUTTON_SIZE=100
+BUTTON_CENTERS={'agenda':(117,344),'voice':(225,373),'alerts':(333,344)}
 wf=ET.Element('WatchFace',width='450',height='450',clipShape='CIRCLE')
 counter=0
 
@@ -185,31 +187,37 @@ def weather_icon(parent,source,x,y,size=36):
     weather_symbol(el(c,'Default'),0,x,y,size)
 
 def forecast(parent,day,cx):
-    g=group(parent,cx-48,16,96,67)
+    g=group(parent,cx-50,12,100,40)
     # Anchor tomorrow/day+N at noon: safe across a one-hour DST transition.
     stamp=f'[UTC_TIMESTAMP] - [SECONDS_IN_DAY] * 1000 - [MILLISECOND] + {day*86400000+43200000}'
-    text(g,0,0,96,18,14,value='Domani' if day==1 else None,
+    text(g,0,0,100,17,14,value='Domani' if day==1 else None,
          expr=None if day==1 else f'icuText("EEE d", {stamp})',color=SOFT)
     c,available=condition(g,f'[WEATHER.DAYS.{day}.IS_AVAILABLE]')
-    data=group(available,0,0,96,67)
-    weather_icon(data,f'[WEATHER.DAYS.{day}.CONDITION_DAY]',33,18,30)
-    text(data,0,47,96,21,17,value='%s° / %s°',parameters=[f'[WEATHER.DAYS.{day}.TEMPERATURE_HIGH]',f'[WEATHER.DAYS.{day}.TEMPERATURE_LOW]'])
-    missing=group(el(c,'Default'),0,0,96,67)
-    weather_symbol(missing,0,33,18,30)
-    text(missing,0,47,96,21,17,value='— / —',color=SOFT)
+    data=group(available,0,0,100,40)
+    weather_icon(data,f'[WEATHER.DAYS.{day}.CONDITION_DAY]',1,17,25)
+    text(data,28,18,72,22,15,value='%s°/%s°',parameters=[f'[WEATHER.DAYS.{day}.TEMPERATURE_HIGH]',f'[WEATHER.DAYS.{day}.TEMPERATURE_LOW]'])
+    missing=group(el(c,'Default'),0,0,100,40)
+    weather_symbol(missing,0,1,17,25)
+    text(missing,28,18,72,22,15,value='— / —',color=SOFT)
 
-def shortcut(parent,x,slotid,provider,label):
-    s=el(parent,'ComplicationSlot',x=x,y=389,width=65,height=43,slotId=slotid,displayName=label,isCustomizable='TRUE',supportedTypes='SHORT_TEXT RANGED_VALUE MONOCHROMATIC_IMAGE SMALL_IMAGE EMPTY')
-    mode(s); el(s,'BoundingOval',x=0,y=0,width=65,height=43)
+def shortcut(parent,center,slotid,provider,label,caption):
+    cx,cy=center
+    s=el(parent,'ComplicationSlot',x=cx-50,y=cy-50,width=BUTTON_SIZE,height=BUTTON_SIZE,slotId=slotid,displayName=label,isCustomizable='TRUE',supportedTypes='SHORT_TEXT RANGED_VALUE MONOCHROMATIC_IMAGE SMALL_IMAGE EMPTY')
+    mode(s); el(s,'BoundingOval',x=0,y=0,width=BUTTON_SIZE,height=BUTTON_SIZE)
     el(s,'DefaultProviderPolicy',defaultSystemProvider=provider,defaultSystemProviderType='SHORT_TEXT')
     for kind in ('SHORT_TEXT','RANGED_VALUE'):
         c=el(s,'Complication',type=kind)
-        image(c,23,0,20,20,'[COMPLICATION.MONOCHROMATIC_IMAGE]',tintColor=ACCENT)
-        text(c,0,22,65,18,12,expr='[COMPLICATION.TEXT]',color=SOFT)
+        image(c,0,0,100,100,'round_action_dark')
+        image(c,33,19,34,34,'[COMPLICATION.MONOCHROMATIC_IMAGE]',tintColor=ACCENT)
+        text(c,8,60,84,25,20,value=caption,weight='BOLD')
     for kind in ('MONOCHROMATIC_IMAGE','SMALL_IMAGE'):
         c=el(s,'Complication',type=kind)
-        image(c,19,8,28,28,f'[COMPLICATION.{kind}]',**({'tintColor':ACCENT} if kind=='MONOCHROMATIC_IMAGE' else {}))
-    el(s,'Complication',type='EMPTY')
+        image(c,0,0,100,100,'round_action_dark')
+        image(c,33,19,34,34,f'[COMPLICATION.{kind}]',**({'tintColor':ACCENT} if kind=='MONOCHROMATIC_IMAGE' else {}))
+        text(c,8,60,84,25,20,value=caption,weight='BOLD')
+    c=el(s,'Complication',type='EMPTY')
+    image(c,0,0,100,100,'round_action_dark')
+    text(c,8,38,84,25,20,value=caption,weight='BOLD',color=SOFT)
 
 def weather_shortcut(parent,x,y,w,h,slotid,label,radius=12):
     s=el(parent,'ComplicationSlot',x=x,y=y,width=w,height=h,slotId=slotid,displayName=label,isCustomizable='TRUE',supportedTypes='MONOCHROMATIC_IMAGE SMALL_IMAGE SHORT_TEXT RANGED_VALUE EMPTY')
@@ -221,33 +229,33 @@ def weather_shortcut(parent,x,y,w,h,slotid,label,radius=12):
     el(s,'Complication',type='EMPTY')
 
 def health_column(parent):
-    side=group(parent,272,0,108,300)
-    text(side,18,88,72,57,60,expr='[SECOND_Z]',family='teko_semibold')
-    text(side,18,143,72,16,11,value='SEC',color=SOFT)
-    hr=group(side,0,169,108,46)
+    side=group(parent,265,0,108,240)
+    text(side,18,80,72,43,52,expr='[SECOND_Z]',family='teko_semibold')
+    text(side,18,120,72,14,10,value='SEC',color=SOFT)
+    hr=group(side,0,138,108,40)
     el(hr,'Launch',target='HEALTH_HEART_RATE')
     p=draw(hr,0,11,27,25)
     for a,b,c,d in [(1,13,6,13),(6,13,10,4),(10,4,16,22),(16,22,20,10),(20,10,25,13)]:
         line(p,a,b,c,d,ACCENT,1.8)
-    text(hr,30,0,76,31,37,expr="[HEART_RATE] > 0 ? [HEART_RATE] : '--'",family='teko_semibold')
-    text(hr,30,30,76,15,10,value='BPM',color=SOFT)
-    steps=group(side,0,217,108,45)
+    text(hr,30,0,76,27,34,expr="[HEART_RATE] > 0 ? [HEART_RATE] : '--'",family='teko_semibold')
+    text(hr,30,26,76,13,9,value='BPM',color=SOFT)
+    steps=group(side,0,180,108,37)
     el(steps,'Launch',target='com.samsung.android.wear.shealth/com.samsung.android.wear.shealth.app.home.HomeActivity')
     p=draw(steps,0,10,27,25)
     ellipse(p,9,9,3,6,fill=ACCENT);ellipse(p,19,16,3,6,fill=ACCENT)
-    text(steps,28,0,80,30,32,expr='[STEP_COUNT]',family='teko_semibold')
-    text(steps,28,28,80,15,10,value='PASSI',color=SOFT)
-    battery=group(side,0,267,108,30)
+    text(steps,28,0,80,25,30,expr='[STEP_COUNT]',family='teko_semibold')
+    text(steps,28,24,80,13,9,value='PASSI',color=SOFT)
+    battery=group(side,0,217,108,24)
     el(battery,'Launch',target='BATTERY_STATUS')
-    p=draw(battery,0,8,27,20)
+    p=draw(battery,0,5,27,18)
     b=el(p,'RoundRectangle',x=1,y=2,width=21,height=12,cornerRadiusX=2,cornerRadiusY=2)
     el(b,'Stroke',color=ACCENT,thickness=1.5)
     line(p,25,6,25,10,ACCENT,1.8)
     fill=rect(p,4,5,15,6,ACCENT,1)
     transform(fill,'width','15 * clamp([BATTERY_PERCENT], 0, 100) / 100')
     c,low=condition(battery,'[BATTERY_PERCENT] < 20')
-    text(low,29,0,79,30,31,value='%s%%',expr='[BATTERY_PERCENT]',color='#FFFF7479',family='teko_semibold')
-    text(el(c,'Default'),29,0,79,30,31,value='%s%%',expr='[BATTERY_PERCENT]',family='teko_semibold')
+    text(low,29,0,79,24,29,value='%s%%',expr='[BATTERY_PERCENT]',color='#FFFF7479',family='teko_semibold')
+    text(el(c,'Default'),29,0,79,24,29,value='%s%%',expr='[BATTERY_PERCENT]',family='teko_semibold')
 
 
 def build():
@@ -265,35 +273,39 @@ def build():
     aod=group(scene,alpha=0); mode(aod,255)
     clock(aod,True)
     health_column(active)
-    weather=group(scene,60,300,330,84); mode(weather)
+    weather=group(scene,60,241,330,52); mode(weather)
     c,available=condition(weather,'[WEATHER.IS_AVAILABLE]')
-    weather_data=group(available,0,0,330,84)
+    weather_data=group(available,0,0,330,52)
     for day,cx in [(1,57),(2,165),(3,273)]: forecast(weather_data,day,cx)
     # Preserve available-but-stale data and show its age rather than silently refreshing a date.
     stale,stale_content=condition(weather_data,'[WEATHER.IS_ERROR]')
-    text(stale_content,20,0,290,15,10,value='Da aggiornare · %s · MAX / MIN',expr='icuText("HH:mm", [WEATHER.LAST_UPDATED])',color=ACCENT)
-    text(el(stale,'Default'),20,0,290,15,9,value='PROSSIMI 3 GIORNI · MAX / MIN',color=SOFT)
-    missing=group(el(c,'Default'),0,0,330,84)
-    text(missing,20,0,290,15,10,value='METEO NON DISPONIBILE',color=SOFT)
+    text(stale_content,20,0,290,12,9,value='Da aggiornare · %s · MAX / MIN',expr='icuText("HH:mm", [WEATHER.LAST_UPDATED])',color=ACCENT)
+    text(el(stale,'Default'),20,0,290,12,9,value='PROSSIMI 3 GIORNI · MAX / MIN',color=SOFT)
+    missing=group(el(c,'Default'),0,0,330,52)
+    text(missing,20,0,290,12,9,value='METEO NON DISPONIBILE',color=SOFT)
     for day,cx in [(1,57),(2,165),(3,273)]:
-        text(missing,cx-48,16,96,18,14,value=['Domani','Tra 2 giorni','Tra 3 giorni'][day-1],color=SOFT)
-        weather_symbol(missing,0,cx-15,34,30)
-        text(missing,cx-48,63,96,21,17,value='— / —',color=SOFT)
-    p=draw(weather,0,0,330,84)
-    for x in (111,219):line(p,x,35,x,78,'#FF242824',.7)
-    shortcut(scene,122,0,'NEXT_EVENT','slot_left_name')
-    shortcut(scene,263,1,'UNREAD_NOTIFICATION_COUNT','slot_right_name')
-    weather_shortcut(scene,60,300,330,84,3,'slot_weather_name',12)
-    mic=group(active,199,383,52,52)
+        text(missing,cx-50,12,100,17,14,value=['Domani','Tra 2 giorni','Tra 3 giorni'][day-1],color=SOFT)
+        weather_symbol(missing,0,cx-49,29,25)
+        text(missing,cx-22,30,72,22,15,value='— / —',color=SOFT)
+    p=draw(weather,0,0,330,52)
+    for x in (111,219):line(p,x,17,x,49,'#FF242824',.7)
+    shortcut(scene,BUTTON_CENTERS['agenda'],0,'NEXT_EVENT','slot_left_name','Agenda')
+    shortcut(scene,BUTTON_CENTERS['alerts'],1,'UNREAD_NOTIFICATION_COUNT','slot_right_name','Avvisi')
+    weather_shortcut(scene,60,241,330,52,3,'slot_weather_name',12)
+    cx,cy=BUTTON_CENTERS['voice']
+    mic=group(active,cx-50,cy-50,BUTTON_SIZE,BUTTON_SIZE)
+    mic.set('name','primary_voice')
     el(mic,'Launch',target='com.samsung.android.wear.voicerecorder/com.samsung.android.wear.voicerecorder.view.MainActivity')
-    p=draw(mic,0,0,52,52); ellipse(p,26,26,25,fill=ACCENT)
+    el(mic,'ScreenReader',stringId='a11y_voice')
+    p=draw(mic,0,0,100,100); ellipse(p,50,50,49,fill=ACCENT)
     dark='#FF13190A'
-    rect(p,22,12,8,18,dark,4)
-    a=el(p,'Arc',centerX=26,centerY=25,width=20,height=20,startAngle=90,endAngle=270,direction='CLOCKWISE')
-    el(a,'Stroke',color=dark,thickness=2.2,cap='ROUND')
-    line(p,26,36,26,42,dark,2.2); line(p,20,42,32,42,dark,2.2)
+    rect(p,44,18,12,27,dark,6)
+    a=el(p,'Arc',centerX=50,centerY=39,width=30,height=30,startAngle=90,endAngle=270,direction='CLOCKWISE')
+    el(a,'Stroke',color=dark,thickness=2.8,cap='ROUND')
+    line(p,50,55,50,62,dark,2.8); line(p,41,62,59,62,dark,2.8)
+    text(mic,10,65,80,25,21,value='Voce',color=dark,weight='BOLD')
     ET.indent(wf,space='    ')
     ET.ElementTree(wf).write(ROOT/'res/raw/watchface.xml',encoding='utf-8',xml_declaration=True)
-    print('Generated Palette Meteo 4: vertical flip clock, perimeter seconds, 3-day weather, static AOD.')
+    print('Generated Palette Meteo 5: variant A, three 100-unit action keys, vertical flip clock, weather, AOD.')
 
 if __name__=='__main__': build()

@@ -14,6 +14,7 @@ function Run-Checked([string]$Executable, [string[]]$Arguments) {
 Run-Checked 'python' @((Join-Path $PSScriptRoot 'generate_flip.py'))
 Run-Checked 'python' @((Join-Path $PSScriptRoot 'preview_flip.py'))
 Run-Checked 'python' @((Join-Path $PSScriptRoot 'validate.py'))
+Run-Checked 'python' @((Join-Path $PSScriptRoot 'validate_touch.py'))
 Run-Checked (Join-Path $buildTools 'aapt2.exe') @('compile','--dir',(Join-Path $project 'res'),'-o',(Join-Path $build 'res.zip'))
 Run-Checked (Join-Path $buildTools 'aapt2.exe') @('link','-o',(Join-Path $build 'unsigned.apk'),'--manifest',(Join-Path $project 'AndroidManifest.xml'),'-I',(Join-Path $AndroidSdk 'platforms\android-35\android.jar'),'--min-sdk-version','34','--target-sdk-version','35',(Join-Path $build 'res.zip'))
 Run-Checked (Join-Path $buildTools 'zipalign.exe') @('-f','4',(Join-Path $build 'unsigned.apk'),(Join-Path $build 'aligned.apk'))

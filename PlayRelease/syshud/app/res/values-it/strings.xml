@@ -2,6 +2,7 @@
 <resources>
   <string name="watch_face_name">Palette Meteo</string>
   <string name="a11y_time">Ore %1$s e %2$s minuti</string>
+  <string name="a11y_voice">Apri registratore vocale</string>
   <string name="color_warm">Ambra · Classico</string>
   <string name="theme_color_name">Accento</string>
   <string name="color_volt">Volt · Lime</string>

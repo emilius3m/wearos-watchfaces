@@ -13,7 +13,7 @@ def shell(*args):
     return adb('shell', *args).decode('utf-8', errors='replace')
 
 def capture(name):
-    target = ROOT / 'design' / 'vertical' / name
+    target = ROOT / 'design' / 'round-buttons' / name
     target.write_bytes(adb('exec-out', 'screencap', '-p'))
     print('Captured', target.name)
 
@@ -27,11 +27,11 @@ def home():
 home()
 capture('device-active.png')
 for name, point, expected in [
-    ('recorder', (240, 436), 'com.samsung.android.wear.voicerecorder.view.MainActivity'),
-    ('heart', (360, 205), 'HeartRateActivity'),
-    ('steps', (360, 255), 'com.samsung.android.wear.shealth.app.home.HomeActivity'),
-    ('battery', (360, 302), 'BatteryMainActivity'),
-    ('weather', (240, 370), 'com.samsung.android.watch.weather')]:
+    ('recorder', (240, 398), 'com.samsung.android.wear.voicerecorder.view.MainActivity'),
+    ('heart', (350, 170), 'HeartRateActivity'),
+    ('steps', (350, 211), 'com.samsung.android.wear.shealth.app.home.HomeActivity'),
+    ('battery', (350, 244), 'BatteryMainActivity'),
+    ('weather', (240, 289), 'com.samsung.android.watch.weather')]:
     shell('input', 'tap', str(point[0]), str(point[1]))
     time.sleep(1.5)
     focused = shell('dumpsys', 'window')

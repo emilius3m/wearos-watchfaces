@@ -96,16 +96,17 @@ class Renderer:
         if tag=='PartImage':
             resource=node.find('Image').get('resource')
             if resource.startswith('[COMPLICATION.'):
-                d=ImageDraw.Draw(layer);color=self.color(self.data['CONFIGURATION.verticalPalette.0'])
+                icon=Image.new('RGBA',(40,40));d=ImageDraw.Draw(icon);color=self.color(self.data['CONFIGURATION.verticalPalette.0'])
                 if self.data['COMPLICATION.MONOCHROMATIC_IMAGE']=='demo_calendar':
-                    d.rounded_rectangle((5,6,w*S-5,h*S-4),radius=3,outline=color,width=3)
-                    d.line((5,14,w*S-5,14),fill=color,width=2)
-                    for x in (12,w*S-12):d.line((x,2,x,10),fill=color,width=3)
+                    d.rounded_rectangle((5,6,35,36),radius=3,outline=color,width=3)
+                    d.line((5,14,35,14),fill=color,width=2)
+                    for x in (12,28):d.line((x,2,x,10),fill=color,width=3)
                 else:
-                    d.ellipse((11,4,w*S-11,28),fill=color)
-                    d.rectangle((11,15,w*S-11,29),fill=color)
-                    d.rounded_rectangle((6,26,w*S-6,31),radius=2,fill=color)
-                    d.ellipse((w*S/2-3,32,w*S/2+3,38),fill=color)
+                    d.ellipse((11,4,29,28),fill=color)
+                    d.rectangle((11,15,29,29),fill=color)
+                    d.rounded_rectangle((6,26,34,31),radius=2,fill=color)
+                    d.ellipse((17,32,23,38),fill=color)
+                layer=icon.resize((w*S,h*S),Image.Resampling.LANCZOS)
             else: layer=asset(resource).resize((w*S,h*S),Image.Resampling.LANCZOS)
         elif tag=='PartText':
             font_node=node.find('./Text/Font'); template=font_node.find('Template')
@@ -153,8 +154,8 @@ def asset(resource):
     return Image.open(ROOT/f'res/drawable-nodpi/{resource}.png').convert('RGBA')
 
 def main():
-    out=ROOT/'design/vertical';out.mkdir(parents=True,exist_ok=True)
-    still=datetime(2026,11,13,13,43,16,tzinfo=timezone(timedelta(hours=1)))
+    out=ROOT/'design/round-buttons';out.mkdir(parents=True,exist_ok=True)
+    still=datetime(2026,11,14,13,43,16,tzinfo=timezone(timedelta(hours=1)))
     base=still.replace(minute=59,second=59)
     Renderer(still).render().save(out/'preview-illustrative-weather.png')
     Renderer(still,weather=False).render().save(out/'preview-weather-unavailable.png')
@@ -178,7 +179,7 @@ def main():
     # Test the rendered clock against the previous/current time at boundaries.
     for hour,minute in [(0,0),(10,0),(20,0),(14,0),(9,10),(23,59)]:
         now=base.replace(hour=hour,minute=minute,second=0,microsecond=0)
-        clockbox=(72*S,84*S,242*S,298*S)
+        clockbox=(76*S,79*S,226*S,241*S)
         prior=Renderer(now-timedelta(seconds=1)).render().crop(clockbox)
         start=Renderer(now).render().crop(clockbox)
         current=Renderer(now+timedelta(seconds=1)).render().crop(clockbox)

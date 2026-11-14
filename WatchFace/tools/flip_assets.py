@@ -4,11 +4,11 @@ from PIL import Image, ImageDraw, ImageFont, ImageChops, ImageFilter
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'res/drawable-nodpi'
-W, H, SCALE = 80, 102, 2
+W, H, SCALE = 70, 76, 2
 
 def digit_image(digit, ambient=False):
     w,h = W*SCALE,H*SCALE
-    font = ImageFont.truetype(str(ROOT/'res/font/teko_semibold.ttf'), 136*SCALE)
+    font = ImageFont.truetype(str(ROOT/'res/font/teko_semibold.ttf'), 104*SCALE)
     glyph = Image.new('L',(w,h))
     d = ImageDraw.Draw(glyph)
     box = d.textbbox((0,0),str(digit),font=font)
@@ -45,6 +45,16 @@ def card_image():
 
 def generate():
     OUT.mkdir(parents=True,exist_ok=True)
+    # A shared matte, softly bevelled face for the two large round action keys.
+    button=Image.new('RGBA',(200,200));pixels=button.load()
+    for y in range(200):
+        for x in range(200):
+            radius=((x-99.5)**2+(y-99.5)**2)**.5
+            if radius>99:continue
+            if radius>97:level=round(66-24*y/200)
+            else:level=round(41-14*y/200+3*(1-radius/100))
+            pixels[x,y]=(level,level+1,level,255)
+    button.save(OUT/'round_action_dark.png',optimize=True)
     card=card_image()
     card.save(OUT/'flip_card.png',optimize=True)
     card.crop((0,0,W*SCALE,H*SCALE//2)).save(OUT/'flip_card_top.png',optimize=True)
@@ -55,6 +65,6 @@ def generate():
         image.crop((0,0,W*SCALE,H*SCALE//2)).save(OUT/f'flip_top_{digit}.png',optimize=True)
         image.crop((0,H*SCALE//2,W*SCALE,H*SCALE)).save(OUT/f'flip_bottom_{digit}.png',optimize=True)
         digit_image(digit,True).save(OUT/f'flip_ambient_{digit}.png',optimize=True)
-    print('Generated 43 compact flip-clock components: plates, tintable digits, AOD.')
+    print('Generated flip components and the large round action key.')
 
 if __name__ == '__main__': generate()

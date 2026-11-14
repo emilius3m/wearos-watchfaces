@@ -1,5 +1,6 @@
 """Build Play-Store-ready signed .aab bundles & store graphic kits for all 4 E3M Corp watch faces."""
 from pathlib import Path
+import argparse
 import getpass
 import io
 import os
@@ -136,14 +137,15 @@ FACES = [
         slug='syshud',
         src=WATCH_PROJECTS / 'WatchFace',
         package='it.e3mcorp.watchface.syshud',
-        version_code='5',
-        version_name='4.1',
+        version_code='6',
+        version_name='5.0',
         title_en='APEX METEO',
         title_it='Palette Meteo',
         tagline='Vertical Split-Flap & 3-Day Forecast',
         strings_en={
             'watch_face_name': 'APEX METEO',
             'a11y_time': '%1$s hours %2$s minutes',
+            'a11y_voice': 'Open voice recorder',
             'color_warm': 'Amber · Classic',
             'theme_color_name': 'Accent',
             'color_volt': 'Volt · Lime',
@@ -159,6 +161,7 @@ FACES = [
         strings_it={
             'watch_face_name': 'Palette Meteo',
             'a11y_time': 'Ore %1$s e %2$s minuti',
+            'a11y_voice': 'Apri registratore vocale',
             'color_warm': 'Ambra · Classico',
             'theme_color_name': 'Accento',
             'color_volt': 'Volt · Lime',
@@ -322,18 +325,20 @@ def transform_watchface_xml(slug, xml_path: Path):
             icon_color='#FF14100C', fallback_res='ic_mic', fallback_sz=38,
         ))
     elif slug == 'syshud':
-        for g in root.xpath('//Group[@name="flip_group_296"]'):
+        for g in root.xpath('//Group[@name="primary_voice"]'):
             g.getparent().remove(g)
         scene.append(make_shortcut_slot(
-            slot_id=2, x=199, y=383, w=52, h=52,
+            slot_id=2, x=175, y=323, w=100, h=100,
             display_name='slot_shortcut_name',
             accent_color='[CONFIGURATION.verticalPalette.0]',
             circle=True, bg_fill='[CONFIGURATION.verticalPalette.0]',
+            fallback_sz=38,
             draw_vector_mic_color='#FF13190A',
         ))
         # Localize hardcoded Italian text inside syshud watchface.xml for global Play Store
         repl = {
             'PASSI': 'STEPS',
+            'Avvisi': 'Alerts',
             'METEO NON DISPONIBILE': 'WEATHER UNAVAILABLE',
             'PROSSIMI 3 GIORNI · MAX / MIN': '3-DAY FORECAST · MAX / MIN',
             'Da aggiornare · %s · MAX / MIN': 'Updated · %s · MAX / MIN',
@@ -578,8 +583,13 @@ def stage_project(spec):
 
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Build and validate Play Store AAB bundles.')
+    parser.add_argument('--apps', nargs='+', choices=[f['slug'] for f in FACES],
+                        help='Subset of watch face slugs to build (default: all).')
+    args = parser.parse_args()
     if not KS_PASS:
         KS_PASS = getpass.getpass('Upload keystore password: ')
-    for spec in FACES:
+    selected = [f for f in FACES if not args.apps or f['slug'] in args.apps]
+    for spec in selected:
         stage_project(spec)
-    print('All 4 Play Store AAB bundles built, signed, and validated cleanly.')
+    print(f'Built, signed, and validated {len(selected)} Play Store AAB bundle(s) cleanly.')
